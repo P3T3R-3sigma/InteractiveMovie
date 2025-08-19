@@ -1,0 +1,8 @@
+{
+    "title": "SceenesAndConditions",
+    "identifier": "com.yourcompany.wizardEVAP.SceenesAndConditions",
+    "orientation": "auto",
+    "versioncode": 1,
+    "versionname": "1.0.0",
+    "stage": "test"
+}
