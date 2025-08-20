@@ -57,11 +57,11 @@ BasicText {
         /*
           Position all of the items
           */
+
         lInterior.x = (width - lInterior.width) / 2
         lInterior.y = (height - lInterior.height) / 2
         lAppText.x = (lInterior.width - lAppText.width) / 2
         lAppText.y = (lInterior.height - lAppText.height) / 2
     }
-
 
 }

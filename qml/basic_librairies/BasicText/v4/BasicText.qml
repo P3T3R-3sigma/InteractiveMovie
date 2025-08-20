@@ -91,6 +91,8 @@ BasicItem {
         mBasicDisplay.errorOverride(mTHIS_BASICTEXT_V4, "adjustWindow");
     }
 
+    implicitHeight: mAppText.paintedHeight
+
     Rectangle {
         id: mBorder
 
@@ -218,6 +220,9 @@ BasicItem {
 
     function compute() {
         if (visible) {
+            if (mTHIS_BASICTEXT_V4.mIS_DEBUG) {
+                console.log("BasicText.compute()");
+            }
             if (!shadow_is_computing) {
                 shadow_is_computing = true;
                 signalWindowOrTextChanged = true;

@@ -16,6 +16,7 @@ import "basic_librairies/BasicSprites/v3"
 import "basic_librairies/BasicReflection/v3"
 import "basic_librairies/BasicScroll/v2"
 import "basic_librairies/BasicSubWindow/v3"
+import "basic_librairies/BasicDebug/v1"
 
 
 
@@ -57,18 +58,25 @@ GameWindow {
         id: mBasicReflection
     }
 
-    Choice {
+    /*
+      Constants
+      */
+    CHc {
+        id: mCHc
+    }
+
+    CHsChoiceContainer {
         id: ch0
         pTitle: qsTr("Title 0")
         pQuestion: qsTr("question 0")
 
         pTextBeforeChoosing: ""
-        pVideoBeforeChoiceSource: ""
-        pVideoWhileChoiceSource: ""
+        pVideoBeforeChoiceSource: "Videos/VideoReduite.mp4"
+        pVideoWhileChoiceSource: "Videos/VideoReduite.mp4"
         pImageWhileChoiceSource: "BasicSubWindow/IViewSimpleCupboardRight.jpg"
-        pTimer: 0
+        pTime: 0
         pDefaultChoice: null
-        pChoices: [ch1, ch2, ch3, ch4]
+        pListChoices: [ch1, ch2, ch3, ch4]
     }
 
 
@@ -82,22 +90,20 @@ GameWindow {
 
 
 
-
-
-    Choice {
+    CHsChoiceContainer {
         id: ch1
         pTitle: qsTr("Title 1")
         pQuestion: qsTr("question 1")
 
-        pTextBeforeChoosing: qsTr("Choice 1")
-        pVideoBeforeChoiceSource: ""
+        pTextBeforeChoosing: qsTr("Choice 1, Choice 1, Choice 1, Choice 1, Choice1, Choice 1, Choice 1, Choice")
+        pVideoBeforeChoiceSource: "Videos/VideoReduite.mp4"
         pVideoWhileChoiceSource: ""
         pImageWhileChoiceSource: "Angel/Angel_001.jpg"
-        pTimer: 0
+        pTime: 0
         pDefaultChoice: null
-        pChoices: []
+        pListChoices: [ch2, ch3]
     }
-    Choice {
+    CHsChoiceContainer {
         id: ch2
         pTitle: qsTr("Title 2")
         pQuestion: qsTr("question 2")
@@ -106,11 +112,11 @@ GameWindow {
         pVideoBeforeChoiceSource: ""
         pVideoWhileChoiceSource: ""
         pImageWhileChoiceSource: "Angel/Angel_002.jpg"
-        pTimer: 0
+        pTime: 0
         pDefaultChoice: null
-        pChoices: []
+        pListChoices: []
     }
-    Choice {
+    CHsChoiceContainer {
         id: ch3
         pTitle: qsTr("Title 3")
         pQuestion: qsTr("question 3")
@@ -119,11 +125,11 @@ GameWindow {
         pVideoBeforeChoiceSource: ""
         pVideoWhileChoiceSource: ""
         pImageWhileChoiceSource: "Angel/Angel_003.jpg"
-        pTimer: 0
+        pTime: 0
         pDefaultChoice: null
-        pChoices: []
+        pListChoices: []
     }
-    Choice {
+    CHsChoiceContainer {
         id: ch4
         pTitle: qsTr("Title 4")
         pQuestion: qsTr("question 4")
@@ -132,9 +138,9 @@ GameWindow {
         pVideoBeforeChoiceSource: ""
         pVideoWhileChoiceSource: ""
         pImageWhileChoiceSource: ""
-        pTimer: 0
+        pTime: 0
         pDefaultChoice: null
-        pChoices: []
+        pListChoices: []
     }
     Component.onCompleted: ch0.visible = true
 
