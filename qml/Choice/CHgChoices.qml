@@ -1,10 +1,10 @@
 import QtQuick
 import Felgo
 
-import "basic_librairies/BasicImageSource/v4"
-import "basic_librairies/BasicLoader/v1"
-import "basic_librairies/BasicText/v4"
-import "basic_librairies/BasicDebug/v1"
+import "../basic_librairies/BasicImageSource/v4"
+import "../basic_librairies/BasicLoader/v1"
+import "../basic_librairies/BasicText/v4"
+import "../basic_librairies/BasicDebug/v1"
 
 Item {
 
@@ -113,7 +113,6 @@ Item {
             iAvailableChoices.children[i].adjustWindow()
             iAvailableChoices.children[i].yPercent = yPadding
             yPadding += iAvailableChoices.children[i].heightPercent + iCHc.mPADDING_H
-            console.log(iAvailableChoices.children[i].heightPercent, iAvailableChoices.children[i].parent.height)
         }
 
         mChoiceTimer.yPercent = yPadding
@@ -121,7 +120,6 @@ Item {
 
         pHeightPercent = yPadding - iChoices.pYPercent
     }
-
 
 
 

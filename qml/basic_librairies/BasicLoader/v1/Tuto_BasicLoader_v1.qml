@@ -153,7 +153,7 @@ SceneAbstract {
         width: 256
         height: 256
 
-         property int mIdx: 05
+        property int mIdx: 05
         widthPercent: 0.15
         xPercent: mIdx * widthPercent * 1.1
         yPercent: (1 - heightPercent) / 2

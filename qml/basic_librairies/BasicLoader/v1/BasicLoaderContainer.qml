@@ -24,7 +24,7 @@ Item {
       Variables
       */
     property string mName
-    property int mRetryInterval: 500
+    property int mRetryInterval: 10000
     property int mTimeElapsedDownload: -1
     property var shadow_timerStartTime
     property var shadow_timerTimeOut
@@ -92,16 +92,16 @@ Item {
             console.log("Force download  for " + mName)
         }
 
-        mTimer_ScheduleRestartDownload.start()
+        // mTimer_ScheduleRestartDownload.start()
         /*
           checkForReady
           */
-        checkForReady();
+        mIsReady = checkForReady();
         /*
           set the source and Start timer
           */
         let lWishSource = mBasicSource.getSource(mSource)
-        if (!mIsReady && lWishSource && lWishSource != mItemWithSource.source) {
+        if (!mIsReady && lWishSource && lWishSource !== mItemWithSource.source) {
             /*
           Set source
           */
@@ -114,7 +114,7 @@ Item {
           Com
           */
             if (mIS_DEBUG) {
-                console.log("Forcce download > mItemWithSource= " + mName)
+                console.log("Force download > mItemWithSource= " + mName)
             }
 
         }

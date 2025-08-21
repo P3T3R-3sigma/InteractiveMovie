@@ -2,11 +2,11 @@ import QtQuick
 import Felgo
 import QtMultimedia
 
-import "basic_librairies/BasicImageHover/v1"
-import "basic_librairies/BasicImageSource/v4"
-import "basic_librairies/BasicLoader/v1"
-import "basic_librairies/BasicText/v4"
-import "basic_librairies/BasicDebug/v1"
+import "../basic_librairies/BasicImageHover/v1"
+import "../basic_librairies/BasicImageSource/v4"
+import "../basic_librairies/BasicLoader/v1"
+import "../basic_librairies/BasicText/v4"
+import "../basic_librairies/BasicDebug/v1"
 
 Item {
 
@@ -16,11 +16,14 @@ Item {
 
     property var pStatusEnum: {
         "ACCESSIBLE": 0,
-        "HIDDEN": 1,
-        "TERMINATED": 2
+        "LOCKED": 1,
+        "HIDDEN": 2,
+        "TERMINATED": 3
     }
 
     property int pStatus: pStatusEnum.ACCESSIBLE
+    property bool pTerminateAfterPlay: true
+
     property string pTextBeforeChoosing
     property string pTitle
     property string pQuestion
@@ -29,7 +32,7 @@ Item {
     property string pVideoWhileChoiceSource
     property string pImageWhileChoiceSource
     property int pTime: 0
-    property int pVolume
+    property int pVideoVolume: 0
     property var pDefaultChoice
     property var pListChoices: []
 
@@ -58,6 +61,12 @@ Item {
         sourceSimple: pImageWhileChoiceSource
 
 
+        function getmListItemToCheckIfLoaded() {
+            if (pImageWhileChoiceSource) {
+                return [iImageWhileChoice];
+            }
+            return []
+        }
     }
 
     CHgChoices {
@@ -75,10 +84,27 @@ Item {
     onVisibleChanged: {
         if (visible) {
             mVideoBeforeChoice.visible = true
+            if (pTerminateAfterPlay) {
+                pStatus = pStatusEnum.TERMINATED
+            }
         }
     }
     Component.onCompleted: {
         mCHgChoices.recalibratePositions()
+    }
+
+    // onPListChoicesChanged: {
+    //     console.error("Invalid input: choices is not an array");
+    //     pListChoices = shadow_getChoices(pListChoices)
+    // }
+
+
+
+    function shadow_getChoices(choices) {
+        return choices.filter(choice =>
+                choice.pStatus === pStatusEnum.ACCESSIBLE ||
+                choice.pStatus === pStatusEnum.LOCKED
+            );
     }
 
 
@@ -91,5 +117,18 @@ Item {
     function makeAccessible() {
         pStatus = pStatusEnum.ACCESSIBLE
     }
+    function lock() {
+        pStatus = pStatusEnum.LOCKED
+    }
+
+
+    function getmListItemToCheckIfLoaded() {
+        let getListToCheck = [  ...mVideoBeforeChoice.getmListItemToCheckIfLoaded(),
+                                ...mVideoWhileChoice.getmListItemToCheckIfLoaded(),
+                                ...iImageWhileChoice.getmListItemToCheckIfLoaded()
+                            ]
+        return [...getListToCheck, ...pListChoices];
+    }
+
 
 }

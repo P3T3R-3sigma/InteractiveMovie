@@ -1,5 +1,6 @@
 import Felgo
 import QtQuick
+import QtMultimedia
 
 import "abstract"
 import "basic_librairies/Utils/v1"
@@ -11,12 +12,14 @@ import "basic_librairies/BasicImageHover/v1"
 import "basic_librairies/BasicImageMulti/v1"
 import "basic_librairies/BasicLoader/v1"
 import "basic_librairies/BasicVideo/v1"
+import "basic_librairies/BasicVideoSource/v1"
 import "basic_librairies/BasicText/v4"
 import "basic_librairies/BasicSprites/v3"
 import "basic_librairies/BasicReflection/v3"
 import "basic_librairies/BasicScroll/v2"
 import "basic_librairies/BasicSubWindow/v3"
 import "basic_librairies/BasicDebug/v1"
+import "Choice"
 
 
 
@@ -70,6 +73,7 @@ GameWindow {
         pTitle: qsTr("Title 0")
         pQuestion: qsTr("question 0")
 
+        pTerminateAfterPlay: true
         pTextBeforeChoosing: ""
         pVideoBeforeChoiceSource: "Videos/VideoReduite.mp4"
         pVideoWhileChoiceSource: "Videos/VideoReduite.mp4"
@@ -78,15 +82,6 @@ GameWindow {
         pDefaultChoice: null
         pListChoices: [ch1, ch2, ch3, ch4]
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -142,6 +137,41 @@ GameWindow {
         pDefaultChoice: null
         pListChoices: []
     }
-    Component.onCompleted: ch0.visible = true
+    AppButton {
+        id: downloadButtton
+        width: parent.width * 0.15
+        height: parent.height * 0.10
+        x: width * 0.70
+        y: parent.height - height * 1.5
+        z: 20
+        text: "Download sources"
+        onClicked: {
+            console.log("------- launch loader -----------")
+            /*
+              Set sources
+              */
+
+            /*
+              Start loaded
+              */
+            mBasicLoaderManager.startCheck(iGameWindow, "loadedSuccess");
+        }
+    }
+
+
+    function loadedSuccess() {
+        console.log("Loaded successfully all choices")
+        ch0.visible = true
+        downloadButtton.visible = false
+        /*
+          Communication
+          */
+        mBasicLoaderManager.toConsole();
+    }
+
+
+    function getmListItemToCheckIfLoaded() {
+        return [ch0];
+    }
 
 }

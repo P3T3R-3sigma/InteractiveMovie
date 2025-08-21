@@ -15,7 +15,7 @@ Item {
     /*
       Controls
       */
-    property int mCheckInterval: 100
+    property int mCheckInterval: 1000
     property int mNumOfRetry: 0
     property int mNUMBER_OF_RETRY_FOR_TIMEOUT_ERROR: 100
     property int mNUMBER_OF_RETRY_FOR_LOADING_SCREEN_SPRITE: 10
@@ -185,7 +185,6 @@ Item {
         interval: mCheckInterval
         onTriggered: {
             mNumOfRetry++
-            console.log("REPEAT", getmIsReady())
             /*
               DEBUG
               */
@@ -251,6 +250,7 @@ Item {
         y: (parent.height - height) / 2
 
         interpolate: false
+        running: false
         visible: false
 
     }
@@ -311,7 +311,6 @@ Item {
           Hide the loading screen
           */
         visible = false;
-        console.log("Sprite: " + mSPRITE_SANDGLASS.running)
         mSPRITE_SANDGLASS.running = false
         mSPRITE_SANDGLASS.visible = false
         timeoutErrorMessage.visible = false

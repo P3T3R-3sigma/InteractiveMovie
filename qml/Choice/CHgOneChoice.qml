@@ -1,8 +1,7 @@
 import QtQuick
 import Felgo
-import "basic_librairies/BasicText/v4"
-
-import "basic_librairies/BasicDebug/v1"
+import "../basic_librairies/BasicText/v4"
+import "../basic_librairies/BasicDebug/v1"
 
 BasicTextFitToWindowWidth {
     id: iOneChoice
