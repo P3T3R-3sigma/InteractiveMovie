@@ -19,6 +19,7 @@ import "basic_librairies/BasicReflection/v3"
 import "basic_librairies/BasicScroll/v2"
 import "basic_librairies/BasicSubWindow/v3"
 import "basic_librairies/BasicDebug/v1"
+import "Choice/BackGround"
 import "Choice"
 
 
@@ -68,75 +69,115 @@ GameWindow {
         id: mCHc
     }
 
-    CHsChoiceContainer {
+    CHsChoice {
         id: ch0
-        pTitle: qsTr("Title 0")
-        pQuestion: qsTr("question 0")
+        mTitle: qsTr("Title 0")
+        mQuestion: qsTr("question 0")
 
-        pTerminateAfterPlay: true
-        pTextBeforeChoosing: ""
-        pVideoBeforeChoiceSource: "Videos/VideoReduite.mp4"
-        pVideoWhileChoiceSource: "Videos/VideoReduite.mp4"
-        pImageWhileChoiceSource: "BasicSubWindow/IViewSimpleCupboardRight.jpg"
-        pTime: 0
-        pDefaultChoice: null
-        pListChoices: [ch1, ch2, ch3, ch4]
+        mDisplay: mDisplayEnum.DEBUG
+        mTerminateAfterPlay: true
+        mTextBeforeChoosing: ""
+        mMainVideoSource: "Videos/VideoReduite.mp4"
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: "Angel/Angel_001.jpg"
+        mTime: 400000
+        mDefaultChoice: null
+        mListChoices: [ch1, ch2, ch3, ch4]
+    }
+
+    CHgSexVideo {
+        id: iSexVideo
+
+        mNextVideo: ch0
+
+        mIsDebug: false
+
+        mSourceSimple: "VideoReduite.mp4"
+
+
+        mListSourcesImagesToJumpTo: [
+            // "start_LABEL_Start_MMSS_0000.jpg",
+            "JomereLesbi_LABEL_The each_MMSS_0041.jpg",
+            "JomereLesbi_Gun_LABEL_Gun down_MMSS_0115.jpg",
+            "JomereLesbi_Cunni_LABEL_Cuni_MMSS_0150.jpg",
+            "JomereLesbi_Cunni_Doggy_LABEL_Doggy_MMSS_0439.jpg",
+            // "end_LABEL_End_MMSS_9999.jpg",
+        ]
     }
 
 
-
-    CHsChoiceContainer {
+    CHsChoice {
         id: ch1
-        pTitle: qsTr("Title 1")
-        pQuestion: qsTr("question 1")
+        mTitle: qsTr("Title 1")
+        mQuestion: qsTr("question 1")
+        mDisplay: mDisplayEnum.DEBUG
 
-        pTextBeforeChoosing: qsTr("Choice 1, Choice 1, Choice 1, Choice 1, Choice1, Choice 1, Choice 1, Choice")
-        pVideoBeforeChoiceSource: "Videos/VideoReduite.mp4"
-        pVideoWhileChoiceSource: ""
-        pImageWhileChoiceSource: "Angel/Angel_001.jpg"
-        pTime: 0
-        pDefaultChoice: null
-        pListChoices: [ch2, ch3]
+        mTextBeforeChoosing: qsTr("Choice 1, Choice 1, Choice 1, Choice 1, Choice1, Choice 1, Choice 1, Choice")
+        mMainVideoSource: "Videos/VideoReduite.mp4"
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: "Angel/Angel_001.jpg"
+        mTime: 10000
+        mDefaultChoice: null
+        mListChoices: [ch2, ch3]
+        Component.onCompleted: {
+            ch1.hide()
+        }
     }
-    CHsChoiceContainer {
+    CHsChoice {
         id: ch2
-        pTitle: qsTr("Title 2")
-        pQuestion: qsTr("question 2")
+        mTitle: qsTr("Title 2")
+        mQuestion: qsTr("question 2")
 
-        pTextBeforeChoosing: qsTr("Choice 2")
-        pVideoBeforeChoiceSource: ""
-        pVideoWhileChoiceSource: ""
-        pImageWhileChoiceSource: "Angel/Angel_002.jpg"
-        pTime: 0
-        pDefaultChoice: null
-        pListChoices: []
+        mDisplay: mDisplayEnum.DEBUG
+        mTextIfLocked: qsTr("Locked 2")
+        mTextBeforeChoosing: qsTr("Choice 2")
+        mMainVideoSource: "Videos/VideoReduite.mp4"
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: "Angel/Angel_001.jpg"
+        mTime: 10
+        mDefaultChoice: iSexVideo
+        mListChoices: []
+        Component.onCompleted: {
+            ch2.lock()
+        }
     }
-    CHsChoiceContainer {
+
+    CHsChoice {
         id: ch3
-        pTitle: qsTr("Title 3")
-        pQuestion: qsTr("question 3")
+        mTitle: qsTr("Title 3")
+        mQuestion: qsTr("question 3")
+        mDisplay: mDisplayEnum.DEBUG
 
-        pTextBeforeChoosing: qsTr("Choice 3")
-        pVideoBeforeChoiceSource: ""
-        pVideoWhileChoiceSource: ""
-        pImageWhileChoiceSource: "Angel/Angel_003.jpg"
-        pTime: 0
-        pDefaultChoice: null
-        pListChoices: []
+        mTextBeforeChoosing: qsTr("Choice 3")
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: "Angel/Angel_001.jpg"
+        mTime: 10000
+        mDefaultChoice: null
+        mListChoices: []
+        Component.onCompleted: {
+            ch3.terminate()
+        }
     }
-    CHsChoiceContainer {
+    CHsChoice {
         id: ch4
-        pTitle: qsTr("Title 4")
-        pQuestion: qsTr("question 4")
+        mTitle: qsTr("Title 4")
+        mQuestion: qsTr("question 4")
+        mDisplay: mDisplayEnum.DEBUG
 
-        pTextBeforeChoosing: qsTr("Choice 4")
-        pVideoBeforeChoiceSource: ""
-        pVideoWhileChoiceSource: ""
-        pImageWhileChoiceSource: ""
-        pTime: 0
-        pDefaultChoice: null
-        pListChoices: []
+        mTextBeforeChoosing: qsTr("Choice 4")
+        mMainVideoSource: "Videos/VideoReduite.mp4"
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: "Angel/Angel_001.jpg"
+        mTime: 10000
+        mDefaultChoice: ch2
+        mListChoices: [ch1, ch2]
+        onVisibleChanged:  {
+            ch2.makeAccessible()
+            shadow_getChoices()
+        }
     }
+
     AppButton {
         id: downloadButtton
         width: parent.width * 0.15
@@ -154,7 +195,7 @@ GameWindow {
             /*
               Start loaded
               */
-            mBasicLoaderManager.startCheck(iGameWindow, "loadedSuccess");
+            mBasicLoaderManager.startCheck(iGameWindow , "loadedSuccess");
         }
     }
 

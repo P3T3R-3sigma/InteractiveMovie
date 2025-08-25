@@ -6,7 +6,7 @@ import "../../BasicLoader/v1"
 import "../../BasicDebug/v1"
 
 
-BasicLoaderContainerGraphic {
+BasicLoaderContainer {
     id: mLoader
 
     anchors.fill: parent
@@ -18,6 +18,7 @@ BasicLoaderContainerGraphic {
     mItemWithSource: mVideoMediaPlayer
 
     signal sVideoEnd(var mediaPlayer)
+    signal sPositionChanged(var position)
 
     visible: false
 
@@ -37,19 +38,20 @@ BasicLoaderContainerGraphic {
         }
         onPlaybackStateChanged: {
             ///////////////////////////////
-            console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration)
+            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration)
             ///////////////////////////////
             if (mediaStatus === MediaPlayer.EndOfMedia) {
                 sVideoEnd(mVideoMediaPlayer)
                 ///////////////////////////////
-                console.log("End of media reached.")
+                // console.log("End of media reached.")
                 ///////////////////////////////
             } else if (mediaStatus === MediaPlayer.LoadedMedia) {
                 ///////////////////////////////
-                console.log("Loaded")
+                // console.log("Loaded")
                 ///////////////////////////////
             }
         }
+        onPositionChanged: sPositionChanged(mVideoMediaPlayer.position)
     }
     /**
       return a bool: true if ready, false if not ready
@@ -68,33 +70,35 @@ BasicLoaderContainerGraphic {
         return []
     }
 
-    Timer {
-        id: timer
-        interval: 1000
-        repeat: true
-        onTriggered: {
-            console.log("Should Play.", visible, mVideoMediaPlayer.position, mVideoMediaPlayer.mediaStatus, mVideoMediaPlayer.playbackState === MediaPlayer.PlayingState, z)
-        }
-    }
-
 
 
     onVisibleChanged: {
         if (visible) {
-            console.log("Should Play.", visible, mVideoMediaPlayer.mediaStatus, mVideoMediaPlayer.playbackState === MediaPlayer.PlayingState)
-
-            timer.start()
             mVideoMediaPlayer.play()
-            console.log("Should Play.", visible, mVideoMediaPlayer.mediaStatus, mVideoMediaPlayer.playbackState === MediaPlayer.PlayingState)
         } else {
-            timer.stop()
             mVideoMediaPlayer.stop()
         }
     }
     function startVideo(){
-        timer.start()
         mVideoMediaPlayer.play()
+    }
+    function stopVideo(){
+        mVideoMediaPlayer.stop()
+    }
+    function pauseVideo(){
+        mVideoMediaPlayer.pause()
+    }
 
+
+
+    function getVideoDuration() {
+        return mVideoMediaPlayer.duration
+    }
+    function getVideoPosition() {
+        return mVideoMediaPlayer.position
+    }
+    function setVideoPosition(sPosition) {
+        mVideoMediaPlayer.position = sPosition
     }
 }
 

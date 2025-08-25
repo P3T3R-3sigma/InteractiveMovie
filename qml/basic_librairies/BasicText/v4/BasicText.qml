@@ -63,25 +63,32 @@ BasicItem {
 
     onParentWidthChanged: {
         compute();
+        // console.log("CALLED 1", textIsWrapped)
     }
     onParentHeightChanged: {
         compute();
+        // console.log("CALLED 2", textIsWrapped)
     }
     onVisibleChanged: {
         compute();
+        // console.log("CALLED 3", textIsWrapped)
     }
     onTextFontPixelSizePercentChanged: {
         compute();
+        // console.log("CALLED 4", textIsWrapped)
     }
     onPaddingPercentHeightChanged: {
         compute();
+        // console.log("CALLED 5", textIsWrapped)
     }
     onPaddingPercentWidthChanged: {
         compute();
+        // console.log("CALLED 6", textIsWrapped)
     }
     textFontPixelSizePercentMax: textFontForceSizePixelMax > 0 ? textFontForceSizePixelMax / parentHeight : -1
     onTextFontPixelSizePercentMaxChanged: {
         compute();
+        // console.log("CALLED 7", textIsWrapped)
     }
 
     /*
@@ -199,12 +206,15 @@ BasicItem {
                   */
                 onContentHeightChanged: {
                     compute();
+                    // console.log("CALLED 8", textIsWrapped)
                 }
                 onContentWidthChanged: {
                     compute();
+                    // console.log("CALLED 9", textIsWrapped)
                 }
                 onTextChanged: {
                     compute();
+                    // console.log("CALLED 10", textIsWrapped)
                 }
 
                 ////////////////////////////////////////////

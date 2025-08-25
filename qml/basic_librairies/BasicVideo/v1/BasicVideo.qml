@@ -26,12 +26,14 @@ Item {
     onVisibleChanged: {
         if (visible) {
             mThisBasicLoaderContainer.forceDownload()
+            startVideo()
         }
     }
     /*
       Launch video should come before play/pause/stop. It will launch all the controls associated with the video
       */
     function startVideo() {
+        mThisBasicVideo.visible = true
         mThisMediaPlayer.play();
         enableControls(true)
         mThisBasicVideoControls.hideControls()
@@ -62,6 +64,7 @@ Item {
         }
        return [mThisBasicVideoControls, mThisBasicLoaderContainer];
     }
+
 
     /*
       Loader container of the video

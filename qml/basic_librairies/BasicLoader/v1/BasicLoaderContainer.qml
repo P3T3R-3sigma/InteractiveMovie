@@ -14,7 +14,7 @@ Item {
     /*
       Controls
       */
-    property bool mIS_DEBUG: true
+    property bool mIS_DEBUG: false
     property var mItemWithSource        //  the item to which we should set the source
     property string mFolderRoot: ""
     property string mSource             // should be set at start
