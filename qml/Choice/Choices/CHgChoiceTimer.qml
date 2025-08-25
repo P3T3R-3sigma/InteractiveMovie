@@ -1,6 +1,8 @@
 import QtQuick
 import Felgo
 
+import "../../"
+
 Item {
     id: iChoiceTimer
 
@@ -35,24 +37,39 @@ Item {
         radius: height/2
     }
 
-    NumberAnimation {
-        id: iNumberAnimationX
-        target: iTimerGraphic
-        property: "width"
-        duration: pTime
+    ParallelAnimation {
+        id: iParallelAnimation
 
+        running: visible
+        loops: 1
+        NumberAnimation {
+            id: iNumberAnimationX
+            target: iTimerGraphic
+            property: "width"
+            duration: mTime
+
+        }
         onFinished: {
-            pDefaultChoice.visible = true
-            iChoice.visible = false
+            iChoiceManager.visible = false
+            mDefaultChoice.visible = true
+
+        }
+    }
+
+
+    onVisibleChanged: {
+        if (visible) {
+            startTimer()
         }
     }
 
     function startTimer() {
-        if (pTime > 0) {
+        if (mTime > 0) {
             iNumberAnimationX.to = 0
+            iParallelAnimation.running = true
         }
     }
     function stopTimer() {
-        iChoiceTimer.visible = false
+        iParallelAnimation.running = false
     }
 }

@@ -1,10 +1,10 @@
 import QtQuick
 import Felgo
 
-import "../basic_librairies/BasicImageSource/v4"
-import "../basic_librairies/BasicLoader/v1"
-import "../basic_librairies/BasicText/v4"
-import "../basic_librairies/BasicDebug/v1"
+import "../../basic_librairies/BasicImageSource/v4"
+import "../../basic_librairies/BasicLoader/v1"
+import "../../basic_librairies/BasicText/v4"
+import "../../basic_librairies/BasicDebug/v1"
 
 Item {
 
@@ -14,6 +14,8 @@ Item {
     property real pYPercent
     property real pWidthPercent
     property real pHeightPercent: 1 - pYPercent
+
+    property bool pChoose: false
 
     CHc {
         id: iCHc
@@ -32,7 +34,6 @@ Item {
     BasicTextFitToWindowWidth {
         id: iTitle
 
-        textIsWrapped: true
         xPercent: 0.1
         yPercent: pYPercent
         widthPercent: 1 - pXPercent*2
@@ -44,13 +45,13 @@ Item {
         textColor: "black"
         textFontPixelSizePercent: 0.06
         textIsAlignToCenterV: true
-        text: pTitle
+        text: mTitle
+        textIsWrapped: true
     }
 
     BasicTextFitToWindowWidth {
         id: iQuestion
 
-        textIsWrapped: true
         xPercent: 0.15
         yPercent: pYPercent
         widthPercent: 1 - pXPercent*2
@@ -62,7 +63,8 @@ Item {
         textColor: "black"
         textFontPixelSizePercent: 0.04
         textIsAlignToCenterV: true
-        text: pQuestion
+        text: mQuestion
+        textIsWrapped: true
     }
 
     Item {
@@ -71,7 +73,7 @@ Item {
 
         Repeater {
             id: iRepeater
-            model: pListChoices.length
+            model: mListChoices.length
 
             CHgOneChoice {
                 id: iOneChoice
@@ -94,8 +96,9 @@ Item {
         yPercent: 0.01
         widthPercent: 0.8
         heightPercent: 0.03
-
     }
+    onPChooseChanged: mChoiceTimer.stopTimer()
+
 
     function recalibratePositions() {
         let yPadding = iChoices.pYPercent

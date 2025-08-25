@@ -2,10 +2,10 @@ import QtQuick
 import Felgo
 import QtMultimedia
 
-import "../basic_librairies/BasicLoader/v1"
-import "../basic_librairies/BasicVideoSource/v1"
+import "../../basic_librairies/BasicLoader/v1"
+import "../../basic_librairies/BasicVideoSource/v1"
 Item {
-    id: iVideoWhileChoice
+    id: iSecondaryVideo
 
     visible: false
     z:1
@@ -14,19 +14,27 @@ Item {
 
     BasicVideoSource {
         id: iBasicVideoSourceWhileChoice
-        mSource: pVideoWhileChoiceSource
-        mVolume: pVideoVolume
+        mVolume: mVideoVolume
     }
 
     Component.onCompleted: {
         iBasicVideoSourceWhileChoice.sVideoEnd.connect(onVideoEnd)
+        if (mDisplay === mDisplayEnum.TWO_VIDEOS) {
+            iBasicVideoSourceWhileChoice.mSource = mSecondaryVideoSource
+        }
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            iBasicVideoSourceWhileChoice.visible = true
+        }
     }
 
     function onVideoEnd(mediaPlayer) {
         mediaPlayer.play()
     }
     function getmListItemToCheckIfLoaded() {
-        if (pVideoWhileChoiceSource) {
+        if (mDisplay === mDisplayEnum.TWO_VIDEO) {
             return [iBasicVideoSourceWhileChoice];
         }
         return []
