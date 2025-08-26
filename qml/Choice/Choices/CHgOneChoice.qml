@@ -11,11 +11,13 @@ BasicTextFitToWindowWidth {
     yPercent: 0
     widthPercent : 0
 
-    textFontPixelSizePercent: 0.03
+    textFontPixelSizePercent: 0.04
     paddingPercentHeight: iCHc.mPADDING_H
     textIsAlignToCenterV: true
     textColor: "black"
 
+    borderColor: "green"
+    borderWidthPercent: 0.001
     text:  getText()
     textIsWrapped: true
 
@@ -25,27 +27,27 @@ BasicTextFitToWindowWidth {
 
         hoverEnabled: true
 
-        enabled: mListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE
+        enabled: mShadowListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE
 
         onEntered: {
             iOneChoice.borderColor = "purple"
         }
         onExited: {
-            iOneChoice.borderColor = "transparent"
+            iOneChoice.borderColor = "green"
         }
 
         onClicked: {
-            pChoose = true
+            stopTimer()
             iChoiceManager.visible = false
-            mListChoices[model.index].visible = true
+            mShadowListChoices[model.index].visible = true
         }
     }
 
     function getText() {
-        if (mListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE) {
-            return mListChoices[model.index].mTextBeforeChoosing
+        if (mShadowListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE) {
+            return mShadowListChoices[model.index].mTextBeforeChoosing
         }
-        return mListChoices[model.index].mTextIfLocked
+        return mShadowListChoices[model.index].mTextIfLocked
     }
 }
 

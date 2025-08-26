@@ -13,6 +13,11 @@ BasicImageSource {
 
     sourceSimple: mSecondaryImageSource
 
+    onVisibleChanged: {
+        if (visible) {
+            mCHgChoices.visible = true
+        }
+    }
 
     function getmListItemToCheckIfLoaded() {
         if (mSecondaryImageSource) {

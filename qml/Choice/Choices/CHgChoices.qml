@@ -15,7 +15,6 @@ Item {
     property real pWidthPercent
     property real pHeightPercent: 1 - pYPercent
 
-    property bool pChoose: false
 
     CHc {
         id: iCHc
@@ -28,26 +27,24 @@ Item {
     height: parent.height * pHeightPercent
 
     //////////////////////////////////
-    BasicDebugRectangle {visible: true; color: "orange"; anchors.fill: parent}
+    // BasicDebugRectangle {visible: mIsDebug; color: "orange"; anchors.fill: parent}
     //////////////////////////////////
 
-    BasicTextFitToWindowWidth {
-        id: iTitle
+    // BasicTextFitToWindowWidth {
+    //     id: iTitle
 
-        xPercent: 0.1
-        yPercent: pYPercent
-        widthPercent: 1 - pXPercent*2
+    //     xPercent: 0.1
+    //     yPercent: pYPercent
+    //     widthPercent: 1 - pXPercent*2
 
-        ////////////////////////////
-        BasicDebugRectangle {visible: true; color: "blue"; anchors.fill: parent}
-        ////////////////////////////
-
-        textColor: "black"
-        textFontPixelSizePercent: 0.06
-        textIsAlignToCenterV: true
-        text: mTitle
-        textIsWrapped: true
-    }
+    //     borderColor: "yellow"
+    //     borderWidthPercent: 0.001
+    //     textColor: "black"
+    //     textFontPixelSizePercent: 0.06
+    //     textIsAlignToCenterV: true
+    //     text: mTitle
+    //     textIsWrapped: true
+    // }
 
     BasicTextFitToWindowWidth {
         id: iQuestion
@@ -56,12 +53,10 @@ Item {
         yPercent: pYPercent
         widthPercent: 1 - pXPercent*2
 
-        ////////////////////////////
-        BasicDebugRectangle {visible: true; color: "blue"; anchors.fill: parent}
-        ////////////////////////////
-
+        borderColor: "yellow"
+        borderWidthPercent: 0.001
         textColor: "black"
-        textFontPixelSizePercent: 0.04
+        textFontPixelSizePercent: 0.05
         textIsAlignToCenterV: true
         text: mQuestion
         textIsWrapped: true
@@ -73,18 +68,13 @@ Item {
 
         Repeater {
             id: iRepeater
-            model: mListChoices.length
+            model: mShadowListChoices.length
 
             CHgOneChoice {
                 id: iOneChoice
                 xPercent: pXPercent
                 yPercent: pYPercent
                 widthPercent: 1 - 2*pXPercent
-
-
-                //////////////////////////////////
-                BasicDebugRectangle {visible: true; color: "blue"; anchors.fill: parent}
-                //////////////////////////////////
             }
         }
     }
@@ -97,16 +87,30 @@ Item {
         widthPercent: 0.8
         heightPercent: 0.03
     }
-    onPChooseChanged: mChoiceTimer.stopTimer()
+
+    onVisibleChanged: {
+        if (visible) {
+            recalibratePositions()
+            if (mTime === 0) {
+                mChoiceTimer.visible = false
+            }
+        }
+    }
+
+    function stopTimer() {
+        mChoiceTimer.stopTimer()
+        iChoices.visible = false
+    }
+
 
 
     function recalibratePositions() {
         let yPadding = iChoices.pYPercent
 
 
-        iTitle.adjustWindow()
-        iTitle.yPercent = yPadding
-        yPadding += iTitle.heightPercent + iCHc.mPADDING_H
+        // iTitle.adjustWindow()
+        // iTitle.yPercent = yPadding
+        // yPadding += iTitle.heightPercent + iCHc.mPADDING_H
 
         iQuestion.adjustWindow()
         iQuestion.yPercent = yPadding
@@ -121,7 +125,6 @@ Item {
         mChoiceTimer.yPercent = yPadding
         yPadding += mChoiceTimer.heightPercent + iCHc.mPADDING_H
 
-        pHeightPercent = yPadding - iChoices.pYPercent
     }
 
 

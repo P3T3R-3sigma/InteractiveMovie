@@ -16,6 +16,7 @@ Item {
 
     anchors.fill: parent
 
+
     BasicVideoSource {
         id: iBasicVideoSourceMainVideo
         mSource: mMainVideoSource
@@ -25,29 +26,36 @@ Item {
     MouseArea {
         anchors.fill: parent
 
-        enabled: !pChoiceVisible
+        enabled: !pChoiceVisible || mIsDebug
         onClicked: {
-            iBasicVideoSourceMainVideo.setVideoPosition(mTimerStart)
+            if (mTime === 0) {
+                onVideoEnd()
+            } else {
+                iBasicVideoSourceMainVideo.setVideoPosition(mTimerStart)
+            }
         }
     }
 
     Component.onCompleted: {
         iBasicVideoSourceMainVideo.sVideoEnd.connect(onVideoEnd)
         iBasicVideoSourceMainVideo.sPositionChanged.connect(onPosChanged)
+        iPlaceholder.sOnClicked.connect(skipVideoDebug)
     }
 
     onVisibleChanged: {
-        if (mMainVideoSource) {
-            if (mDisplay === mDisplayEnum.DEBUG) {
-                onVideoEnd()
-            } else {
+        if (visible) {
+            if (mMainVideoSource) {
                 iBasicVideoSourceMainVideo.visible = true
                 if (iBasicVideoSourceMainVideo.getVideoDuration() > 0) {
                     mTimerStart = iBasicVideoSourceMainVideo.getVideoDuration() - mTime
                 } else {
                     console.log("NOT LOADED, WRONG TIMING")
                 }
+
             }
+
+        } else {
+            pChoiceVisible = false
         }
     }
 
@@ -57,9 +65,10 @@ Item {
         // console.log("Video end")
         //////////////////////////////
         iMainVideoChoice.visible = false
+        pChoiceVisible = false
         switch (mDisplay) {
         case mDisplayEnum.ONE_VIDEO: {
-            mCHgChoices.visible = true
+            mCHgChoices.visible = false
             iChoiceManager.visible = false
             mDefaultChoice.visible = true
             break
@@ -69,19 +78,20 @@ Item {
             pVideoNext.visible = true
             break
             }
-        case mDisplayEnum.SEX_VIDEO: {
-            mDefaultChoice.visible = true
-            break
-            }
-        case mDisplayEnum.DEBUG: {
-            mCHgChoices.visible = true
-            pImageNext.visible = true
-            break
-            }
         }
     }
+
+    function skipVideoDebug() {
+        if (mTime === 0) {
+            onVideoEnd()
+        } else {
+            pChoiceVisible = true
+            mCHgChoices.visible = true
+        }
+    }
+
     function onPosChanged(position) {
-        if (position > mTimerStart && !pChoiceVisible && mDisplay !== mDisplayEnum.SEX_VIDEO) {
+        if (position > mTimerStart && !pChoiceVisible) {
             pChoiceVisible = true
             mCHgChoices.visible = true
         }

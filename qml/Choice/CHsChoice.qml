@@ -25,16 +25,18 @@ Item {
     property var mDisplayEnum: {
         "ONE_VIDEO": 0,
         "TWO_VIDEO": 1,
-        "SEX_VIDEO": 2,
-        "DEBUG": 3
+        "IMAGE": 2
     }
+
+    property bool mIsDebug: false
+    property string mDebugMessage: ""
 
     property int mStatus: mStatusEnum.ACCESSIBLE
     property bool mTerminateAfterPlay: false
 
     property int mDisplay: mDisplayEnum.ONE_VIDEO
     property string mTextBeforeChoosing
-    property string mTitle      // The title of the scenario    ** Merida jumbs you **
+    property string mTitle      // The title of the scenario    ** Merida jumps you **
     property string mQuestion   // The question of the scenario ** What do you do? **
 
     property string mTextIfLocked   // Text in case the option is locked
@@ -45,6 +47,8 @@ Item {
     property int mVideoVolume: 0
     property var mDefaultChoice
     property var mListChoices: []
+    property var mShadowListChoices: []
+    property var mListUnlocks: []
 
     visible: false
 
@@ -62,8 +66,9 @@ Item {
         visible: false
 
         pXPercent: 0.2
-        pYPercent: 0.2
+        pYPercent: 0.43
         pWidthPercent: 0.55
+        pHeightPercent: 0.35
     }
 
     onVisibleChanged: {
@@ -73,21 +78,23 @@ Item {
             if (mTerminateAfterPlay) {
                 mStatus = mStatusEnum.TERMINATED
             }
-        }
-    }
-
-    Component.onCompleted: {
-        mCHgChoices.recalibratePositions()
-    }
-
-    function shadow_getChoices() {
-        for (let i=0; i < mListChoices.length; i++) {
-            if (mListChoices[i].mStatus === mStatusEnum.HIDDEN || mListChoices[i].mStatus === mStatusEnum.TERMINATED) {
-                mListChoices.splice(i, 1)
-                i--
+            for (let i=0; i < mListUnlocks.length; i++) {
+                mListUnlocks[i].makeAccessible()
             }
         }
-        mListChoices = mListChoices
+    }
+    onMStatusChanged: mCHgChoices.recalibratePositions()
+
+    Component.onCompleted: mCHgChoices.recalibratePositions()
+
+    function shadow_getChoices() {
+        mShadowListChoices = []
+        for (let i=0; i < mListChoices.length; i++) {
+            if (mListChoices[i].mStatus !== mStatusEnum.HIDDEN && mListChoices[i].mStatus !== mStatusEnum.TERMINATED) {
+                mShadowListChoices.push(mListChoices[i])
+            }
+        }
+        mShadowListChoices = mShadowListChoices
         mCHgChoices.recalibratePositions()
     }
 

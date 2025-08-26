@@ -40,7 +40,7 @@ Item {
     ParallelAnimation {
         id: iParallelAnimation
 
-        running: visible
+        running: false
         loops: 1
         NumberAnimation {
             id: iNumberAnimationX
@@ -50,6 +50,7 @@ Item {
 
         }
         onFinished: {
+            stopTimer()
             iChoiceManager.visible = false
             mDefaultChoice.visible = true
 
@@ -67,9 +68,16 @@ Item {
         if (mTime > 0) {
             iNumberAnimationX.to = 0
             iParallelAnimation.running = true
+        } else if (mDisplay === mDisplayEnum.IMAGE) {
+
+        } else {
+            iChoiceManager.visible = false
+            mDefaultChoice.visible = true
         }
     }
     function stopTimer() {
         iParallelAnimation.running = false
+        iNumberAnimationX.duration = mTime
+        iTimerGraphic.width = parent.width * widthPercent
     }
 }

@@ -21,7 +21,7 @@ Item {
     property int mNUMBER_OF_RETRY_FOR_LOADING_SCREEN_SPRITE: 10
     property int mTIME_OUT: 10 * 1000 // in milliseconds. If the image takes more than TIME_OUT to download, we issue an error message
     property int mLoaderSpriteStartime: 1000
-    property bool mIS_DEBUG: false
+    property bool mIS_DEBUG: true
     property bool mIS_DEBUG_INITIAL_LIST: false
     property string mSOURCE_SIMPLE_SPRITE: mBasicSource.getSource("Sprites/Timer/sandglass.jpg")
     /*
@@ -124,21 +124,6 @@ Item {
             mBasicDisplay.toConsoleKnowItem(sSender)
         }
         /*
-
-          */
-        let lListItemToCheckIfLoaded = sItemToCheck.getmListItemToCheckIfLoaded();
-        /*
-          Recursivity: Case there is a list (the item contains several items to check --> we call them recursively
-          */
-        for (let lIdx = 0; lIdx < lListItemToCheckIfLoaded.length; lIdx++) {
-            let lItemToCheck = lListItemToCheckIfLoaded[lIdx]
-            if (lItemToCheck) {
-                if (lItemToCheck !== sItemToCheck) {
-                    buildmListItemToCheckIfLoaded(lItemToCheck, sItemToCheck);
-                }
-            }
-        }
-        /*
           Check all functions are here
           */
         let lIsItemToCheckLoadingOrContainer = true
@@ -155,7 +140,26 @@ Item {
           Add to list
           */
         if (lIsItemToCheckLoadingOrContainer && !mListItemToCheckIfLoaded.includes(sItemToCheck)) {
+            if (mIS_DEBUG) {
+                console.log("ADD: ", sItemToCheck)
+            }
+
             mListItemToCheckIfLoaded.push(sItemToCheck)
+            /*
+
+              */
+            let lListItemToCheckIfLoaded = sItemToCheck.getmListItemToCheckIfLoaded();
+            /*
+              Recursivity: Case there is a list (the item contains several items to check --> we call them recursively
+              */
+            for (let lIdx = 0; lIdx < lListItemToCheckIfLoaded.length; lIdx++) {
+                let lItemToCheck = lListItemToCheckIfLoaded[lIdx]
+                if (lItemToCheck) {
+                    if (lItemToCheck !== sItemToCheck) {
+                        buildmListItemToCheckIfLoaded(lItemToCheck, sItemToCheck);
+                    }
+                }
+            }
         }
         /*
           */

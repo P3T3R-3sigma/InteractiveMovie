@@ -26,8 +26,15 @@ Item {
 
     onVisibleChanged: {
         if (visible) {
-            iBasicVideoSourceWhileChoice.visible = true
+            if (mIsDebug) {
+                iPlaceholder.visible = true
+            } else {
+                iBasicVideoSourceWhileChoice.visible = true
+            }
         }
+    }
+    CHgPlaceholder {
+        id: iPlaceholder
     }
 
     function onVideoEnd(mediaPlayer) {

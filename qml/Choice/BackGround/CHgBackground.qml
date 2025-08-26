@@ -8,6 +8,10 @@ Item {
     anchors.fill: parent
 
 
+    CHgPlaceholder {
+        id: iPlaceholder
+    }
+
     CHgMainVideo {
         id: iMainVideo
 
@@ -25,6 +29,21 @@ Item {
     CHgSecondaryImage {
         id: iSecondaryImage
 
+    }
+
+
+    onVisibleChanged: {
+        if  (visible) {
+            if (mIsDebug) {
+                iPlaceholder.visible = true
+            } else {
+                switch (mDisplay) {
+                case mDisplayEnum.ONE_VIDEO: iMainVideo.visible = true; break
+                case mDisplayEnum.TWO_VIDEO: iMainVideo.visible = true; break
+                case mDisplayEnum.IMAGE: iSecondaryImage.visible = true
+                }
+            }
+        }
     }
 
     function getmListItemToCheckIfLoaded() {

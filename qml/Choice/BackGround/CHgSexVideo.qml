@@ -8,9 +8,11 @@ Item {
     id: iSexItem
 
     property bool mIsDebug: false
+    property string mTitle: ""
     property var mNextVideo
     property var mListSourcesImagesToJumpTo
     property var mSourceSimple
+
 
     visible: false
     anchors.fill: parent
@@ -26,45 +28,35 @@ Item {
         mSourceSimple: iSexItem.mSourceSimple
 
         onTerminated: {
-            iSexItem.visible = false
-            mNextVideo.visible = true
+            terminate()
         }
     }
 
-    BasicImageSource {
-        id: iSecondaryImage
-
-        visible: false
-
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-
-        sourceSimple: "Angel/Angel_003.jpg"
-
-        MouseArea {
-            anchors.fill: parent
-
-            onClicked: {
-                iSexItem.visible = false
-                mNextVideo.visible = true
-            }
-        }
+    CHgPlaceholder {
+        id: iPlaceholder
     }
 
     onVisibleChanged: {
         if (visible) {
             if (mIsDebug) {
-                console.log("HERE")
-                iSecondaryImage.visible = true
+                iPlaceholder.visible = true
             } else {
                 iBasicSexVideo.visible = true
             }
         }
+    }
 
+    Component.onCompleted: {
+        iPlaceholder.sOnClicked.connect(terminate)
+    }
+
+    function terminate() {
+        iSexItem.visible = false
+        mNextVideo.visible = true
     }
 
     function getmListItemToCheckIfLoaded() {
-        return [iBasicSexVideo, iSecondaryImage]
+        return [iBasicSexVideo]
     }
 
 }
