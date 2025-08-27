@@ -24,6 +24,9 @@ Item {
         return [sceeneC70, sceeneC06]
     }
 
+    function resetGame() {
+        sceeneC70.makeAccessible()
+    }
 
     CHsChoice {
         id: sceeneC70

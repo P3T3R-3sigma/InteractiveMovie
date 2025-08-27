@@ -13,6 +13,14 @@ Item {
         return [sceeneC00, sceeneC01, sceeneC02, sceeneC08]
     }
 
+    function resetGame(){
+        sceeneC01.hide()
+        sceeneC02.hide()
+        sceeneC08.hide()
+        sceeneC00.makeAccessible()
+    }
+
+
     CHsChoice {
         id: sceeneC00
 

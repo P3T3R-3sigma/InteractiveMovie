@@ -26,7 +26,7 @@ Item {
     MouseArea {
         anchors.fill: parent
 
-        enabled: !pChoiceVisible || mIsDebug
+        enabled: !pChoiceVisible && !mIsDebug
         onClicked: {
             if (mTime === 0) {
                 onVideoEnd()

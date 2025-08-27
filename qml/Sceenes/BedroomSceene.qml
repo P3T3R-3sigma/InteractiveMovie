@@ -28,6 +28,12 @@ Item {
         }
     }
 
+    function resetGame(){
+        sceeneC22.hide()
+        sceeneC23.hide()
+        sceeneC20.makeAccessible()
+    }
+
     function getSceene() {
         return [sceeneC20, sceeneC22, sceeneC23, sceeneC07]
     }
@@ -134,15 +140,15 @@ Item {
 
         mTextBeforeChoosing: qsTr("Leya is incredible")
         mTitle: qsTr("Leya is incredible")
-        mQuestion: qsTr("")
+        mQuestion: qsTr("What do you do?")
 
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
+        mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC22
-        mListChoices: []
+        mDefaultChoice: sceeneC25
+        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
     }
     CHsChoice {
@@ -185,16 +191,16 @@ Item {
         mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Tell a joke about chihuahas")
-        mTitle: qsTr("Chihuahas joke")
-        mQuestion: qsTr("")
+        mTitle: qsTr("Chihuahas")
+        mQuestion: qsTr("What do you do?")
 
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
+        mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC22
-        mListChoices: []
+        mDefaultChoice: sceeneC25
+        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
     }
     CHsChoice {

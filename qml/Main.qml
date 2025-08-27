@@ -85,6 +85,16 @@ GameWindow {
         iBedroomsceene.meridaSuperGlueOff()
         iLibrarySceene.meridaSuperGlueOff()
     }
+    function restartGame() {
+        sceeneC05.hide()
+        sceeneC06.hide()
+        sceeneC07.hide()
+        iKitchenSceene.resetGame()
+        iBedroomsceene.resetGame()
+        iSwimmingPoolSceene.resetGame()
+        iLibrarySceene.resetGame()
+
+    }
 
     CHsChoice {
         id: sceeneIntro
@@ -236,11 +246,31 @@ GameWindow {
 
         mIsDebug: true
 
-        mNextVideo: sceeneIntro
+        mNextVideo: gameOver
 
         mTitle: "Leya + Matthew BGA"
         mSourceSimple: ""
         mListSourcesImagesToJumpTo: []
+    }
+    CHsChoice {
+        id: gameOver
+
+
+
+        mIsDebug: true
+
+        mTextBeforeChoosing: ""
+        mTitle: "GameOver"
+        mQuestion: ""
+
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+        mTime: 0
+        mVideoVolume: 0
+        mDefaultChoice: sceeneIntro
+        mListChoices: []
+        mFunctionToCall: restartGame
     }
 
     AppButton {
