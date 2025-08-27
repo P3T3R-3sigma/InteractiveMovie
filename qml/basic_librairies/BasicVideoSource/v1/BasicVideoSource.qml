@@ -6,19 +6,19 @@ import "../../BasicLoader/v1"
 import "../../BasicDebug/v1"
 
 
-BasicLoaderContainer {
+Item {
     id: mLoader
 
     anchors.fill: parent
 
     property int mVolume: 0
+    property string mSource
 
     z: 10
 
-    mItemWithSource: mVideoMediaPlayer
-
     signal sVideoEnd(var mediaPlayer)
     signal sPositionChanged(var position)
+
 
     visible: false
 
@@ -32,6 +32,7 @@ BasicLoaderContainer {
     MediaPlayer {
         id: mVideoMediaPlayer
 
+        source: mSource
         videoOutput: mVideoOutput
         audioOutput: AudioOutput {
             volume: mVolume
@@ -53,23 +54,6 @@ BasicLoaderContainer {
         }
         onPositionChanged: sPositionChanged(mVideoMediaPlayer.position)
     }
-    /**
-      return a bool: true if ready, false if not ready
-      */
-    function checkForReady() {
-        if (mVideoMediaPlayer.mediaStatus === MediaPlayer.NoMedia) {
-            return false
-        }
-        /*
-          Store the time it took to download
-          */
-        mIsReady = true
-        return true
-    }
-    function getmListItemToCheckIfLoaded() {
-        return []
-    }
-
 
 
     onVisibleChanged: {

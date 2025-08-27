@@ -10,16 +10,34 @@ Item {
 
     anchors.fill: parent
 
+    property bool pLaugh: false
+
+    function meridaSuperGlueOn() {
+        if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
+        } else {
+            sceeneC20.hide()
+        }
+        sceeneC22.hide()
+        sceeneC07.makeAccessible()
+    }
+    function meridaSuperGlueOff() {
+        if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
+            sceeneC22.makeAccessible()
+        } else {
+            sceeneC20.makeAccessible()
+        }
+    }
 
     function getSceene() {
-        return [sceeneC20, sceeneC21, sceeneC22, sceeneC23]
+        return [sceeneC20, sceeneC22, sceeneC23, sceeneC07]
+    }
+
+    function setLaugh() {
+        pLaugh = true
     }
 
     CHsChoice {
         id: sceeneC20
-
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -35,13 +53,11 @@ Item {
         mDefaultChoice: sceeneC25
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
+        mListTerminates: [sceeneC20]
     }
     CHsChoice {
         id: sceeneC21
 
-        mTerminateAfterPlay: true
-
-        mStatus: mStatusEnum.HIDDEN
         mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom again")
@@ -53,14 +69,11 @@ Item {
         mSecondaryImageSource: ""
         mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC22
-
-
-        mTerminateAfterPlay: true
 
         mStatus: mStatusEnum.HIDDEN
         mIsDebug: true
@@ -72,7 +85,7 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
+        mTime: 10000
         mVideoVolume: 0
         mDefaultChoice: sceeneC25
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
@@ -81,7 +94,7 @@ Item {
         id: sceeneC23
 
 
-        mTerminateAfterPlay: true
+
 
         mStatus: mStatusEnum.HIDDEN
         mIsDebug: true
@@ -94,35 +107,11 @@ Item {
         mSecondaryImageSource: ""
         mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
-        mListChoices: []
-    }
-    CHsChoice {
-        id: sceeneC24
-
-
-        mTerminateAfterPlay: true
-
-        mStatus: mStatusEnum.HIDDEN
-        mIsDebug: true
-
-        mTextBeforeChoosing: qsTr("")
-        mTitle: qsTr("SuperGlue")
-        mQuestion: qsTr("")
-
-        mMainVideoSource: ""
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC25
-
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -141,9 +130,6 @@ Item {
     CHsChoice {
         id: sceeneC26
 
-
-        mTerminateAfterPlay: true
-
         mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Leya is incredible")
@@ -155,14 +141,12 @@ Item {
         mSecondaryImageSource: ""
         mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneC22
         mListChoices: []
+        mFunctionToCall: setLaugh
     }
     CHsChoice {
         id: sceeneC27
-
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -173,16 +157,13 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
+        mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: pLaugh ? sceeneC31S04 : sceeneC21
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC28
-
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -195,14 +176,11 @@ Item {
         mSecondaryImageSource: ""
         mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneC21
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC29
-
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -213,10 +191,60 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
+        mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneC22
         mListChoices: []
+        mFunctionToCall: setLaugh
+    }
+    CHsChoice {
+        id: sceeneC30
+
+        mIsDebug: true
+
+        mTextBeforeChoosing: qsTr("")
+        mTitle: qsTr("This is inapropriate")
+        mQuestion: qsTr("")
+
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+        mTime: 0
+        mVideoVolume: 0
+        mDefaultChoice: sceeneC21
+        mListChoices: []
+    }
+    CHsChoice {
+        id: sceeneC31S04
+
+        mIsDebug: true
+
+        mTextBeforeChoosing: qsTr("")
+        mTitle: qsTr("It is really because you are a nice guy")
+        mQuestion: qsTr("")
+
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+        mTime: 0
+        mVideoVolume: 0
+        mDefaultChoice: sceeneS04
+        mListChoices: []
+        mListUnlocks: [sceeneC23]
+        mListTerminates: [sceeneC22]
+    }
+    CHgSexVideo {
+        id: sceeneS04
+
+
+        mIsDebug: true
+
+        mNextVideo: sceeneHall
+
+        mTitle: "Sex on bed: Amber"
+
+        mSourceSimple: ""
+        mListSourcesImagesToJumpTo: []
     }
 
 }

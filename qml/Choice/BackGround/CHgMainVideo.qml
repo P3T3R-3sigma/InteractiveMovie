@@ -68,6 +68,7 @@ Item {
         pChoiceVisible = false
         switch (mDisplay) {
         case mDisplayEnum.ONE_VIDEO: {
+            iChoiceManager.setStatusChanges()
             mCHgChoices.visible = false
             iChoiceManager.visible = false
             mDefaultChoice.visible = true

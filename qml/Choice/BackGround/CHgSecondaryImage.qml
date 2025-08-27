@@ -18,11 +18,4 @@ BasicImageSource {
             mCHgChoices.visible = true
         }
     }
-
-    function getmListItemToCheckIfLoaded() {
-        if (mSecondaryImageSource) {
-            return [iSecondaryImage];
-        }
-        return []
-    }
 }

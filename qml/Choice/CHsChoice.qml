@@ -32,7 +32,6 @@ Item {
     property string mDebugMessage: ""
 
     property int mStatus: mStatusEnum.ACCESSIBLE
-    property bool mTerminateAfterPlay: false
 
     property int mDisplay: mDisplayEnum.ONE_VIDEO
     property string mTextBeforeChoosing
@@ -49,6 +48,9 @@ Item {
     property var mListChoices: []
     property var mShadowListChoices: []
     property var mListUnlocks: []
+    property var mListHides: []
+    property var mListTerminates: []
+    property var mFunctionToCall
 
     visible: false
 
@@ -75,12 +77,6 @@ Item {
         if (visible) {
             shadow_getChoices()
             mBackground.visible = true
-            if (mTerminateAfterPlay) {
-                mStatus = mStatusEnum.TERMINATED
-            }
-            for (let i=0; i < mListUnlocks.length; i++) {
-                mListUnlocks[i].makeAccessible()
-            }
         }
     }
     onMStatusChanged: mCHgChoices.recalibratePositions()
@@ -98,6 +94,21 @@ Item {
         mCHgChoices.recalibratePositions()
     }
 
+    function setStatusChanges() {
+        let i = 0
+        for (i=0; i < mListUnlocks.length; i++) {
+            mListUnlocks[i].makeAccessible()
+        }
+        for (i=0; i < mListTerminates.length; i++) {
+            mListTerminates[i].terminate()
+        }
+        for (i=0; i < mListHides.length; i++) {
+            mListHides[i].hide()
+        }
+        if (mFunctionToCall) {
+            mFunctionToCall()
+        }
+    }
 
     function hide() {
         mStatus = mStatusEnum.HIDDEN

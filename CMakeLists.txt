@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(SceenesAndConditions VERSION 0.1 LANGUAGES CXX)
+project(InteractiveMovie VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -9,7 +9,7 @@ find_package(Felgo REQUIRED)
 
 # Project identifier and version
 # More information: https://felgo.com/doc/felgo-publishing/#project-configuration
-set(PRODUCT_IDENTIFIER "com.yourcompany.wizardEVAP.SceenesAndConditions")
+set(PRODUCT_IDENTIFIER "com.yourcompany.wizardEVAP.InteractiveMovie")
 set(PRODUCT_VERSION_NAME "1.0.0")
 set(PRODUCT_VERSION_CODE 1)
 
@@ -32,21 +32,21 @@ file(GLOB_RECURSE QmlFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/*.qml qml/*.
 file(GLOB_RECURSE AssetsFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} assets/* qml/*)
 list(REMOVE_ITEM AssetsFiles ${QmlFiles})
 
-qt_add_executable(appSceenesAndConditions
+qt_add_executable(appInteractiveMovie
     main.cpp
     ${QmlFiles}
     ${AssetsFiles}
 )
 
-felgo_configure_executable(appSceenesAndConditions)
+felgo_configure_executable(appInteractiveMovie)
 
 # Deploy resources to build folder/package directly
 # comment for publishing
 deploy_resources("${QmlFiles};${AssetsFiles}")
 
 # Add QML files and resources to QML module to included them via QRC automatically:
-qt_add_qml_module(appSceenesAndConditions
-    URI SceenesAndConditions
+qt_add_qml_module(appInteractiveMovie
+    URI InteractiveMovie
     VERSION 1.0
 # uncomment for publishing:
 #    QML_FILES ${QmlFiles}
@@ -63,12 +63,12 @@ qt_add_qml_module(appSceenesAndConditions
 # during development, use the deploy_resources because you then get shorter compilation times (the qml files do not need to be compiled to the binary but are just copied)
 # also, for quickest deployment on Desktop disable the "Shadow Build" option in Projects/Builds - you can then select "Run Without Deployment" from the Build menu in Qt Creator if you only changed QML files; this speeds up application start, because your app is not copied & re-compiled but just re-interpreted
 
-target_compile_definitions(appSceenesAndConditions
+target_compile_definitions(appInteractiveMovie
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
-target_link_libraries(appSceenesAndConditions PRIVATE Felgo)
+target_link_libraries(appInteractiveMovie PRIVATE Felgo)
 
 # uncomment this line to add Felgo Hot Reload and use hot reloading with your custom C++ code
 # for the remaining steps see here: https://felgo.com/custom-code-reload-app/
 # find_package(FelgoHotReload REQUIRED)
-# target_link_libraries(appSceenesAndConditions PRIVATE FelgoHotReload)
+# target_link_libraries(appInteractiveMovie PRIVATE FelgoHotReload)

@@ -76,6 +76,7 @@ Item {
         }
     }
     function stopTimer() {
+        iChoiceManager.setStatusChanges()
         iParallelAnimation.running = false
         iNumberAnimationX.duration = mTime
         iTimerGraphic.width = parent.width * widthPercent

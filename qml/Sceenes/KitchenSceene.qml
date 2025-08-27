@@ -9,19 +9,12 @@ Item {
 
     anchors.fill: parent
 
-    property bool mStep: true
-    signal onStepChanged()
-
-    onMStepChanged: onStepChanged()
-
     function getSceene() {
         return [sceeneC00, sceeneC01, sceeneC02, sceeneC08]
     }
 
     CHsChoice {
         id: sceeneC00
-
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -34,22 +27,22 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mListUnlocks: [sceeneC02]
         mDefaultChoice: sceeneC04
         mListChoices: [sceeneC04, sceeneC03S01]
+        mListUnlocks: [sceeneC02]
+        mListTerminates: [sceeneC00]
     }
 
     CHsChoice {
         id: sceeneC01
 
-        mTerminateAfterPlay: false
         mStatus: mStatusEnum.HIDDEN
 
         mIsDebug: true
         mDebugMessage: "Merida rejects you"
 
-        mTextBeforeChoosing: ""
-        mTitle: ""
+        mTextBeforeChoosing: "Go to the kitchen again"
+        mTitle: "Merida rejects you"
         mQuestion: ""
 
         mMainVideoSource: ""
@@ -64,7 +57,6 @@ Item {
     CHsChoice {
         id: sceeneC02
 
-        mTerminateAfterPlay: false
         mStatus: mStatusEnum.HIDDEN
 
         mIsDebug: true
@@ -86,8 +78,6 @@ Item {
     CHsChoice {
         id: sceeneC04
 
-        mTerminateAfterPlay: false
-
         mIsDebug: true
         mDebugMessage: "Leaving Merida"
 
@@ -107,8 +97,6 @@ Item {
     CHsChoice {
         id: sceeneC03S01
 
-        mTerminateAfterPlay: false
-
         mIsDebug: true
         mDebugMessage: "Before fucking Merida"
 
@@ -122,6 +110,8 @@ Item {
         mDefaultChoice: sceeneS01
         mListChoices: []
         mListUnlocks: [sceeneC08]
+        mListTerminates: [sceeneC02]
+        mFunctionToCall: mSetSuperGlue
     }
 
     CHgSexVideo {
@@ -139,8 +129,6 @@ Item {
     CHsChoice {
         id: sceeneC08
 
-
-        mTerminateAfterPlay: false
 
         mStatus: mStatusEnum.HIDDEN
         mIsDebug: true
@@ -163,8 +151,6 @@ Item {
         id: sceeneC09
 
 
-        mTerminateAfterPlay: false
-
         mIsDebug: true
         mDebugMessage: "Told Merida to leave you alone"
 
@@ -185,8 +171,6 @@ Item {
         id: sceeneC10
 
 
-        mTerminateAfterPlay: false
-
         mIsDebug: true
         mDebugMessage: "Said you will marry Merida"
 
@@ -206,9 +190,6 @@ Item {
     CHsChoice {
         id: sceeneBackToHall
 
-
-        mTerminateAfterPlay: false
-
         mIsDebug: true
 
         mTextBeforeChoosing: "Go back to the hall"
@@ -226,9 +207,6 @@ Item {
 
     CHsChoice {
         id: sceeneC11
-
-
-        mTerminateAfterPlay: false
 
         mIsDebug: true
         mDebugMessage: "Confession about anal"
@@ -249,9 +227,6 @@ Item {
     CHsChoice {
         id: sceeneC12
 
-
-        mTerminateAfterPlay: false
-
         mIsDebug: true
 
         mTextBeforeChoosing: "Insist about anal to Merida"
@@ -270,9 +245,6 @@ Item {
     CHsChoice {
         id: sceeneC13S02
 
-
-        mTerminateAfterPlay: false
-
         mIsDebug: true
 
         mTextBeforeChoosing: ""
@@ -286,6 +258,9 @@ Item {
         mVideoVolume: 0
         mDefaultChoice: sceeneS02
         mListChoices: []
+        mListUnlocks: [sceeneC01]
+        mListTerminates: [sceeneC08, sceeneC05, sceeneC06, sceeneC07]
+        mFunctionToCall: mRemoveSuperGlue
     }
 
     CHgSexVideo {

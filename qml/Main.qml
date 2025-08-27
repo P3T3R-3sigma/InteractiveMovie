@@ -71,15 +71,25 @@ GameWindow {
         id: mCHc
     }
 
-    Item {
+    property bool mMeridaSuperglue: false
 
+    function mSetSuperGlue() {
+        mMeridaSuperglue = true
+        iSwimmingPoolSceene.meridaSuperGlueOn()
+        iBedroomsceene.meridaSuperGlueOn()
+        iLibrarySceene.meridaSuperGlueOn()
+    }
+    function mRemoveSuperGlue() {
+        mMeridaSuperglue = false
+        iSwimmingPoolSceene.meridaSuperGlueOff()
+        iBedroomsceene.meridaSuperGlueOff()
+        iLibrarySceene.meridaSuperGlueOff()
     }
 
     CHsChoice {
         id: sceeneIntro
 
         mStatus: mStatusEnum.ACCESSIBLE
-        mTerminateAfterPlay: true
 
         mIsDebug: true
 
@@ -104,7 +114,7 @@ GameWindow {
     CHsChoice {
         id: sceeneHall
 
-        mTerminateAfterPlay: false
+
 
         mDisplay: mDisplayEnum.IMAGE
         mIsDebug: true
@@ -119,7 +129,7 @@ GameWindow {
         mTime: 0
         mVideoVolume: 0
         mDefaultChoice: null
-        mListChoices: [...iKitchenSceene.getSceene(), ...iBedroomsceene.getSceene(), ...iSwimmingPoolSceene.getSceene()]
+        mListChoices: [...iKitchenSceene.getSceene(), ...iBedroomsceene.getSceene(), ...iSwimmingPoolSceene.getSceene(), ...iLibrarySceene.getSceene()]
 
 
         //////////////////////////////////
@@ -137,63 +147,19 @@ GameWindow {
     SwimmingPoolSceene {
         id: iSwimmingPoolSceene
     }
+    LibrarySceene {
+        id: iLibrarySceene
+    }
 
 
     CHsChoice {
         id: sceeneC05
 
-
-        mTerminateAfterPlay: false
-
         mIsDebug: true
-        mDebugMessage: "sceeneC05"
 
-        mTextBeforeChoosing: ""
-        mTitle: ""
-        mQuestion: ""
-
-        mMainVideoSource: ""
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
-        mDefaultChoice: null
-        mListChoices: []
-    }
-
-    CHsChoice {
-        id: sceeneC06
-
-
-        mTerminateAfterPlay: false
-
-        mIsDebug: true
-        mDebugMessage: "sceeneC06"
-
-        mTextBeforeChoosing: ""
-        mTitle: ""
-        mQuestion: ""
-
-        mMainVideoSource: ""
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
-        mDefaultChoice: null
-        mListChoices: []
-    }
-
-    CHsChoice {
-        id: sceeneC07
-
-
-        mTerminateAfterPlay: false
-
-        mIsDebug: true
-        mDebugMessage: "sceeneC07"
-
-        mTextBeforeChoosing: ""
-        mTitle: ""
+        mStatus: mStatusEnum.HIDDEN
+        mTextBeforeChoosing: "Go to the Swimming Pool"
+        mTitle: "Swimming pool Superglue"
         mQuestion: ""
 
         mMainVideoSource: ""
@@ -201,7 +167,46 @@ GameWindow {
         mSecondaryImageSource: ""
         mTime: 0
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneHall
+        mListChoices: []
+    }
+
+    CHsChoice {
+        id: sceeneC06
+
+        mStatus: mStatusEnum.HIDDEN
+        mIsDebug: true
+
+        mTextBeforeChoosing: "Go to the Library"
+        mTitle: "Library Superglue"
+        mQuestion: ""
+
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+        mTime: 0
+        mVideoVolume: 0
+        mDefaultChoice: sceeneHall
+        mListChoices: []
+    }
+
+    CHsChoice {
+        id: sceeneC07
+
+        mIsDebug: true
+        mDebugMessage: "sceeneC07"
+
+        mStatus: mStatusEnum.HIDDEN
+        mTextBeforeChoosing: "Go to the Bedroom"
+        mTitle: "Bedroom Superglue"
+        mQuestion: ""
+
+        mMainVideoSource: ""
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+        mTime: 0
+        mVideoVolume: 0
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
 
@@ -209,7 +214,7 @@ GameWindow {
     CHsChoice {
         id: sceeneC14S03
 
-        mTerminateAfterPlay: false
+
 
         mIsDebug: true
 

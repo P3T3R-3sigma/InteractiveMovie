@@ -47,9 +47,7 @@ Item {
     }
 
     function getmListItemToCheckIfLoaded() {
-        return [...iMainVideo.getmListItemToCheckIfLoaded(),
-                ...iSecondaryVideo.getmListItemToCheckIfLoaded(),
-                ...iSecondaryImage.getmListItemToCheckIfLoaded()];
+        return [iSecondaryImage.getmListItemToCheckIfLoaded()];
     }
 
 }
