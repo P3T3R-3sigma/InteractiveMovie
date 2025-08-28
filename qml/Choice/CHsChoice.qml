@@ -29,22 +29,24 @@ Item {
     }
 
     property bool mIsDebug: false
-    property bool mIsDebugImage: true
+    property bool mIsDebugImage: false
     property string mDebugMessage: ""
 
+    property bool mIsTimer: false
     property int mStatus: mStatusEnum.ACCESSIBLE
-
     property int mDisplay: mDisplayEnum.ONE_VIDEO
-    property string mTextBeforeChoosing
-    property string mTitle      // The title of the scenario    ** Merida jumps you **
-    property string mQuestion   // The question of the scenario ** What do you do? **
 
-    property string mTextIfLocked   // Text in case the option is locked
+    property string mTextBeforeChoosing
+    property string mTitle                  // The title of the scenario    ** Merida jumps you **
+    property string mQuestion               // The question of the scenario ** What do you do? **
+    property string mTextIfLocked           // Text in case the option is locked
+
     property string mMainVideoSource
     property string mSecondaryVideoSource
     property string mSecondaryImageSource
-    property int mTime      // The time for the timer for choosing
-    property int mVideoVolume: 0
+
+    property int mVideoVolume: mVolumeOverall
+
     property var mDefaultChoice
     property var mListChoices: []
     property var mShadowListChoices: []
@@ -94,9 +96,9 @@ Item {
             if (mDisplay === mDisplayEnum.IMAGE) {
                 mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
             }
-
-
             mBackground.visible = true
+        } else {
+            hideChoices()
         }
     }
     onMStatusChanged: {
@@ -110,7 +112,10 @@ Item {
     }
 
     function getTime() {
-        return mCHc.cBaseTime + mShadowListChoices.length * mCHc.cAdditionalTime
+        if (mIsTimer) {
+            return mCHc.cBaseTime + mShadowListChoices.length * mCHc.cAdditionalTime
+        }
+        return 0
     }
 
     function shadow_getChoices() {

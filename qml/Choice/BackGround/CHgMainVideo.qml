@@ -2,7 +2,6 @@ import QtQuick
 import Felgo
 import QtMultimedia
 
-import "../../basic_librairies/BasicLoader/v1"
 import "../../basic_librairies/BasicVideoSource/v1"
 
 Item {
@@ -19,7 +18,7 @@ Item {
 
     BasicVideoSource {
         id: iBasicVideoSourceMainVideo
-        mSource: mMainVideoSource
+        mSource: "qrc:/assets/Videos/" + mMainVideoSource + ".mp4"
         mVolume: mVideoVolume
     }
 
@@ -28,16 +27,19 @@ Item {
 
         enabled: !pChoiceVisible && !mIsDebug
         onClicked: {
-            if (mTime === 0) {
-                onVideoEnd()
-            } else {
+            if (mIsTimer) {
                 iBasicVideoSourceMainVideo.setVideoPosition(mTimerStart)
+            } else {
+                onVideoEnd()
             }
         }
     }
 
     Component.onCompleted: {
-        iBasicVideoSourceMainVideo.sVideoEnd.connect(onVideoEnd)
+        if (!mIsTimer) {
+            iBasicVideoSourceMainVideo.sVideoEnd.connect(onVideoEnd)
+        }
+
         iBasicVideoSourceMainVideo.sPositionChanged.connect(onPosChanged)
         iPlaceholder.sOnClicked.connect(skipVideoDebug)
     }
@@ -46,11 +48,7 @@ Item {
         if (visible) {
             if (mMainVideoSource) {
                 iBasicVideoSourceMainVideo.visible = true
-                if (iBasicVideoSourceMainVideo.getVideoDuration() > 0) {
-                    mTimerStart = iBasicVideoSourceMainVideo.getVideoDuration() - mTime
-                } else {
-                    console.log("NOT LOADED, WRONG TIMING")
-                }
+                iBasicVideoSourceMainVideo.startVideo()
             }
 
         } else {
@@ -63,6 +61,9 @@ Item {
         //////////////////////////////
         // console.log("Video end")
         //////////////////////////////
+
+        iBasicVideoSourceMainVideo.stopVideo()
+        iBasicVideoSourceMainVideo.setVideoPosition(0)
         iMainVideoChoice.visible = false
         pChoiceVisible = false
         switch (mDisplay) {
@@ -82,16 +83,17 @@ Item {
     }
 
     function skipVideoDebug() {
-        if (mTime === 0) {
-            onVideoEnd()
-        } else {
+        if (mIsTimer) {
             pChoiceVisible = true
             iChoiceManager.showChoices()
+        } else {
+            onVideoEnd()
         }
     }
 
     function onPosChanged(position) {
-        if (position > mTimerStart && !pChoiceVisible) {
+        if (position >= iBasicVideoSourceMainVideo.getVideoDuration() - 100) {
+            iBasicVideoSourceMainVideo.pauseVideo() // freeze on last frame
             pChoiceVisible = true
             iChoiceManager.showChoices()
         }

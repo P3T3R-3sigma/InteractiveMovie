@@ -54,8 +54,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
@@ -73,8 +73,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -91,8 +91,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
     }
@@ -111,8 +111,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -128,8 +128,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC14S03
         mListChoices: []
     }
@@ -145,8 +145,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
@@ -163,8 +163,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: pLaugh ? sceeneC31S04 : sceeneC21
         mListChoices: []
     }
@@ -180,8 +180,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC21
         mListChoices: []
     }
@@ -197,8 +197,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
@@ -215,8 +215,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC21
         mListChoices: []
     }
@@ -232,8 +232,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS04
         mListChoices: []
         mListUnlocks: [sceeneC23]

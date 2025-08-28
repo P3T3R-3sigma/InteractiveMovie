@@ -72,6 +72,7 @@ GameWindow {
     }
 
     property bool mMeridaSuperglue: false
+    property int mVolumeOverall: 50
 
     function mSetSuperGlue() {
         mMeridaSuperglue = true
@@ -87,8 +88,9 @@ GameWindow {
     }
     function restartGame() {
         sceeneC05.hide()
-        sceeneC06.hide()
+        // sceeneC06.hide()
         sceeneC07.hide()
+        sceeneC71.hide()
         iKitchenSceene.resetGame()
         iBedroomsceene.resetGame()
         iSwimmingPoolSceene.resetGame()
@@ -110,8 +112,8 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
 
@@ -136,8 +138,8 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 1
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: null
         mListChoices: [...iKitchenSceene.getSceene(), ...iBedroomsceene.getSceene(), ...iSwimmingPoolSceene.getSceene(), ...iLibrarySceene.getSceene()]
 
@@ -175,30 +177,46 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
-
     CHsChoice {
-        id: sceeneC06
+        id: sceeneC71
 
         mStatus: mStatusEnum.HIDDEN
-        mIsDebug: true
-
         mTextBeforeChoosing: "Go to the Library"
-        mTitle: "Library Superglue"
+        mTitle: "Milena Superglue"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c71"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
+
+    // CHsChoice {
+    //     id: sceeneC06
+
+    //     mStatus: mStatusEnum.HIDDEN
+    //     mIsDebug: true
+
+    //     mTextBeforeChoosing: "Go to the Library"
+    //     mTitle: "Library Superglue"
+    //     mQuestion: ""
+
+    //     mMainVideoSource: ""
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
+    //
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneHall
+    //     mListChoices: []
+    // }
 
     CHsChoice {
         id: sceeneC07
@@ -214,8 +232,8 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -235,8 +253,8 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS03
         mListChoices: []
     }
@@ -266,8 +284,8 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneIntro
         mListChoices: []
         mFunctionToCall: restartGame
@@ -296,7 +314,7 @@ GameWindow {
 
 
     function loadedSuccess() {
-        console.log("Loaded successfully all choices")
+        console.log("Loaded successfully all choicfWGAVes")
         sceeneIntro .visible = true
         downloadButtton.visible = false
         /*

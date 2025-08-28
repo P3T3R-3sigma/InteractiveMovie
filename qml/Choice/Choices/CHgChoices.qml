@@ -91,7 +91,7 @@ Item {
     onVisibleChanged: {
         if (visible) {
             recalibratePositions()
-            if (mTime === 0) {
+            if (!mIsTimer) {
                 mChoiceTimer.visible = false
             }
         }

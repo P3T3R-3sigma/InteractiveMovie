@@ -65,7 +65,7 @@ Item {
     }
 
     function startTimer() {
-        if (mTime > 0) {
+        if (mIsTimer) {
             console.log(iChoiceManager.getTime())
             iNumberAnimationX.duration = iChoiceManager.getTime()
             iNumberAnimationX.to = 0

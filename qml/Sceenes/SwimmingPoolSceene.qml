@@ -11,15 +11,24 @@ Item {
     anchors.fill: parent
 
     function meridaSuperGlueOn() {
-        sceeneC40.hide()
+        if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
+        } else {
+            sceeneC40.hide()
+        }
+        sceeneC57.hide()
         sceeneC05.makeAccessible()
     }
     function meridaSuperGlueOff() {
-        sceeneC40.makeAccessible()
+
+        if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
+            sceeneC57.makeAccessible()
+        } else {
+            sceeneC40.makeAccessible()
+        }
     }
 
     function getSceene() {
-        return [sceeneC40, sceeneC05]
+        return [sceeneC40, sceeneC05, sceeneC57]
     }
 
     function resetGame(){
@@ -31,119 +40,105 @@ Item {
     CHsChoice {
         id: sceeneC40
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Go to the Swimming Pool")
         mTitle: qsTr("Lollypop")
         mQuestion: qsTr("What do you want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c40_1"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC43
         mListChoices: [sceeneC42, sceeneC43, sceeneC44, sceeneC45, sceeneC46]
     }
     CHsChoice {
         id: sceeneC41
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("")
         mTitle: qsTr("Go away")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c41"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC42
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Lie down")
         mTitle: qsTr("Lie down ")
         mQuestion: qsTr("What do you want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c42"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC48
         mListChoices: [sceeneC47, sceeneC48, sceeneC49, sceeneC50]
     }
     CHsChoice {
         id: sceeneC43
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Say hello")
         mTitle: qsTr("Hello")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c43"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC44
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Propose a drink")
         mTitle: qsTr("drink")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c44"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC45
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Compliment")
         mTitle: qsTr("Compliment")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c45"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC46
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Kiss her")
         mTitle: qsTr("Kissing her")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c46"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC14S03
         mListChoices: []
     }
@@ -151,7 +146,6 @@ Item {
         id: sceeneC47
 
         mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Wait 1 minute")
         mTitle: qsTr("Waiting")
         mQuestion: qsTr("What do you want to do?")
@@ -159,14 +153,13 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC52
-        mListChoices: [sceeneC52, sceeneC53, sceeneC54, sceeneC56, sceeneC57]
+        mListChoices: [sceeneC52, sceeneC53, sceeneC54S05, sceeneC56S05, sceeneC57]
     }
     CHsChoice {
         id: sceeneC48
-
         mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Say hello")
@@ -176,130 +169,118 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC49
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Propose a drink")
         mTitle: qsTr("drink 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c49"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC50
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Compliment")
         mTitle: qsTr("Compliment 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c50"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC52
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Say hello")
         mTitle: qsTr("Hello 3")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c52"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC53
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Propose a drink")
         mTitle: qsTr("drink 3")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c53"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
-        id: sceeneC54
-
-        mIsDebug: true
+        id: sceeneC54S05
 
         mTextBeforeChoosing: qsTr("Compliment")
         mTitle: qsTr("Compliment 3")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c54"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS05
         mListChoices: []
         mListUnlocks: [sceeneC57]
+        mListTerminates: [sceeneC40]
     }
     CHsChoice {
-        id: sceeneC56
-
-        mIsDebug: true
+        id: sceeneC56S05
 
         mTextBeforeChoosing: qsTr("Kiss her")
         mTitle: qsTr("Kissing her 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c56"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS05
         mListChoices: []
         mListUnlocks: [sceeneC57]
+        mListTerminates: [sceeneC40]
     }
     CHsChoice {
         id: sceeneC57
-
-        mIsDebug: true
 
         mStatus: mStatusEnum.HIDDEN
         mTextBeforeChoosing: qsTr("Offer money")
         mTitle: qsTr("Money Money")
         mQuestion: qsTr("How much do you want to pay?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c57"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC59
         mListChoices: [sceeneC58, sceeneC59, sceeneC60S06]
     }
@@ -329,42 +310,38 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC14S03
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC59
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("400 USD")
         mTitle: qsTr("400 USD")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c59"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
-        mDefaultChoice: sceeneC41
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
         mListChoices: []
     }
     CHsChoice {
         id: sceeneC60S06
 
-        mIsDebug: true
-
-        mTextBeforeChoosing: qsTr("800 USD")
-        mTitle: qsTr("800 USD")
+        mTextBeforeChoosing: qsTr("2000 USD")
+        mTitle: qsTr("2000 USD")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c60"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS06
         mListChoices: []
     }

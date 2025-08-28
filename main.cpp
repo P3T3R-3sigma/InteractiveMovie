@@ -2,6 +2,8 @@
 #include <FelgoApplication>
 
 #include <QQmlApplicationEngine>
+#include <QResource>
+#include <QDir>
 
 // Uncomment this line to add Felgo Hot Reload and use hot reloading with your custom C++ code
 //#include <FelgoHotReload>
@@ -12,6 +14,7 @@ int main(int argc, char *argv[])
 
     FelgoApplication felgo;
 
+    QResource::registerResource("video_assets.rcc");
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
 

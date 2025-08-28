@@ -3,6 +3,7 @@ import Felgo
 import QtMultimedia
 
 import "../../BasicLoader/v1"
+import "../../Utils/v1"
 import "../../BasicDebug/v1"
 
 
@@ -39,16 +40,17 @@ Item {
         }
         onPlaybackStateChanged: {
             ///////////////////////////////
-            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration)
+            console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
             ///////////////////////////////
             if (mediaStatus === MediaPlayer.EndOfMedia) {
                 sVideoEnd(mVideoMediaPlayer)
+
                 ///////////////////////////////
-                // console.log("End of media reached.")
+                console.log("End of media reached.")
                 ///////////////////////////////
             } else if (mediaStatus === MediaPlayer.LoadedMedia) {
                 ///////////////////////////////
-                // console.log("Loaded")
+                console.log("Loaded")
                 ///////////////////////////////
             }
         }
@@ -63,6 +65,7 @@ Item {
             mVideoMediaPlayer.stop()
         }
     }
+
     function startVideo(){
         mVideoMediaPlayer.play()
     }
@@ -77,6 +80,10 @@ Item {
 
     function getVideoDuration() {
         return mVideoMediaPlayer.duration
+    }
+
+    function getVideoSource() {
+        return mSource
     }
     function getVideoPosition() {
         return mVideoMediaPlayer.position

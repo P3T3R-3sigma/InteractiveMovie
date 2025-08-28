@@ -24,17 +24,15 @@ Item {
     CHsChoice {
         id: sceeneC00
 
-        mIsDebug: true
-
         mTextBeforeChoosing: "Go to the kitchen"
         mTitle: "I always wanted you"
         mQuestion: "What do you do"
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c00"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC04
         mListChoices: [sceeneC04, sceeneC03S01]
         mListUnlocks: [sceeneC02]
@@ -46,18 +44,17 @@ Item {
 
         mStatus: mStatusEnum.HIDDEN
 
-        mIsDebug: true
         mDebugMessage: "Merida rejects you"
 
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Merida rejects you"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c01"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -67,18 +64,17 @@ Item {
 
         mStatus: mStatusEnum.HIDDEN
 
-        mIsDebug: true
         mDebugMessage: "Merida teasing"
 
         mTextBeforeChoosing: qsTr("Go to the kitchen")
         mTitle: qsTr("Merida is teasing you")
         mQuestion: qsTr("What do want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c02"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 100
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC04
         mListChoices: [sceeneC04, sceeneC03S01]
     }
@@ -86,18 +82,17 @@ Item {
     CHsChoice {
         id: sceeneC04
 
-        mIsDebug: true
         mDebugMessage: "Leaving Merida"
 
         mTextBeforeChoosing: "Leave Merida"
         mTitle: "Left Merida"
         mQuestion: "sceeneC04"
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c04"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -105,16 +100,15 @@ Item {
     CHsChoice {
         id: sceeneC03S01
 
-        mIsDebug: true
         mDebugMessage: "Before fucking Merida"
 
         mTextBeforeChoosing: "Fuck Merida"
         mTitle: "Choose to fuck Merida"
         mQuestion: ""
 
-        mMainVideoSource: ""
-        mTime: 0
-        mVideoVolume: 0
+        mMainVideoSource: "c03"
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS01
         mListChoices: []
         mListUnlocks: [sceeneC08]
@@ -137,20 +131,18 @@ Item {
     CHsChoice {
         id: sceeneC08
 
-
         mStatus: mStatusEnum.HIDDEN
-        mIsDebug: true
         mDebugMessage: "Do you eant to marry her?"
 
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Do you want to marry me?"
         mQuestion: "Marry her?"
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c08"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneBackToHall
         mListChoices: [sceeneC09, sceeneC10, sceeneC11, sceeneBackToHall]
     }
@@ -158,19 +150,17 @@ Item {
     CHsChoice {
         id: sceeneC09
 
-
-        mIsDebug: true
         mDebugMessage: "Told Merida to leave you alone"
 
         mTextBeforeChoosing: "Please, leave me alone"
         mTitle: "Told Merida to leave you alone."
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c09"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -178,8 +168,8 @@ Item {
     CHsChoice {
         id: sceeneC10
 
-
         mIsDebug: true
+
         mDebugMessage: "Said you will marry Merida"
 
         mTextBeforeChoosing: "Sure, I will marry you"
@@ -189,8 +179,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC14S03
         mListChoices: []
     }
@@ -207,8 +197,8 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
@@ -216,18 +206,17 @@ Item {
     CHsChoice {
         id: sceeneC11
 
-        mIsDebug: true
         mDebugMessage: "Confession about anal"
 
         mTextBeforeChoosing: "Confess about anal to Merida 1"
         mTitle: "Matthew really wants anal"
         mQuestion: "Do you insist?"
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c11"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
-        mVideoVolume: 0
+        mIsTimer: true
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneBackToHall
         mListChoices: [sceeneC12, sceeneBackToHall]
     }
@@ -235,17 +224,15 @@ Item {
     CHsChoice {
         id: sceeneC12
 
-        mIsDebug: true
-
         mTextBeforeChoosing: "Insist about anal to Merida"
         mTitle: "Insisting on anal"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c12"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC13S02
         mListChoices: []
     }
@@ -253,21 +240,19 @@ Item {
     CHsChoice {
         id: sceeneC13S02
 
-        mIsDebug: true
-
         mTextBeforeChoosing: ""
         mTitle: "The trap"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c13"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
-        mVideoVolume: 0
+
+        mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS02
         mListChoices: []
         mListUnlocks: [sceeneC01]
-        mListTerminates: [sceeneC08, sceeneC05, sceeneC06, sceeneC07]
+        mListTerminates: [sceeneC08, sceeneC05, sceeneC71, sceeneC07]
         mFunctionToCall: mRemoveSuperGlue
     }
 

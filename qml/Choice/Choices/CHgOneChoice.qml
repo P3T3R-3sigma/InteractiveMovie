@@ -11,8 +11,8 @@ BasicTextFitToWindowWidth {
     yPercent: 0
     widthPercent : 0
 
-    textFontPixelSizePercent: 0.04
-    paddingPercentHeight: iCHc.mPADDING_H
+    textFontPixelSizePercent: 0.07
+    paddingPercentHeight: 0
     textIsAlignToCenterV: true
     textColor: "black"
 

@@ -42,16 +42,23 @@ felgo_configure_executable(appInteractiveMovie)
 
 # Deploy resources to build folder/package directly
 # comment for publishing
-deploy_resources("${QmlFiles};${AssetsFiles}")
+# deploy_resources("${QmlFiles};${AssetsFiles}")
+
+configure_file(
+    ${CMAKE_SOURCE_DIR}/video_assets.rcc
+    ${CMAKE_BINARY_DIR}/video_assets.rcc
+    COPYONLY
+)
 
 # Add QML files and resources to QML module to included them via QRC automatically:
 qt_add_qml_module(appInteractiveMovie
     URI InteractiveMovie
     VERSION 1.0
 # uncomment for publishing:
-#    QML_FILES ${QmlFiles}
+    QML_FILES ${QmlFiles}
 #    RESOURCES ${AssetsFiles}
     NO_RESOURCE_TARGET_PATH
+    RESOURCES video_assets.qrc
 )
 
 # NOTE: for PUBLISHING, perform the following steps:
