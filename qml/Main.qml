@@ -136,7 +136,7 @@ GameWindow {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 0
+        mTime: 1
         mVideoVolume: 0
         mDefaultChoice: null
         mListChoices: [...iKitchenSceene.getSceene(), ...iBedroomsceene.getSceene(), ...iSwimmingPoolSceene.getSceene(), ...iLibrarySceene.getSceene()]
@@ -307,7 +307,7 @@ GameWindow {
 
 
     function getmListItemToCheckIfLoaded() {
-        return [sceeneIntro];
+        return [];
     }
 
 }

@@ -29,6 +29,7 @@ Item {
     }
 
     property bool mIsDebug: false
+    property bool mIsDebugImage: true
     property string mDebugMessage: ""
 
     property int mStatus: mStatusEnum.ACCESSIBLE
@@ -52,6 +53,8 @@ Item {
     property var mListTerminates: []
     property var mFunctionToCall
 
+    property bool mChoiceVisible: false
+
     visible: false
 
 
@@ -72,16 +75,43 @@ Item {
         pWidthPercent: 0.55
         pHeightPercent: 0.35
     }
+    CHgChoicesImage {
+        id: mCHgChoicesImage
+
+        z: 10
+
+        visible: false
+
+        pXPercent: 0.1
+        pYPercent: 0.1
+        pWidthPercent: 0.8
+        pHeightPercent: 0.8
+    }
 
     onVisibleChanged: {
         if (visible) {
             shadow_getChoices()
+            if (mDisplay === mDisplayEnum.IMAGE) {
+                mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
+            }
+
+
             mBackground.visible = true
         }
     }
-    onMStatusChanged: mCHgChoices.recalibratePositions()
+    onMStatusChanged: {
+        mCHgChoicesImage.recalibratePositions()
+        mCHgChoices.recalibratePositions()
+    }
+    Component.onCompleted: {
+        mCHgChoicesImage.recalibratePositions()
+        mCHgChoices.recalibratePositions()
+        shadow_getChoices()
+    }
 
-    Component.onCompleted: mCHgChoices.recalibratePositions()
+    function getTime() {
+        return mCHc.cBaseTime + mShadowListChoices.length * mCHc.cAdditionalTime
+    }
 
     function shadow_getChoices() {
         mShadowListChoices = []
@@ -91,6 +121,7 @@ Item {
             }
         }
         mShadowListChoices = mShadowListChoices
+        mCHgChoicesImage.recalibratePositions()
         mCHgChoices.recalibratePositions()
     }
 
@@ -107,6 +138,32 @@ Item {
         }
         if (mFunctionToCall) {
             mFunctionToCall()
+        }
+    }
+
+    function showChoices() {
+        mChoiceVisible = true
+        if (mIsDebugImage) {
+            mCHgChoicesImage.visible = true
+        } else {
+            mCHgChoices.visible = true
+        }
+
+    }
+    function hideChoices() {
+        mChoiceVisible = false
+        if (mIsDebugImage) {
+            mCHgChoicesImage.visible = false
+        } else {
+            mCHgChoices.visible = false
+        }
+    }
+    function getChoicesVisible() {
+        mChoiceVisible = false
+        if (mIsDebugImage) {
+            mCHgChoicesImage.visible = false
+        } else {
+            mCHgChoices.visible = false
         }
     }
 

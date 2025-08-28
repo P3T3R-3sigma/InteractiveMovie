@@ -15,7 +15,7 @@ BasicImageSource {
 
     onVisibleChanged: {
         if (visible) {
-            mCHgChoices.visible = true
+            iChoiceManager.showChoices()
         }
     }
 }

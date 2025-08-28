@@ -46,7 +46,7 @@ Item {
             id: iNumberAnimationX
             target: iTimerGraphic
             property: "width"
-            duration: mTime
+            duration: 10000
 
         }
         onFinished: {
@@ -66,10 +66,10 @@ Item {
 
     function startTimer() {
         if (mTime > 0) {
+            console.log(iChoiceManager.getTime())
+            iNumberAnimationX.duration = iChoiceManager.getTime()
             iNumberAnimationX.to = 0
             iParallelAnimation.running = true
-        } else if (mDisplay === mDisplayEnum.IMAGE) {
-
         } else {
             iChoiceManager.visible = false
             mDefaultChoice.visible = true
@@ -78,7 +78,6 @@ Item {
     function stopTimer() {
         iChoiceManager.setStatusChanges()
         iParallelAnimation.running = false
-        iNumberAnimationX.duration = mTime
         iTimerGraphic.width = parent.width * widthPercent
     }
 }

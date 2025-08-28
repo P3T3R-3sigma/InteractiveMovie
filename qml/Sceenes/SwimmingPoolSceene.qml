@@ -42,7 +42,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC46
+        mDefaultChoice: sceeneC43
         mListChoices: [sceeneC42, sceeneC43, sceeneC44, sceeneC45, sceeneC46]
     }
     CHsChoice {
@@ -300,7 +300,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC58
+        mDefaultChoice: sceeneC59
         mListChoices: [sceeneC58, sceeneC59, sceeneC60S06]
     }
     CHgSexVideo {

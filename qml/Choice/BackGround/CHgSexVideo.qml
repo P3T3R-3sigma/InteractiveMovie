@@ -12,6 +12,7 @@ Item {
     property var mNextVideo
     property var mListSourcesImagesToJumpTo
     property var mSourceSimple
+    property bool mChoiceVisible: false
 
 
     visible: false

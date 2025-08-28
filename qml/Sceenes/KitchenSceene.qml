@@ -77,7 +77,7 @@ Item {
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
-        mTime: 10000
+        mTime: 100
         mVideoVolume: 0
         mDefaultChoice: sceeneC04
         mListChoices: [sceeneC04, sceeneC03S01]
@@ -151,7 +151,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneBackToHall
         mListChoices: [sceeneC09, sceeneC10, sceeneC11, sceeneBackToHall]
     }
 
@@ -228,7 +228,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: null
+        mDefaultChoice: sceeneBackToHall
         mListChoices: [sceeneC12, sceeneBackToHall]
     }
 

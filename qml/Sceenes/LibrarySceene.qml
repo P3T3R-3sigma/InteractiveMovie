@@ -42,7 +42,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC73
+        mDefaultChoice: sceeneC75
         mListChoices: [sceeneC72, sceeneC73, sceeneC74, sceeneC75]
     }
     CHsChoice {
@@ -76,7 +76,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC73
+        mDefaultChoice: sceeneC79
         mListChoices: [sceeneC73, sceeneC76, sceeneC77, sceeneC78, sceeneC79]
     }
     CHsChoice {
@@ -144,7 +144,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC81
+        mDefaultChoice: sceeneC83
         mListChoices: [sceeneC80S07, sceeneC81, sceeneC82, sceeneC83, sceeneC84]
     }
     CHsChoice {

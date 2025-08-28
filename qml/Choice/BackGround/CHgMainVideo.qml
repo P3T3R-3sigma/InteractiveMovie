@@ -51,7 +51,6 @@ Item {
                 } else {
                     console.log("NOT LOADED, WRONG TIMING")
                 }
-
             }
 
         } else {
@@ -69,13 +68,13 @@ Item {
         switch (mDisplay) {
         case mDisplayEnum.ONE_VIDEO: {
             iChoiceManager.setStatusChanges()
-            mCHgChoices.visible = false
+            iChoiceManager.hideChoices()
             iChoiceManager.visible = false
             mDefaultChoice.visible = true
             break
             }
         case mDisplayEnum.TWO_VIDEO: {
-            mCHgChoices.visible = true
+            iChoiceManager.showChoices()
             pVideoNext.visible = true
             break
             }
@@ -87,14 +86,14 @@ Item {
             onVideoEnd()
         } else {
             pChoiceVisible = true
-            mCHgChoices.visible = true
+            iChoiceManager.showChoices()
         }
     }
 
     function onPosChanged(position) {
         if (position > mTimerStart && !pChoiceVisible) {
             pChoiceVisible = true
-            mCHgChoices.visible = true
+            iChoiceManager.showChoices()
         }
     }
 

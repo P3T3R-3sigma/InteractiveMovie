@@ -56,7 +56,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC25
+        mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
         mListTerminates: [sceeneC20]
@@ -93,7 +93,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC25
+        mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
     }
     CHsChoice {
@@ -147,7 +147,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC25
+        mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
     }
@@ -199,7 +199,7 @@ Item {
         mSecondaryImageSource: ""
         mTime: 10000
         mVideoVolume: 0
-        mDefaultChoice: sceeneC25
+        mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
     }

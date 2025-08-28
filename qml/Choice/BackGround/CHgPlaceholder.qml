@@ -13,19 +13,16 @@ Item {
     anchors.fill: parent
 
     visible: false
-    z: parent.z+10
     BasicTextFitToText {
         id: iPlaceholderText
         text: mTitle
 
-        textIsAlignToCenter: true
-
+        yPercent: 0.05
         textFontForceSizePixel: 40
         textColor: "black"
         borderColor: "Pink"
         borderWidthPercent: 0.01
 
-        anchors.centerIn: parent
     }
 
     Rectangle {
@@ -35,7 +32,7 @@ Item {
         width: parent.width * 0.8
         height: parent.height * 0.03
 
-        visible: !mCHgChoices.visible
+        visible: !mChoiceVisible
         color: "red"
         radius: height/2
     }
@@ -46,7 +43,7 @@ Item {
         width: parent.width * 0.8
         height: parent.height * 0.03
 
-        visible: !mCHgChoices.visible
+        visible: !mChoiceVisible
         color: "transparent"
         border.color: "yellow"
         border.width: parent.height * 0.03 * 0.1
@@ -80,11 +77,11 @@ Item {
         x: parent.width * 0.7
         y: parent.height * 0.65
         z: 20
-        visible: !mCHgChoices.visible
+        visible: !mChoiceVisible
         text: "Skip Video"
         onClicked: {
-            sOnClicked()
             stopTimer()
+            sOnClicked()
         }
     }
     function startTimer() {
@@ -100,11 +97,12 @@ Item {
 
     onVisibleChanged: {
         if (visible) {
-            startTimer()
             if (mDisplay === mDisplayEnum.IMAGE) {
-                mCHgChoices.visible = true
-                stopTimer()
+                iSecondaryImage.visible = true
+            } else {
+                startTimer()
             }
+
         }
     }
 
