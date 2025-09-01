@@ -99,9 +99,8 @@ Item {
         if (visible) {
             if (mDisplay === mDisplayEnum.IMAGE) {
                 iSecondaryImage.visible = true
-            } else {
-                startTimer()
             }
+            startTimer()
 
         }
     }

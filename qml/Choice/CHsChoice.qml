@@ -111,9 +111,14 @@ Item {
         shadow_getChoices()
     }
 
+    function restartVideo() {
+        mBackground.restartVideo()
+    }
+
     function getTime() {
         if (mIsTimer) {
-            return mCHc.cBaseTime + mShadowListChoices.length * mCHc.cAdditionalTime
+            // return mCHc.cBaseTime + mShadowListChoices.length * mCHc.cAdditionalTime
+            return 4000
         }
         return 0
     }

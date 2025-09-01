@@ -38,8 +38,11 @@ BasicTextFitToWindowWidth {
 
         onClicked: {
             stopTimer()
-            iChoiceManager.visible = false
+            iChoiceManager.setStatusChanges()
+            iChoiceManager.hideChoices()
             mShadowListChoices[model.index].visible = true
+            // mShadowListChoices[model.index].z = iChoiceManager.z+1
+            iChoiceManager.visible = false
         }
     }
 

@@ -252,7 +252,7 @@ Item {
         mDefaultChoice: sceeneS02
         mListChoices: []
         mListUnlocks: [sceeneC01]
-        mListTerminates: [sceeneC08, sceeneC05, sceeneC71, sceeneC07]
+        mListTerminates: [sceeneC08, sceeneC05, sceeneC71, sceeneC24]
         mFunctionToCall: mRemoveSuperGlue
     }
 

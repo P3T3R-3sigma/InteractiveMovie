@@ -78,12 +78,11 @@ Item {
     CHsChoice {
         id: sceeneC74
 
-        mIsDebug: true
         mTextBeforeChoosing: "Compliment her beauty"
         mTitle: "Compliment"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c74"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

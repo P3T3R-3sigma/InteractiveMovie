@@ -14,10 +14,12 @@ Item {
 
     property int mVolume: 0
     property string mSource
+    property bool shouldPause: false
 
     z: 10
 
     signal sVideoEnd(var mediaPlayer)
+    signal sStopOnEnd(var mediaPlayer)
     signal sPositionChanged(var position)
 
 
@@ -28,6 +30,13 @@ Item {
 
         fillMode: VideoOutput.PreserveAspectFit
         anchors.fill: parent
+
+        onFrameUpdated: {
+            if (shouldPause) {
+                shouldPause = false;
+                mVideoMediaPlayer.pause();
+            }
+        }
     }
 
     MediaPlayer {
@@ -35,6 +44,7 @@ Item {
 
         source: mSource
         videoOutput: mVideoOutput
+        loops: MediaPlayer.Infinite
         audioOutput: AudioOutput {
             volume: mVolume
         }
@@ -55,6 +65,7 @@ Item {
             }
         }
         onPositionChanged: sPositionChanged(mVideoMediaPlayer.position)
+
     }
 
 
@@ -67,13 +78,14 @@ Item {
     }
 
     function startVideo(){
+        setVideoPosition(0)
         mVideoMediaPlayer.play()
     }
     function stopVideo(){
         mVideoMediaPlayer.stop()
     }
     function pauseVideo(){
-        mVideoMediaPlayer.pause()
+        shouldPause = true
     }
 
 

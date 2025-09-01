@@ -51,9 +51,11 @@ Item {
         }
         onFinished: {
             stopTimer()
-            iChoiceManager.visible = false
+            iChoiceManager.setStatusChanges()
+            iChoiceManager.hideChoices()
             mDefaultChoice.visible = true
-
+            // mDefaultChoice.z = iChoiceManager.z+1
+            iChoiceManager.visible = false
         }
     }
 

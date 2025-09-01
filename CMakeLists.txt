@@ -45,8 +45,23 @@ felgo_configure_executable(appInteractiveMovie)
 # deploy_resources("${QmlFiles};${AssetsFiles}")
 
 configure_file(
-    ${CMAKE_SOURCE_DIR}/video_assets.rcc
-    ${CMAKE_BINARY_DIR}/video_assets.rcc
+    ${CMAKE_SOURCE_DIR}/amber_assets.rcc
+    ${CMAKE_BINARY_DIR}/amber_assets.rcc
+    COPYONLY
+)
+configure_file(
+    ${CMAKE_SOURCE_DIR}/milena_assets.rcc
+    ${CMAKE_BINARY_DIR}/milena_assets.rcc
+    COPYONLY
+)
+configure_file(
+    ${CMAKE_SOURCE_DIR}/merida_assets.rcc
+    ${CMAKE_BINARY_DIR}/merida_assets.rcc
+    COPYONLY
+)
+configure_file(
+    ${CMAKE_SOURCE_DIR}/lollypop_assets.rcc
+    ${CMAKE_BINARY_DIR}/lollypop_assets.rcc
     COPYONLY
 )
 
@@ -58,7 +73,7 @@ qt_add_qml_module(appInteractiveMovie
     QML_FILES ${QmlFiles}
 #    RESOURCES ${AssetsFiles}
     NO_RESOURCE_TARGET_PATH
-    RESOURCES video_assets.qrc
+    RESOURCES amber_assets.qrc milena_assets.qrc merida_assets.qrc lollypop_assets.qrc
 )
 
 # NOTE: for PUBLISHING, perform the following steps:

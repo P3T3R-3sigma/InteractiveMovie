@@ -17,6 +17,7 @@ Item {
 
         pVideoNext: iSecondaryVideo
         pImageNext: iSecondaryImage
+        z: 2
 
     }
 
@@ -28,6 +29,7 @@ Item {
 
     CHgSecondaryImage {
         id: iSecondaryImage
+        z: 1
 
     }
 
@@ -44,6 +46,10 @@ Item {
                 }
             }
         }
+    }
+
+    function restartVideo() {
+        iMainVideo.startVideo()
     }
 
     function getmListItemToCheckIfLoaded() {

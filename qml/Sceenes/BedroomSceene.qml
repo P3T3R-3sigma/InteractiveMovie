@@ -17,25 +17,23 @@ Item {
         } else {
             sceeneC20.hide()
         }
-        sceeneC22.hide()
-        sceeneC07.makeAccessible()
+        sceeneC24.makeAccessible()
     }
     function meridaSuperGlueOff() {
         if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
-            sceeneC22.makeAccessible()
+            sceeneC23.makeAccessible()
         } else {
             sceeneC20.makeAccessible()
         }
     }
 
     function resetGame(){
-        sceeneC22.hide()
         sceeneC23.hide()
         sceeneC20.makeAccessible()
     }
 
     function getSceene() {
-        return [sceeneC20, sceeneC22, sceeneC23, sceeneC07]
+        return [sceeneC20, sceeneC23, sceeneC24]
     }
 
     function setLaugh() {
@@ -45,13 +43,11 @@ Item {
     CHsChoice {
         id: sceeneC20
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Go to the Bedroom")
         mTitle: qsTr("BGF")
         mQuestion: qsTr("What do want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c20"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
@@ -59,7 +55,6 @@ Item {
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
-        mListTerminates: [sceeneC20]
     }
     CHsChoice {
         id: sceeneC21
@@ -99,16 +94,12 @@ Item {
     CHsChoice {
         id: sceeneC23
 
-
-
-
         mStatus: mStatusEnum.HIDDEN
-        mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom again")
         mTitle: qsTr("Haven't you done enough?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c23"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -119,13 +110,11 @@ Item {
     CHsChoice {
         id: sceeneC25
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("My hormones are shouting")
         mTitle: qsTr("My hormones")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c25"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -136,31 +125,27 @@ Item {
     CHsChoice {
         id: sceeneC26
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Leya is incredible")
         mTitle: qsTr("Leya is incredible")
         mQuestion: qsTr("What do you do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c26"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
+        mListChoices: [sceeneC25, sceeneC27, sceeneC28, sceeneC29]
         mFunctionToCall: setLaugh
     }
     CHsChoice {
         id: sceeneC27
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("I got a sunburn")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c27"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -171,13 +156,11 @@ Item {
     CHsChoice {
         id: sceeneC28
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Tell a joke  about sex")
         mTitle: qsTr("Sex talk")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c28"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -188,19 +171,17 @@ Item {
     CHsChoice {
         id: sceeneC29
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Tell a joke about chihuahas")
         mTitle: qsTr("Chihuahas")
         mQuestion: qsTr("What do you do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c29"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
+        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28]
         mFunctionToCall: setLaugh
     }
     CHsChoice {
@@ -237,7 +218,7 @@ Item {
         mDefaultChoice: sceeneS04
         mListChoices: []
         mListUnlocks: [sceeneC23]
-        mListTerminates: [sceeneC22]
+        mListTerminates: [sceeneC20]
     }
     CHgSexVideo {
         id: sceeneS04

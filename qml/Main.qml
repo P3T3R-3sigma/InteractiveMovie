@@ -89,7 +89,8 @@ GameWindow {
     function restartGame() {
         sceeneC05.hide()
         // sceeneC06.hide()
-        sceeneC07.hide()
+        // sceeneC07.hide()
+        sceeneC24.hide()
         sceeneC71.hide()
         iKitchenSceene.resetGame()
         iBedroomsceene.resetGame()
@@ -198,6 +199,22 @@ GameWindow {
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
+    CHsChoice {
+        id: sceeneC24
+
+        mStatus: mStatusEnum.HIDDEN
+
+        mTextBeforeChoosing: qsTr("Go to the Bedroom")
+        mTitle: qsTr("Amber Superglue")
+
+        mMainVideoSource: "c24"
+        mSecondaryVideoSource: ""
+        mSecondaryImageSource: ""
+
+        mVideoVolume: mVolumeOverall
+        mDefaultChoice: sceeneHall
+        mListChoices: []
+    }
 
     // CHsChoice {
     //     id: sceeneC06
@@ -218,31 +235,29 @@ GameWindow {
     //     mListChoices: []
     // }
 
-    CHsChoice {
-        id: sceeneC07
+    // CHsChoice {
+    //     id: sceeneC07
 
-        mIsDebug: true
-        mDebugMessage: "sceeneC07"
+    //     mIsDebug: true
+    //     mDebugMessage: "sceeneC07"
 
-        mStatus: mStatusEnum.HIDDEN
-        mTextBeforeChoosing: "Go to the Bedroom"
-        mTitle: "Bedroom Superglue"
-        mQuestion: ""
+    //     mStatus: mStatusEnum.HIDDEN
+    //     mTextBeforeChoosing: "Go to the Bedroom"
+    //     mTitle: "Bedroom Superglue"
+    //     mQuestion: ""
 
-        mMainVideoSource: ""
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+    //     mMainVideoSource: ""
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
 
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneHall
-        mListChoices: []
-    }
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneHall
+    //     mListChoices: []
+    // }
 
 
     CHsChoice {
         id: sceeneC14S03
-
-
 
         mIsDebug: true
 
@@ -293,12 +308,13 @@ GameWindow {
 
     AppButton {
         id: downloadButtton
+        visible: false
         width: parent.width * 0.15
         height: parent.height * 0.10
         x: width * 0.70
         y: parent.height - height * 1.5
         z: 20
-        text: "Download sources"
+        text: "Start Game"
         onClicked: {
             console.log("------- launch loader -----------")
             /*
@@ -328,4 +344,5 @@ GameWindow {
         return [];
     }
 
+    Component.onCompleted: downloadButtton.visible = true
 }

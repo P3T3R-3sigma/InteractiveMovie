@@ -46,7 +46,7 @@ Item {
 
         mMainVideoSource: "c40_1"
         mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+        mSecondaryImageSource: "c40_1"
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC43
@@ -181,7 +181,7 @@ Item {
         mTitle: qsTr("drink 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: "c49"
+        mMainVideoSource: ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

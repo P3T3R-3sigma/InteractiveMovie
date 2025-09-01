@@ -10,101 +10,166 @@ Item {
     property var pVideoNext: null
     property var pImageNext: null
 
-    property int mTimerStart
     property bool pChoiceVisible: false
+    property int pPosToShowChoices
 
     anchors.fill: parent
 
+    VideoOutput {
+        id: mVideoOutput
 
-    BasicVideoSource {
-        id: iBasicVideoSourceMainVideo
-        mSource: "qrc:/assets/Videos/" + mMainVideoSource + ".mp4"
-        mVolume: mVideoVolume
+        fillMode: VideoOutput.PreserveAspectFit
+        anchors.fill: parent
     }
+
+    MediaPlayer {
+        id: mVideoMediaPlayer
+
+        source: "qrc:/assets/Videos/" + mMainVideoSource + ".mp4"
+        videoOutput: mVideoOutput
+        audioOutput: AudioOutput {
+            volume: mVideoVolume
+        }
+        onPlaybackStateChanged: {
+            ///////////////////////////////
+            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
+            ///////////////////////////////
+            if (mediaStatus === MediaPlayer.EndOfMedia) {
+                onVideoEnd(mVideoMediaPlayer)
+
+                ///////////////////////////////
+                // console.log("End of media reached.")
+                ///////////////////////////////
+            } else if (mediaStatus === MediaPlayer.LoadedMedia) {
+                ///////////////////////////////
+                // console.log("Loaded")
+                ///////////////////////////////
+            }
+        }
+    }
+
 
     MouseArea {
         anchors.fill: parent
 
         enabled: !pChoiceVisible && !mIsDebug
         onClicked: {
-            if (mIsTimer) {
-                iBasicVideoSourceMainVideo.setVideoPosition(mTimerStart)
-            } else {
-                onVideoEnd()
-            }
+            skipVideo()
         }
     }
 
     Component.onCompleted: {
-        if (!mIsTimer) {
-            iBasicVideoSourceMainVideo.sVideoEnd.connect(onVideoEnd)
+        iPlaceholder.sOnClicked.connect(skipVideo)
+        if (mMainVideoSource && mIsTimer) {
+            pPosToShowChoices = getPosFromSource()
         }
-
-        iBasicVideoSourceMainVideo.sPositionChanged.connect(onPosChanged)
-        iPlaceholder.sOnClicked.connect(skipVideoDebug)
     }
 
     onVisibleChanged: {
         if (visible) {
             if (mMainVideoSource) {
-                iBasicVideoSourceMainVideo.visible = true
-                iBasicVideoSourceMainVideo.startVideo()
+                startVideo()
+                iTimer.start()
             }
-
         } else {
+            setVideoPosition(0)
             pChoiceVisible = false
         }
     }
 
 
-    function onVideoEnd(mediaPlayer) {
-        //////////////////////////////
-        // console.log("Video end")
-        //////////////////////////////
+    function onVideoEnd() {
 
-        iBasicVideoSourceMainVideo.stopVideo()
-        iBasicVideoSourceMainVideo.setVideoPosition(0)
+        console.log("End Video", mMainVideoSource)
+        stopVideo()
+        setStatusChanges()
         iMainVideoChoice.visible = false
         pChoiceVisible = false
-        switch (mDisplay) {
-        case mDisplayEnum.ONE_VIDEO: {
-            iChoiceManager.setStatusChanges()
-            iChoiceManager.hideChoices()
-            iChoiceManager.visible = false
-            mDefaultChoice.visible = true
-            break
+        iChoiceManager.visible = false
+    }
+
+    Timer {
+        id: iTimer
+        interval: 200
+        repeat: true
+        onTriggered: {
+            if (getVideoPosition() > getVideoDuration()-450) {
+                if (mIsTimer) {
+                    pauseVideo()
+                    iChoiceManager.showChoices()
+                } else {
+                    mDefaultChoice.visible = true
+                    onVideoEnd()
+
+                }
+
+                console.log("Video choice end", mMainVideoSource)
+                // mDefaultChoice.visible = true
+                 iTimer.stop()
+                // onVideoEnd()
             }
-        case mDisplayEnum.TWO_VIDEO: {
-            iChoiceManager.showChoices()
-            pVideoNext.visible = true
-            break
-            }
+            // else if (getVideoPosition() > getVideoDuration()-4500) {
+            //     console.log("Show choices", mMainVideoSource)
+            //     showChoices()
+            //     pChoiceVisible = true
+            //     iTimer.stop()
+            // }
         }
     }
 
-    function skipVideoDebug() {
+    function skipVideo() {
+        setStatusChanges()
         if (mIsTimer) {
-            pChoiceVisible = true
-            iChoiceManager.showChoices()
-        } else {
-            onVideoEnd()
-        }
-    }
+            if (mMainVideoSource) {
+                console.log("Skipping to choice position", mMainVideoSource)
+                setVideoPosition(getVideoDuration()-500)
+            } else {
+                console.log("Show choices", mMainVideoSource)
+                showChoices()
+                iTimer.stop()
+            }
 
-    function onPosChanged(position) {
-        if (position >= iBasicVideoSourceMainVideo.getVideoDuration() - 100) {
-            iBasicVideoSourceMainVideo.pauseVideo() // freeze on last frame
-            pChoiceVisible = true
-            iChoiceManager.showChoices()
+        } else {
+            console.log("Skipping to default", mMainVideoSource)
+            mDefaultChoice.visible = true
+            onVideoEnd()
         }
     }
 
 
     function getmListItemToCheckIfLoaded() {
         if (mMainVideoSource) {
-            return [iBasicVideoSourceMainVideo];
+            return [];
         }
         return []
     }
 
+    function startVideo(){
+        setVideoPosition(0)
+        mVideoMediaPlayer.play()
+    }
+    function stopVideo(){
+        mVideoMediaPlayer.stop()
+    }
+    function pauseVideo(){
+        mVideoMediaPlayer.pause()
+    }
+
+    function getPosFromSource() {
+        return parseInt(mMainVideoSource.split("_")[1])
+    }
+
+    function getVideoDuration() {
+        return mVideoMediaPlayer.duration
+    }
+
+    function getVideoSource() {
+        return mSource
+    }
+    function getVideoPosition() {
+        return mVideoMediaPlayer.position
+    }
+    function setVideoPosition(sPosition) {
+        mVideoMediaPlayer.position = sPosition
+    }
 }
