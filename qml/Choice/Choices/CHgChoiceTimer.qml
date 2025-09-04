@@ -13,6 +13,7 @@ Item {
     property real heightPercent
 
     anchors.fill: parent
+    z: parent.z
 
     Rectangle {
         id: iTimerGraphic
@@ -32,6 +33,8 @@ Item {
         y: parent.height * yPercent
         width: parent.width * widthPercent
         height: parent.height * heightPercent
+
+        z: parent.z
 
         color: "#e5e5e5"
         radius: height/4

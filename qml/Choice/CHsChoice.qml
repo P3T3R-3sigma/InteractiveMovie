@@ -9,6 +9,7 @@ import "../basic_librairies/BasicText/v4"
 import "../basic_librairies/BasicDebug/v1"
 import "BackGround"
 import "Choices"
+import "../Particles"
 
 Item {
 
@@ -33,6 +34,8 @@ Item {
     property bool mIsTimer: false
     property int mStatus: mStatusEnum.ACCESSIBLE
     property int mDisplay: mDisplayEnum.ONE_VIDEO
+    property real mPosToZoomInXPercent: 0.5
+    property real mPosToZoomInYPercent: 0.2
 
     property string mTextBeforeChoosing
     property string mTitle                  // The title of the scenario    ** Merida jumps you **
@@ -67,8 +70,6 @@ Item {
     CHgChoices {
         id: mCHgChoices
 
-        z: 10
-
         visible: false
     }
 
@@ -95,6 +96,10 @@ Item {
         }
     }
 
+    DefaultBackgroundParticles {
+        id: mDefaultBackgroundParticles
+    }
+
     onVisibleChanged: {
         if (visible) {
             opacity = 0
@@ -106,6 +111,7 @@ Item {
                 mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
             }
             mBackground.visible = true
+            showSpecific(mDefaultBackgroundParticles)
         } else {
             hideChoices()
         }
@@ -171,6 +177,21 @@ Item {
         if (mDefaultChoice) {
             if (!mDefaultChoice.getSource()) {
                 mDefaultChoice.setSource()
+            }
+        }
+    }
+
+    function showSpecific(sOneParticle) {
+        let lListOneParticleAbstract = mParticleManager.getmListParticles();
+        for (let lIdx = 0; lIdx < lListOneParticleAbstract.length; lIdx++) {
+            let lOneParticle_01 = lListOneParticleAbstract[lIdx];
+            lOneParticle_01.clear();
+            if (lOneParticle_01 === sOneParticle && mParticleOverall) {
+                lOneParticle_01.visible = true
+                lOneParticle_01.start();
+            } else {
+                lOneParticle_01.visible = false;
+                lOneParticle_01.stop()
             }
         }
     }

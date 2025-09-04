@@ -23,6 +23,7 @@ import "Choice/BackGround"
 import "Choice/Choices"
 import "Choice"
 import "Sceenes"
+import "Particles"
 
 
 
@@ -30,7 +31,7 @@ import "Sceenes"
 
 
 GameWindow {
-    id: iGameWindow
+    id: mGameWindow
 
     BasicConst {
         id: mBasicConst
@@ -71,9 +72,14 @@ GameWindow {
         id: mCHc
     }
 
+    ParticlesManager {
+        id: mParticleManager
+    }
+
     property bool mMeridaSuperglue: false
     property int mVolumeOverall: 50
     property bool mDebugOverall: true
+    property bool mParticleOverall: false
     property var mCurrentSceene
 
     Rectangle {
@@ -159,6 +165,29 @@ GameWindow {
                     }
                 }
             }
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
+                Text {
+                    id: iParticleOnOffText
+                    text: "Turn " + (mParticleOverall ? "off" : "on") + " the particles: "
+                    font.pixelSize: 40
+                    color: "white"
+                }
+
+                Rectangle {
+                    width: 50; height: 50
+                    color: mParticleOverall ? "green" : "black"
+                    border.color: "lightgray"
+                    border.width: 5
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: mParticleOverall = !mParticleOverall
+                    }
+                }
+            }
         }
     }
 
@@ -177,6 +206,8 @@ GameWindow {
         iLibrarySceene.meridaSuperGlueOff()
     }
     function restartGame() {
+        mCurrentSceene.visible = false
+        mRemoveSuperGlue()
         sceeneC05.hide()
         // sceeneC06.hide()
         // sceeneC07.hide()
@@ -368,7 +399,7 @@ GameWindow {
         height: parent.height * 0.10
         x: width * 0.70
         y: parent.height - height * 1.5
-        z: 20
+        z: 200
         text: "Start Game"
         onClicked: {
             console.log("------- launch loader -----------")
@@ -381,7 +412,7 @@ GameWindow {
               */
             sceeneIntro.setSource()
 
-            mBasicLoaderManager.startCheck(iGameWindow , "loadedSuccess");
+            mBasicLoaderManager.startCheck(mGameWindow , "loadedSuccess");
         }
     }
     AppButton {
@@ -391,7 +422,7 @@ GameWindow {
         height: parent.height * 0.1
         x: parent.width * 0.05
         y: parent.height * 0.05
-        z: 20
+        z: 200
         text: "Restart Game"
         onClicked: {
             mCurrentSceene.visible = false
@@ -419,4 +450,5 @@ GameWindow {
     function getmListItemToCheckIfLoaded() {
         return [];
     }
+
 }

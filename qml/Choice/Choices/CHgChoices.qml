@@ -12,6 +12,8 @@ Item {
 
     anchors.fill: parent
 
+    z: 250
+
     CHgFiveChoice {
         id: iFiveChoice
         visible: false

@@ -10,7 +10,6 @@ Item {
 
     anchors.fill: parent
 
-    property bool pLaugh: false
 
     function meridaSuperGlueOn() {
         if (sceeneC22.mStatus === sceeneC22.mStatusEnum.TERMINATED) {
@@ -43,10 +42,6 @@ Item {
         return [sceeneC20, sceeneC22, sceeneC23, sceeneC24]
     }
 
-    function setLaugh() {
-        pLaugh = true
-    }
-
     CHsChoice {
         id: sceeneC20
 
@@ -60,7 +55,7 @@ Item {
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
+        mListChoices: [sceeneC25, sceeneC26, sceeneC30, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
         mListTerminates: [sceeneC20]
     }
@@ -86,19 +81,18 @@ Item {
         id: sceeneC22
 
         mStatus: mStatusEnum.HIDDEN
-        mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom again")
         mTitle: qsTr("Hi")
         mQuestion: qsTr("What do want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c22"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
+        mListChoices: [sceeneC25, sceeneC26, sceeneC30, sceeneC28, sceeneC29]
     }
     CHsChoice {
         id: sceeneC23
@@ -144,9 +138,8 @@ Item {
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC27, sceeneC28, sceeneC29]
+        mListChoices: [sceeneC25, sceeneC31S04, sceeneC28, sceeneC29]
         mListHides: [sceeneC26]
-        mFunctionToCall: setLaugh
     }
     CHsChoice {
         id: sceeneC27
@@ -160,7 +153,7 @@ Item {
         mSecondaryImageSource: ""
 
         mVideoVolume: mVolumeOverall
-        mDefaultChoice: pLaugh ? sceeneC31S04 : sceeneC21
+        mDefaultChoice: null
         mListChoices: []
     }
     CHsChoice {
@@ -175,8 +168,9 @@ Item {
         mSecondaryImageSource: ""
 
         mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneC21
+        mDefaultChoice: sceeneHall
         mListChoices: []
+        mListUnlocks: [sceeneC26, sceeneC29]
     }
     CHsChoice {
         id: sceeneC29
@@ -191,16 +185,15 @@ Item {
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
-        mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28]
+        mListChoices: [sceeneC25, sceeneC26, sceeneC31S04, sceeneC28]
         mListHides: [sceeneC29]
-        mFunctionToCall: setLaugh
     }
     CHsChoice {
         id: sceeneC30
 
         mIsDebug: true
 
-        mTextBeforeChoosing: qsTr("")
+        mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("This is inapropriate")
         mQuestion: qsTr("")
 
@@ -209,20 +202,18 @@ Item {
         mSecondaryImageSource: ""
 
         mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneC21
+        mDefaultChoice: sceeneHall
         mListChoices: []
         mListUnlocks: [sceeneC26, sceeneC29]
     }
     CHsChoice {
         id: sceeneC31S04
 
-        mIsDebug: true
-
-        mTextBeforeChoosing: qsTr("")
+        mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("It is really because you are a nice guy")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c31"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

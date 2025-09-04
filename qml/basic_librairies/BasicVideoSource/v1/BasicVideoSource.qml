@@ -29,6 +29,15 @@ Item {
 
         fillMode: VideoOutput.PreserveAspectFit
         anchors.fill: parent
+        transform: [
+            Scale {
+                id: mVideoOutputScale
+                origin.x: width / 2
+                origin.y: height / 2
+                xScale: 1.0
+                yScale: 1.0
+            }
+        ]
     }
 
     MediaPlayer {
@@ -83,6 +92,30 @@ Item {
         mVideoMediaPlayer.play()
     }
 
+    function setVideoOutputScale(originX, originY, scaleX, scaleY) {
+        if (originX) {
+            mVideoOutputScale.origin.x = originX * width
+        }
+        if (originY) {
+            mVideoOutputScale.origin.y = originY * height
+        }
+        if (scaleX) {
+            mVideoOutputScale.xScale = scaleX
+        }
+        if (scaleY) {
+            mVideoOutputScale.yScale = scaleY
+        }
+    }
+
+    function getVideoOutputScale() {
+        return mVideoOutputScale
+    }
+    function getVideoOutput() {
+        return mVideoOutput
+    }
+    function getMediaPlayer() {
+        return mVideoMediaPlayer
+    }
 
 
     function getVideoState() {

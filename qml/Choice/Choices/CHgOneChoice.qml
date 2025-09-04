@@ -5,8 +5,10 @@ import "../../basic_librairies/BasicDebug/v1"
 
 Item {
     id: iOneChoice
-
     anchors.fill: parent
+    z: parent.z
+
+
     property real xPercent
     property real yPercent
     property real widthPercent
@@ -25,6 +27,7 @@ Item {
 
         color: "#779161"
         opacity: 0.95
+        z: parent.z
 
         x: (xPercent-borderWidthPercent) * pParent.width
         y: (yPercent-borderWidthPercent) * pParent.height
@@ -39,6 +42,7 @@ Item {
         Text {
             id: iText
             anchors.centerIn: parent
+            z: parent.z
 
             text: {
                 if (pNextScene) {

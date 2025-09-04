@@ -5,6 +5,7 @@ Item {
 
     id: item
     anchors.fill: parent
+    z: parent.z
 
     property var pListScenes: []
 

@@ -21,7 +21,7 @@ Item {
         text: mMainVideoSource
 
         visible: mDebugOverall && mMainVideoSource
-        z: 100
+        z: 120
 
         yPercent: 0.05
         textFontForceSizePixel: 40
@@ -65,6 +65,7 @@ Item {
     }
 
     Component.onCompleted: {
+        iMainVideo.setVideoOutputScale(mPosToZoomInXPercent, mPosToZoomInYPercent, 1, 1)
         iPlaceholder.sOnClicked.connect(skipVideo)
         if (mMainVideoSource && mIsTimer) {
             pPosToShowChoices = getPosFromSource()
@@ -74,7 +75,6 @@ Item {
     onVisibleChanged: {
         if (visible) {
             if (mMainVideoSource) {
-                console.log(iMainVideo.mSource)
                 iMainVideo.visible = true
                 iMainVideo.startVideo()
                 iTimer.start()
@@ -83,6 +83,8 @@ Item {
             iMainVideo.setVideoPosition(0)
             pChoiceVisible = false
             iMainVideo.visible = false
+            iParallelAnimationZoom.stop()
+            iMainVideo.setVideoOutputScale(mPosToZoomInXPercent, mPosToZoomInYPercent, 1, 1)
         }
     }
 
@@ -91,17 +93,39 @@ Item {
         interval: 400
         repeat: true
         onTriggered: {
-            if (iMainVideo.getVideoPosition() > iMainVideo.getVideoDuration()-1000) {
+            if (iMainVideo.getVideoPosition() > iMainVideo.getVideoDuration()-600) {
                 if (mIsTimer) {
                     iMainVideo.pauseVideo()
                     showChoices()
                     iGlobalMusic.startVideo()
                     pChoiceVisible = true
+                    iParallelAnimationZoom.start()
                 } else {
                     startFadeOut(mDefaultChoice)
                 }
                 iTimer.stop()
             }
+        }
+    }
+
+    ParallelAnimation {
+        id: iParallelAnimationZoom
+
+        running: false
+        loops: 1
+        NumberAnimation {
+            id: iVideoZoomX
+            target: iMainVideo.getVideoOutputScale()
+            property: "xScale"
+            to: 1.1
+            duration: getTime()
+        }
+        NumberAnimation {
+            id: iVideoZoomY
+            target: iMainVideo.getVideoOutputScale()
+            property: "yScale"
+            to: 1.1
+            duration: getTime()
         }
     }
 

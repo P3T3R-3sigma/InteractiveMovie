@@ -4,9 +4,9 @@ import Felgo
 Item {
     id: item
     anchors.fill: parent
+    z: parent.z
 
     property var pListScenes: []
-
 
     property real lXStartPercent: 0
     property real lYStartPercent: 0.7264

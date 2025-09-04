@@ -46,12 +46,11 @@ Item {
     CHsChoice {
         id: sceeneC72
 
-        mIsDebug: true
         mTextBeforeChoosing: "Good joke"
         mTitle: "Tell a joke"
         mQuestion: "What joke do you tell?"
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c72"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
@@ -66,8 +65,7 @@ Item {
         mTitle: "Forced kiss"
         mQuestion: ""
 
-        mIsDebug: true
-        mMainVideoSource: ""
+        mMainVideoSource: "c73"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

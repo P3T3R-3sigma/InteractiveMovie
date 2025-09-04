@@ -157,13 +157,11 @@ Item {
     CHsChoice {
         id: sceeneC10
 
-        mIsDebug: true
-
         mTextBeforeChoosing: "Sure, I will marry you"
         mTitle: "Said, you marry Merida"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c10"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

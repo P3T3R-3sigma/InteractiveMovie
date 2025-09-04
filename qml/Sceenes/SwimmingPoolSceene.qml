@@ -44,6 +44,7 @@ Item {
         mTitle: qsTr("Lollypop")
         mQuestion: qsTr("What do you want to do?")
 
+        mPosToZoomInXPercent: 0.6
         mMainVideoSource: "c40_1"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: "c40_1"
@@ -78,9 +79,11 @@ Item {
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
+
+        mPosToZoomInYPercent: 0.65
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC48
-        mListChoices: [sceeneC47, sceeneC48, sceeneC49, sceeneC50]
+        mListChoices: [sceeneC48, sceeneC49, sceeneC50, sceeneC56S05]
     }
     CHsChoice {
         id: sceeneC43
@@ -277,6 +280,9 @@ Item {
         mMainVideoSource: "c57"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
+
+        mPosToZoomInYPercent: 0.6
+        mPosToZoomInXPercent: 0.4
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC59
