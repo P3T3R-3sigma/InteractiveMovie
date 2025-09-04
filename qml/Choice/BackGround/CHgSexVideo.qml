@@ -12,7 +12,6 @@ Item {
     property var mNextVideo
     property var mListSourcesImagesToJumpTo
     property var mSourceSimple
-    property bool mChoiceVisible: false
 
 
     visible: false
@@ -26,7 +25,7 @@ Item {
 
         anchors.fill: parent
         mListSourcesImagesToJumpTo: iSexItem.mListSourcesImagesToJumpTo
-        mSourceSimple: iSexItem.mSourceSimple
+        mSourceSimple: ""
 
         onTerminated: {
             terminate()
@@ -39,6 +38,7 @@ Item {
 
     onVisibleChanged: {
         if (visible) {
+            mCurrentSceene = this
             if (mIsDebug) {
                 iPlaceholder.visible = true
             } else {
@@ -58,6 +58,14 @@ Item {
 
     function getmListItemToCheckIfLoaded() {
         return [iBasicSexVideo]
+    }
+
+
+    function setSource() {
+        iBasicSexVideo.mSourceSimple = mSourceSimple
+    }
+    function getSource() {
+        return iBasicSexVideo.mSourceSimple
     }
 
 }

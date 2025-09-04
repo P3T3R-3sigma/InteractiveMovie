@@ -3,6 +3,7 @@ import Felgo
 import QtMultimedia
 
 import "../../basic_librairies/BasicVideoSource/v1"
+import "../../basic_librairies/BasicText/v4"
 
 Item {
     id: iMainVideoChoice
@@ -15,39 +16,44 @@ Item {
 
     anchors.fill: parent
 
-    VideoOutput {
-        id: mVideoOutput
+    BasicTextFitToText {
+        id: iPlaceholderText
+        text: mMainVideoSource
 
-        fillMode: VideoOutput.PreserveAspectFit
-        anchors.fill: parent
+        visible: mDebugOverall && mMainVideoSource
+        z: 100
+
+        yPercent: 0.05
+        textFontForceSizePixel: 40
+        textColor: "black"
+        borderColor: "Pink"
+        borderWidthPercent: 0.01
     }
 
-    MediaPlayer {
-        id: mVideoMediaPlayer
+    BasicVideoSource {
+        id: iMainVideo
 
-        source: "qrc:/assets/Videos/" + mMainVideoSource + ".mp4"
-        videoOutput: mVideoOutput
-        audioOutput: AudioOutput {
-            volume: mVideoVolume
-        }
-        onPlaybackStateChanged: {
-            ///////////////////////////////
-            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
-            ///////////////////////////////
-            if (mediaStatus === MediaPlayer.EndOfMedia) {
-                onVideoEnd(mVideoMediaPlayer)
+        mSource: ""
+        mVolume: mVideoVolume
+    }
 
-                ///////////////////////////////
-                // console.log("End of media reached.")
-                ///////////////////////////////
-            } else if (mediaStatus === MediaPlayer.LoadedMedia) {
-                ///////////////////////////////
-                // console.log("Loaded")
-                ///////////////////////////////
+    AppButton {
+        id: iPauseButton
+        width: parent.width * 0.15
+        height: parent.height * 0.1
+        x: parent.width * 0.05
+        y: parent.height * 0.65
+        z: 20
+        text: iMainVideo.getVideoState() === MediaPlayer.PlayingState ? "PAUSE" : "PLAY"
+        visible: !pChoiceVisible
+        onClicked: {
+            if (iMainVideo.getVideoState() === MediaPlayer.PlayingState) {
+                iMainVideo.pauseVideo()
+            } else {
+                iMainVideo.playVideo()
             }
         }
     }
-
 
     MouseArea {
         anchors.fill: parent
@@ -68,71 +74,57 @@ Item {
     onVisibleChanged: {
         if (visible) {
             if (mMainVideoSource) {
-                startVideo()
+                console.log(iMainVideo.mSource)
+                iMainVideo.visible = true
+                iMainVideo.startVideo()
                 iTimer.start()
             }
         } else {
-            setVideoPosition(0)
+            iMainVideo.setVideoPosition(0)
             pChoiceVisible = false
+            iMainVideo.visible = false
         }
-    }
-
-
-    function onVideoEnd() {
-
-        console.log("End Video", mMainVideoSource)
-        stopVideo()
-        setStatusChanges()
-        iMainVideoChoice.visible = false
-        pChoiceVisible = false
-        iChoiceManager.visible = false
     }
 
     Timer {
         id: iTimer
-        interval: 200
+        interval: 400
         repeat: true
         onTriggered: {
-            if (getVideoPosition() > getVideoDuration()-450) {
+            if (iMainVideo.getVideoPosition() > iMainVideo.getVideoDuration()-1000) {
                 if (mIsTimer) {
-                    pauseVideo()
-                    iChoiceManager.showChoices()
+                    iMainVideo.pauseVideo()
+                    showChoices()
+                    iGlobalMusic.startVideo()
+                    pChoiceVisible = true
                 } else {
-                    mDefaultChoice.visible = true
-                    onVideoEnd()
-
+                    startFadeOut(mDefaultChoice)
                 }
-
-                console.log("Video choice end", mMainVideoSource)
-                // mDefaultChoice.visible = true
-                 iTimer.stop()
-                // onVideoEnd()
+                iTimer.stop()
             }
-            // else if (getVideoPosition() > getVideoDuration()-4500) {
-            //     console.log("Show choices", mMainVideoSource)
-            //     showChoices()
-            //     pChoiceVisible = true
-            //     iTimer.stop()
-            // }
         }
+    }
+
+    function setSource() {
+        iMainVideo.mSource = "qrc:/assets/Videos/" + mMainVideoSource + ".mp4"
+    }
+    function getSource() {
+        return iMainVideo.mSource
     }
 
     function skipVideo() {
         setStatusChanges()
         if (mIsTimer) {
             if (mMainVideoSource) {
-                console.log("Skipping to choice position", mMainVideoSource)
-                setVideoPosition(getVideoDuration()-500)
+                iMainVideo.setVideoPosition(iMainVideo.getVideoDuration()-500)
             } else {
-                console.log("Show choices", mMainVideoSource)
                 showChoices()
+                iGlobalMusic.startVideo()
                 iTimer.stop()
             }
 
         } else {
-            console.log("Skipping to default", mMainVideoSource)
-            mDefaultChoice.visible = true
-            onVideoEnd()
+            startFadeOut(mDefaultChoice)
         }
     }
 
@@ -144,32 +136,7 @@ Item {
         return []
     }
 
-    function startVideo(){
-        setVideoPosition(0)
-        mVideoMediaPlayer.play()
-    }
-    function stopVideo(){
-        mVideoMediaPlayer.stop()
-    }
-    function pauseVideo(){
-        mVideoMediaPlayer.pause()
-    }
-
     function getPosFromSource() {
         return parseInt(mMainVideoSource.split("_")[1])
-    }
-
-    function getVideoDuration() {
-        return mVideoMediaPlayer.duration
-    }
-
-    function getVideoSource() {
-        return mSource
-    }
-    function getVideoPosition() {
-        return mVideoMediaPlayer.position
-    }
-    function setVideoPosition(sPosition) {
-        mVideoMediaPlayer.position = sPosition
     }
 }

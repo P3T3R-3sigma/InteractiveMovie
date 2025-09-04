@@ -21,7 +21,9 @@ Item {
         width: parent.width * widthPercent
         height: parent.height * heightPercent
 
-        color: "red"
+        z: iTimerGraphicBorder.z+1
+
+        color: "#f3b831"
         radius: height/2
     }
     Rectangle {
@@ -31,10 +33,8 @@ Item {
         width: parent.width * widthPercent
         height: parent.height * heightPercent
 
-        color: "transparent"
-        border.color: "yellow"
-        border.width: parent.height * heightPercent * 0.1
-        radius: height/2
+        color: "#e5e5e5"
+        radius: height/4
     }
 
     ParallelAnimation {
@@ -43,19 +43,21 @@ Item {
         running: false
         loops: 1
         NumberAnimation {
-            id: iNumberAnimationX
+            id: iNumberAnimationWidth
             target: iTimerGraphic
             property: "width"
             duration: 10000
 
         }
+        NumberAnimation {
+            id: iNumberAnimationX
+            target: iTimerGraphic
+            property: "x"
+            duration: 10000
+
+        }
         onFinished: {
-            stopTimer()
-            iChoiceManager.setStatusChanges()
-            iChoiceManager.hideChoices()
-            mDefaultChoice.visible = true
-            // mDefaultChoice.z = iChoiceManager.z+1
-            iChoiceManager.visible = false
+            startFadeOut(mDefaultChoice)
         }
     }
 
@@ -63,14 +65,17 @@ Item {
     onVisibleChanged: {
         if (visible) {
             startTimer()
+        } else {
+            stopTimer()
         }
     }
 
     function startTimer() {
         if (mIsTimer) {
-            console.log(iChoiceManager.getTime())
+            iNumberAnimationWidth.duration = iChoiceManager.getTime()
+            iNumberAnimationWidth.to = 0
             iNumberAnimationX.duration = iChoiceManager.getTime()
-            iNumberAnimationX.to = 0
+            iNumberAnimationX.to = 0.5 * parent.width
             iParallelAnimation.running = true
         } else {
             iChoiceManager.visible = false
@@ -78,8 +83,12 @@ Item {
         }
     }
     function stopTimer() {
-        iChoiceManager.setStatusChanges()
+        setStatusChanges()
         iParallelAnimation.running = false
         iTimerGraphic.width = parent.width * widthPercent
+        iTimerGraphic.x = parent.width * xPercent
+    }
+    function pauseTimer() {
+        iParallelAnimation.running = false
     }
 }

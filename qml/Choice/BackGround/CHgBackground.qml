@@ -17,20 +17,15 @@ Item {
 
         pVideoNext: iSecondaryVideo
         pImageNext: iSecondaryImage
-        z: 2
-
     }
 
 
     CHgSecondaryVideo {
         id: iSecondaryVideo
-
     }
 
     CHgSecondaryImage {
         id: iSecondaryImage
-        z: 1
-
     }
 
 
@@ -48,8 +43,16 @@ Item {
         }
     }
 
-    function restartVideo() {
-        iMainVideo.startVideo()
+    function setSource() {
+        if (mDisplayEnum.ONE_VIDEO === mDisplay) {
+            iMainVideo.setSource()
+        }
+    }
+    function getSource() {
+        if (mDisplayEnum.ONE_VIDEO === mDisplay) {
+            return iMainVideo.getSource()
+        }
+        return null
     }
 
     function getmListItemToCheckIfLoaded() {

@@ -73,6 +73,96 @@ GameWindow {
 
     property bool mMeridaSuperglue: false
     property int mVolumeOverall: 50
+    property bool mDebugOverall: true
+    property var mCurrentSceene
+
+    Rectangle {
+        id: iSplashForDebug
+        visible: mDebugOverall
+        y: parent.height * 0.2
+        width: parent.width
+        height: parent.height * 0.4
+        color: "black"
+        Column {
+            anchors.horizontalCenter: parent.horizontalCenter
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
+                Text {
+                    id: baseTimeText
+                    text: "The number of seconds added to the timer regardless of the number of choices. (current: " + mCHc.cBaseTime/1000 + ")"
+                    font.pixelSize: 40
+                    color: "white"
+                }
+
+                Rectangle {
+                    width: 100; height: 66
+                    color: "lightgray"
+                    border.color: "black"
+
+                    TextInput {
+                        id: baseTimeInput
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        font.pixelSize: 36
+                        focus: true
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        validator: IntValidator { bottom: 1; top: 20 }  // Adjust range as needed
+                        onTextChanged: {
+                            if (text !== "" && (parseInt(text) < 1 || parseInt(text) > 20)) {
+                                text = ""
+                            }
+                        }
+                    }
+                }
+            }
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
+                Text {
+                    id: perChoiceText
+                    text: "The number of seconds added to the timer for every choice. (current: " + mCHc.cAdditionalTime/1000 + ")"
+                    font.pixelSize: 40
+                    color: "white"
+                }
+
+                Rectangle {
+                    width: 100; height: 66
+                    color: "lightgray"
+                    border.color: "black"
+
+                    TextInput {
+                        id: perChoiceInput
+                        anchors.fill: parent
+                        anchors.margins: 10
+                        font.pixelSize: 36
+                        focus: true
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        validator: IntValidator { bottom: 0; top: 10 }  // Adjust range as needed
+                        onTextChanged: {
+                            if (text !== "" && (parseInt(text) <= 0 || parseInt(text) > 10)) {
+                                text = ""
+                            }
+                        }
+                    }
+                }
+            }
+            AppButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Set timer")
+                onClicked: {
+                    if (perChoiceInput.text) {
+                        mCHc.cAdditionalTime = perChoiceInput.text * 1000
+                    }
+                    if (baseTimeInput.text) {
+                        mCHc.cBaseTime = baseTimeInput.text * 1000
+                    }
+                }
+            }
+        }
+    }
+
+
 
     function mSetSuperGlue() {
         mMeridaSuperglue = true
@@ -96,7 +186,13 @@ GameWindow {
         iBedroomsceene.resetGame()
         iSwimmingPoolSceene.resetGame()
         iLibrarySceene.resetGame()
+    }
 
+    BasicVideoSource {
+        id: iGlobalMusic
+
+        mSource: "qrc:/assets/Videos/c70.mp4"
+        mVolume: mVolumeOverall
     }
 
     CHsChoice {
@@ -130,7 +226,6 @@ GameWindow {
 
 
         mDisplay: mDisplayEnum.IMAGE
-        mIsDebug: true
 
         mTextBeforeChoosing: "Go back to hall"
         mTitle: "HALL"
@@ -138,7 +233,7 @@ GameWindow {
 
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+        mSecondaryImageSource: "c80"
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: null
@@ -216,46 +311,6 @@ GameWindow {
         mListChoices: []
     }
 
-    // CHsChoice {
-    //     id: sceeneC06
-
-    //     mStatus: mStatusEnum.HIDDEN
-    //     mIsDebug: true
-
-    //     mTextBeforeChoosing: "Go to the Library"
-    //     mTitle: "Library Superglue"
-    //     mQuestion: ""
-
-    //     mMainVideoSource: ""
-    //     mSecondaryVideoSource: ""
-    //     mSecondaryImageSource: ""
-    //
-    //     mVideoVolume: mVolumeOverall
-    //     mDefaultChoice: sceeneHall
-    //     mListChoices: []
-    // }
-
-    // CHsChoice {
-    //     id: sceeneC07
-
-    //     mIsDebug: true
-    //     mDebugMessage: "sceeneC07"
-
-    //     mStatus: mStatusEnum.HIDDEN
-    //     mTextBeforeChoosing: "Go to the Bedroom"
-    //     mTitle: "Bedroom Superglue"
-    //     mQuestion: ""
-
-    //     mMainVideoSource: ""
-    //     mSecondaryVideoSource: ""
-    //     mSecondaryImageSource: ""
-
-    //     mVideoVolume: mVolumeOverall
-    //     mDefaultChoice: sceeneHall
-    //     mListChoices: []
-    // }
-
-
     CHsChoice {
         id: sceeneC14S03
 
@@ -308,7 +363,7 @@ GameWindow {
 
     AppButton {
         id: downloadButtton
-        visible: false
+        visible: true
         width: parent.width * 0.15
         height: parent.height * 0.10
         x: width * 0.70
@@ -324,15 +379,36 @@ GameWindow {
             /*
               Start loaded
               */
+            sceeneIntro.setSource()
+
             mBasicLoaderManager.startCheck(iGameWindow , "loadedSuccess");
+        }
+    }
+    AppButton {
+        id: restartButton
+        visible: false
+        width: parent.width * 0.15
+        height: parent.height * 0.1
+        x: parent.width * 0.05
+        y: parent.height * 0.05
+        z: 20
+        text: "Restart Game"
+        onClicked: {
+            mCurrentSceene.visible = false
+            iSplashForDebug.visible = mDebugOverall
+            downloadButtton.visible = true
+            restartButton.visible = false
+            restartGame()
         }
     }
 
 
     function loadedSuccess() {
-        console.log("Loaded successfully all choicfWGAVes")
+        console.log("Loaded successfully all choices")
         sceeneIntro .visible = true
         downloadButtton.visible = false
+        iSplashForDebug.visible = false
+        restartButton.visible = true
         /*
           Communication
           */
@@ -343,6 +419,4 @@ GameWindow {
     function getmListItemToCheckIfLoaded() {
         return [];
     }
-
-    Component.onCompleted: downloadButtton.visible = true
 }

@@ -22,7 +22,6 @@ Item {
         textColor: "black"
         borderColor: "Pink"
         borderWidthPercent: 0.01
-
     }
 
     Rectangle {
@@ -101,7 +100,8 @@ Item {
                 iSecondaryImage.visible = true
             }
             startTimer()
-
+        } else {
+            stopTimer()
         }
     }
 

@@ -145,12 +145,11 @@ Item {
     CHsChoice {
         id: sceeneC47
 
-        mIsDebug: true
         mTextBeforeChoosing: qsTr("Wait 1 minute")
         mTitle: qsTr("Waiting")
         mQuestion: qsTr("What do you want to do?")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c47"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
         mIsTimer: true
@@ -160,13 +159,12 @@ Item {
     }
     CHsChoice {
         id: sceeneC48
-        mIsDebug: true
 
         mTextBeforeChoosing: qsTr("Say hello")
         mTitle: qsTr("Hello 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c52"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -181,7 +179,7 @@ Item {
         mTitle: qsTr("drink 2")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c49"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -272,7 +270,7 @@ Item {
         id: sceeneC57
 
         mStatus: mStatusEnum.HIDDEN
-        mTextBeforeChoosing: qsTr("Offer money")
+        mTextBeforeChoosing: qsTr("Offer money to Lollypop")
         mTitle: qsTr("Money Money")
         mQuestion: qsTr("How much do you want to pay?")
 
@@ -301,13 +299,11 @@ Item {
     CHsChoice {
         id: sceeneC58
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("200 USD")
         mTitle: qsTr("200 USD")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c58"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 

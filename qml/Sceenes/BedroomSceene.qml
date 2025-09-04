@@ -13,27 +13,34 @@ Item {
     property bool pLaugh: false
 
     function meridaSuperGlueOn() {
-        if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
+        if (sceeneC22.mStatus === sceeneC22.mStatusEnum.TERMINATED) {
+            return
+        } else if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
         } else {
             sceeneC20.hide()
         }
+        sceeneC22.hide()
         sceeneC24.makeAccessible()
     }
     function meridaSuperGlueOff() {
-        if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
-            sceeneC23.makeAccessible()
+        if (sceeneC22.mStatus === sceeneC22.mStatusEnum.TERMINATED) {
+            return
+        } else if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
         } else {
             sceeneC20.makeAccessible()
         }
     }
 
     function resetGame(){
-        sceeneC23.hide()
         sceeneC20.makeAccessible()
+        sceeneC22.hide()
+        sceeneC23.hide()
+        sceeneC26.makeAccessible()
+        sceeneC29.makeAccessible()
     }
 
     function getSceene() {
-        return [sceeneC20, sceeneC23, sceeneC24]
+        return [sceeneC20, sceeneC22, sceeneC23, sceeneC24]
     }
 
     function setLaugh() {
@@ -55,6 +62,7 @@ Item {
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
+        mListTerminates: [sceeneC20]
     }
     CHsChoice {
         id: sceeneC21
@@ -72,6 +80,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
+        mListUnlocks: [sceeneC26, sceeneC29]
     }
     CHsChoice {
         id: sceeneC22
@@ -136,6 +145,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC27, sceeneC28, sceeneC29]
+        mListHides: [sceeneC26]
         mFunctionToCall: setLaugh
     }
     CHsChoice {
@@ -182,6 +192,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC28
         mListChoices: [sceeneC25, sceeneC26, sceeneC27, sceeneC28]
+        mListHides: [sceeneC29]
         mFunctionToCall: setLaugh
     }
     CHsChoice {
@@ -200,6 +211,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC21
         mListChoices: []
+        mListUnlocks: [sceeneC26, sceeneC29]
     }
     CHsChoice {
         id: sceeneC31S04
@@ -218,7 +230,7 @@ Item {
         mDefaultChoice: sceeneS04
         mListChoices: []
         mListUnlocks: [sceeneC23]
-        mListTerminates: [sceeneC20]
+        mListTerminates: [sceeneC22]
     }
     CHgSexVideo {
         id: sceeneS04

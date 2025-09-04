@@ -14,7 +14,6 @@ Item {
 
     property int mVolume: 0
     property string mSource
-    property bool shouldPause: false
 
     z: 10
 
@@ -30,13 +29,6 @@ Item {
 
         fillMode: VideoOutput.PreserveAspectFit
         anchors.fill: parent
-
-        onFrameUpdated: {
-            if (shouldPause) {
-                shouldPause = false;
-                mVideoMediaPlayer.pause();
-            }
-        }
     }
 
     MediaPlayer {
@@ -50,17 +42,17 @@ Item {
         }
         onPlaybackStateChanged: {
             ///////////////////////////////
-            console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
+            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
             ///////////////////////////////
             if (mediaStatus === MediaPlayer.EndOfMedia) {
                 sVideoEnd(mVideoMediaPlayer)
 
                 ///////////////////////////////
-                console.log("End of media reached.")
+                // console.log("End of media reached.")
                 ///////////////////////////////
             } else if (mediaStatus === MediaPlayer.LoadedMedia) {
                 ///////////////////////////////
-                console.log("Loaded")
+                // console.log("Loaded")
                 ///////////////////////////////
             }
         }
@@ -85,11 +77,17 @@ Item {
         mVideoMediaPlayer.stop()
     }
     function pauseVideo(){
-        shouldPause = true
+        mVideoMediaPlayer.pause()
+    }
+    function playVideo(){
+        mVideoMediaPlayer.play()
     }
 
 
 
+    function getVideoState() {
+        return mVideoMediaPlayer.playbackState
+    }
     function getVideoDuration() {
         return mVideoMediaPlayer.duration
     }

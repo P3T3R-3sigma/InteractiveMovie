@@ -44,8 +44,6 @@ Item {
 
         mStatus: mStatusEnum.HIDDEN
 
-        mDebugMessage: "Merida rejects you"
-
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Merida rejects you"
         mQuestion: ""
@@ -64,8 +62,6 @@ Item {
 
         mStatus: mStatusEnum.HIDDEN
 
-        mDebugMessage: "Merida teasing"
-
         mTextBeforeChoosing: qsTr("Go to the kitchen")
         mTitle: qsTr("Merida is teasing you")
         mQuestion: qsTr("What do want to do?")
@@ -82,8 +78,6 @@ Item {
     CHsChoice {
         id: sceeneC04
 
-        mDebugMessage: "Leaving Merida"
-
         mTextBeforeChoosing: "Leave Merida"
         mTitle: "Left Merida"
         mQuestion: "sceeneC04"
@@ -99,8 +93,6 @@ Item {
 
     CHsChoice {
         id: sceeneC03S01
-
-        mDebugMessage: "Before fucking Merida"
 
         mTextBeforeChoosing: "Fuck Merida"
         mTitle: "Choose to fuck Merida"
@@ -132,7 +124,6 @@ Item {
         id: sceeneC08
 
         mStatus: mStatusEnum.HIDDEN
-        mDebugMessage: "Do you eant to marry her?"
 
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Do you want to marry me?"
@@ -149,8 +140,6 @@ Item {
 
     CHsChoice {
         id: sceeneC09
-
-        mDebugMessage: "Told Merida to leave you alone"
 
         mTextBeforeChoosing: "Please, leave me alone"
         mTitle: "Told Merida to leave you alone."
@@ -169,8 +158,6 @@ Item {
         id: sceeneC10
 
         mIsDebug: true
-
-        mDebugMessage: "Said you will marry Merida"
 
         mTextBeforeChoosing: "Sure, I will marry you"
         mTitle: "Said, you marry Merida"
@@ -205,8 +192,6 @@ Item {
 
     CHsChoice {
         id: sceeneC11
-
-        mDebugMessage: "Confession about anal"
 
         mTextBeforeChoosing: "Confess about anal to Merida 1"
         mTitle: "Matthew really wants anal"

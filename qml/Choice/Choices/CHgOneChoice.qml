@@ -3,54 +3,88 @@ import Felgo
 import "../../basic_librairies/BasicText/v4"
 import "../../basic_librairies/BasicDebug/v1"
 
-BasicTextFitToWindowWidth {
+Item {
     id: iOneChoice
 
+    anchors.fill: parent
+    property real xPercent
+    property real yPercent
+    property real widthPercent
+    property real heightPercent
+    property real textSizePercent
+    property real radiusPercent: 0.012
+    property real borderWidthPercent: 0.0008
 
-    xPercent: 0
-    yPercent: 0
-    widthPercent : 0
+    property var pNextScene: null
 
-    textFontPixelSizePercent: 0.07
-    paddingPercentHeight: 0
-    textIsAlignToCenterV: true
-    textColor: "black"
+    property var pParent: parent
 
-    borderColor: "green"
-    borderWidthPercent: 0.001
-    text:  getText()
-    textIsWrapped: true
 
-    MouseArea {
-        id: iMouseArea
-        anchors.fill: parent
+    Rectangle {
+        id: iBackground
 
-        hoverEnabled: true
+        color: "#779161"
+        opacity: 0.95
 
-        enabled: mShadowListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE
+        x: (xPercent-borderWidthPercent) * pParent.width
+        y: (yPercent-borderWidthPercent) * pParent.height
+        width: (widthPercent-borderWidthPercent*2) * pParent.width
+        height: (heightPercent-borderWidthPercent*2) * pParent.height
 
-        onEntered: {
-            iOneChoice.borderColor = "purple"
+        radius: pParent.height * radiusPercent
+
+        border.color: "#E5E5E5"
+        border.width: pParent.width * borderWidthPercent
+
+        Text {
+            id: iText
+            anchors.centerIn: parent
+
+            text: {
+                if (pNextScene) {
+                    return pNextScene.mTextBeforeChoosing
+                }
+                return ""
+            }
+
+            color: "#E5E5E5"
+            font.family: "Century Gothic Pro"
+            font.pixelSize: pParent.height * textSizePercent
         }
-        onExited: {
-            iOneChoice.borderColor = "green"
-        }
 
-        onClicked: {
-            stopTimer()
-            iChoiceManager.setStatusChanges()
-            iChoiceManager.hideChoices()
-            mShadowListChoices[model.index].visible = true
-            // mShadowListChoices[model.index].z = iChoiceManager.z+1
-            iChoiceManager.visible = false
+        MouseArea {
+            id: iMouseArea
+            anchors.fill: parent
+
+            hoverEnabled: true
+
+            enabled: {
+                if (pNextScene) {
+                    return pNextScene.mStatus === mStatusEnum.ACCESSIBLE
+                }
+                return false
+            }
+
+            onEntered: {
+                iBackground.color = "#77c668"
+            }
+            onExited: {
+                iBackground.color = "#779161"
+            }
+
+            onPressed: {
+                iBackground.color = "#b2cdaa"
+                iText.font.bold = true
+                startFadeOut(pNextScene)
+            }
         }
     }
 
-    function getText() {
-        if (mShadowListChoices[model.index].mStatus === mStatusEnum.ACCESSIBLE) {
-            return mShadowListChoices[model.index].mTextBeforeChoosing
+    onVisibleChanged: {
+        if (visible){
+            iBackground.color = "#779161"
+            iText.font.bold = false
         }
-        return mShadowListChoices[model.index].mTextIfLocked
     }
 }
 
