@@ -79,7 +79,8 @@ GameWindow {
     property bool mMeridaSuperglue: false
     property int mVolumeOverall: 50
     property bool mDebugOverall: true
-    property bool mParticleOverall: false
+    property bool mParticleOverall: true
+    property bool mShowIntro: false
     property var mCurrentSceene
 
     Rectangle {
@@ -89,8 +90,10 @@ GameWindow {
         width: parent.width
         height: parent.height * 0.4
         color: "black"
+        z: 2
         Column {
             anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 10
@@ -188,9 +191,48 @@ GameWindow {
                     }
                 }
             }
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
+                Text {
+                    id: iShowIntro
+                    text: "Show Intro scene: "
+                    font.pixelSize: 40
+                    color: "white"
+                }
+
+                Rectangle {
+                    width: 50; height: 50
+                    color: mShowIntro ? "green" : "black"
+                    border.color: "lightgray"
+                    border.width: 5
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: mShowIntro = !mShowIntro
+                    }
+                }
+            }
         }
     }
 
+
+    MoveMouseParticle {
+        id: iMoveMouseParticle
+    }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+
+        onPositionChanged: function(mouse) {
+            // Set absolute scene position
+            iMoveMouseParticle.setEmitPos(mouse.x, mouse.y)
+            mParticleManager.showSpecific(iMoveMouseParticle)
+        }
+    }
 
 
     function mSetSuperGlue() {
@@ -209,8 +251,6 @@ GameWindow {
         mCurrentSceene.visible = false
         mRemoveSuperGlue()
         sceeneC05.hide()
-        // sceeneC06.hide()
-        // sceeneC07.hide()
         sceeneC24.hide()
         sceeneC71.hide()
         iKitchenSceene.resetGame()
@@ -231,13 +271,13 @@ GameWindow {
 
         mStatus: mStatusEnum.ACCESSIBLE
 
-        mIsDebug: true
+        mIsDebug: !mShowIntro
 
         mTextBeforeChoosing: "Go back to hall"
         mTitle: "Intro"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: mShowIntro ? "Intro" : ""
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -345,13 +385,11 @@ GameWindow {
     CHsChoice {
         id: sceeneC14S03
 
-        mIsDebug: true
-
         mTextBeforeChoosing: ""
         mTitle: "Revenge"
         mQuestion: ""
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c14"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -399,7 +437,7 @@ GameWindow {
         height: parent.height * 0.10
         x: width * 0.70
         y: parent.height - height * 1.5
-        z: 200
+        z: 2
         text: "Start Game"
         onClicked: {
             console.log("------- launch loader -----------")
@@ -422,7 +460,7 @@ GameWindow {
         height: parent.height * 0.1
         x: parent.width * 0.05
         y: parent.height * 0.05
-        z: 200
+        z: 2
         text: "Restart Game"
         onClicked: {
             mCurrentSceene.visible = false

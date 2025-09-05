@@ -191,13 +191,11 @@ Item {
     CHsChoice {
         id: sceeneC30
 
-        mIsDebug: true
-
         mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("This is inapropriate")
         mQuestion: qsTr("")
 
-        mMainVideoSource: ""
+        mMainVideoSource: "c30"
         mSecondaryVideoSource: ""
         mSecondaryImageSource: ""
 
@@ -208,6 +206,8 @@ Item {
     }
     CHsChoice {
         id: sceeneC31S04
+
+        // mDisplay: mDisplayEnum.TWO_VIDEO
 
         mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("It is really because you are a nice guy")

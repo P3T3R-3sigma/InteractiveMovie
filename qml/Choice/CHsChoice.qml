@@ -59,6 +59,7 @@ Item {
     property bool mChoiceVisible: false
     property var pChoosenNext
 
+    z: 2
     visible: false
 
 
@@ -111,7 +112,7 @@ Item {
                 mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
             }
             mBackground.visible = true
-            showSpecific(mDefaultBackgroundParticles)
+            mParticleManager.showSpecific(mDefaultBackgroundParticles)
         } else {
             hideChoices()
         }
@@ -177,21 +178,6 @@ Item {
         if (mDefaultChoice) {
             if (!mDefaultChoice.getSource()) {
                 mDefaultChoice.setSource()
-            }
-        }
-    }
-
-    function showSpecific(sOneParticle) {
-        let lListOneParticleAbstract = mParticleManager.getmListParticles();
-        for (let lIdx = 0; lIdx < lListOneParticleAbstract.length; lIdx++) {
-            let lOneParticle_01 = lListOneParticleAbstract[lIdx];
-            lOneParticle_01.clear();
-            if (lOneParticle_01 === sOneParticle && mParticleOverall) {
-                lOneParticle_01.visible = true
-                lOneParticle_01.start();
-            } else {
-                lOneParticle_01.visible = false;
-                lOneParticle_01.stop()
             }
         }
     }

@@ -2,6 +2,7 @@ import QtQuick
 import Felgo
 import "../../basic_librairies/BasicText/v4"
 import "../../basic_librairies/BasicDebug/v1"
+import "../../Particles"
 
 Item {
     id: iOneChoice
@@ -19,6 +20,7 @@ Item {
 
     property var pNextScene: null
 
+    property var pFunctionToDo: startFadeOut
     property var pParent: parent
 
 
@@ -46,7 +48,7 @@ Item {
 
             text: {
                 if (pNextScene) {
-                    return pNextScene.mTextBeforeChoosing
+                    return (pNextScene.mStatus === pNextScene.mStatusEnum.LOCKED) ? pNextScene.mTextIfLocked : pNextScene.mTextBeforeChoosing
                 }
                 return ""
             }
@@ -79,8 +81,13 @@ Item {
             onPressed: {
                 iBackground.color = "#b2cdaa"
                 iText.font.bold = true
-                startFadeOut(pNextScene)
+                pFunctionToDo(pNextScene)
+                mParticleManager.showSpecific(iChoiceParticle)
             }
+        }
+
+        ChoiceSelectedParticle {
+            id: iChoiceParticle
         }
     }
 

@@ -14,9 +14,6 @@ Item {
 
     CHgMainVideo {
         id: iMainVideo
-
-        pVideoNext: iSecondaryVideo
-        pImageNext: iSecondaryImage
     }
 
 
@@ -36,7 +33,7 @@ Item {
             } else {
                 switch (mDisplay) {
                 case mDisplayEnum.ONE_VIDEO: iMainVideo.visible = true; break
-                case mDisplayEnum.TWO_VIDEO: iMainVideo.visible = true; break
+                case mDisplayEnum.TWO_VIDEO: console.log("HERE1"); iSecondaryVideo.visible = true; break
                 case mDisplayEnum.IMAGE: iSecondaryImage.visible = true
                 }
             }
@@ -46,11 +43,15 @@ Item {
     function setSource() {
         if (mDisplayEnum.ONE_VIDEO === mDisplay) {
             iMainVideo.setSource()
+        } else if (mDisplayEnum.TWO_VIDEO === mDisplay) {
+            iSecondaryVideo.setSource()
         }
     }
     function getSource() {
         if (mDisplayEnum.ONE_VIDEO === mDisplay) {
             return iMainVideo.getSource()
+        } else if (mDisplayEnum.TWO_VIDEO === mDisplay) {
+            iSecondaryVideo.getSource()
         }
         return null
     }

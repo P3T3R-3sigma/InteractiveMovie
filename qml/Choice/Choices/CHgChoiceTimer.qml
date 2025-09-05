@@ -12,6 +12,8 @@ Item {
     property real widthPercent
     property real heightPercent
 
+    property int pTimerTime: iChoiceManager.getTime()
+
     anchors.fill: parent
     z: parent.z
 
@@ -64,7 +66,6 @@ Item {
         }
     }
 
-
     onVisibleChanged: {
         if (visible) {
             startTimer()
@@ -75,10 +76,10 @@ Item {
 
     function startTimer() {
         if (mIsTimer) {
-            iNumberAnimationWidth.duration = iChoiceManager.getTime()
+            iNumberAnimationWidth.duration = pTimerTime
             iNumberAnimationWidth.to = 0
-            iNumberAnimationX.duration = iChoiceManager.getTime()
-            iNumberAnimationX.to = 0.5 * parent.width
+            iNumberAnimationX.duration = pTimerTime
+            iNumberAnimationX.to = parent.width * 0.5
             iParallelAnimation.running = true
         } else {
             iChoiceManager.visible = false

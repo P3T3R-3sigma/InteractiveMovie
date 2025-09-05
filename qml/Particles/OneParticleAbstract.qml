@@ -10,17 +10,17 @@ Rectangle {
       Controls
       */
     property string mTitle: ""
-    property real xPercent
-    property real yPercent
-    property real widthPercent
-    property real heightPercent
+    property real xPercent: 0
+    property real yPercent: 0
+    property real widthPercent: 1
+    property real heightPercent: 1
     /*
       Variables
       */
     property bool mIsZoom
 
 
-    color: "grey" // "lightyellow"
+    color: "transparent" // "lightyellow"
     x: parent.width * xPercent
     y: parent.height * yPercent
     width: parent.width * widthPercent
@@ -53,19 +53,6 @@ Rectangle {
 
     function getpParticleSystem() {
         return pParticleSystem;
-    }
-
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            if (mIsZoom) {
-                mGameWindow.showGlobal();
-            } else {
-                mGameWindow.showSpecific(mThis)
-            }
-            mIsZoom = !mIsZoom
-        }
     }
 
     function pause() {

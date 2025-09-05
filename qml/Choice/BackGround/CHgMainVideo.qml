@@ -1,18 +1,18 @@
 import QtQuick
 import Felgo
 import QtMultimedia
+import Qt5Compat.GraphicalEffects
 
 import "../../basic_librairies/BasicVideoSource/v1"
 import "../../basic_librairies/BasicText/v4"
+import "../../basic_librairies/BasicImageSource/v4"
+import "../../basic_librairies/BasicDebug/v1"
 
 Item {
     id: iMainVideoChoice
 
-    property var pVideoNext: null
-    property var pImageNext: null
-
     property bool pChoiceVisible: false
-    property int pPosToShowChoices
+    property bool lPaused: false
 
     anchors.fill: parent
 
@@ -21,8 +21,8 @@ Item {
         text: mMainVideoSource
 
         visible: mDebugOverall && mMainVideoSource
-        z: 120
 
+        z: 1
         yPercent: 0.05
         textFontForceSizePixel: 40
         textColor: "black"
@@ -37,29 +37,97 @@ Item {
         mVolume: mVideoVolume
     }
 
-    AppButton {
-        id: iPauseButton
-        width: parent.width * 0.15
-        height: parent.height * 0.1
-        x: parent.width * 0.05
-        y: parent.height * 0.65
-        z: 20
-        text: iMainVideo.getVideoState() === MediaPlayer.PlayingState ? "PAUSE" : "PLAY"
-        visible: !pChoiceVisible
-        onClicked: {
-            if (iMainVideo.getVideoState() === MediaPlayer.PlayingState) {
-                iMainVideo.pauseVideo()
-            } else {
+    BasicImageSource {
+        id: iPlay
+
+        xPercent: 0.1
+        yPercent: 0.9
+        widthPercent: 0.03
+        height: width
+        z: 1
+
+        fillMode: Image.PreserveAspectFit
+
+        mSource: "Images/play.png"
+        visible: iChoiceManager.opacity === 1 && lPaused && !pChoiceVisible
+
+        MouseArea {
+            anchors.fill: parent
+
+            hoverEnabled: true
+            onEntered: iPlayGlow.visible = true
+            onExited: iPlayGlow.visible = false
+
+            onClicked: {
                 iMainVideo.playVideo()
+                lPaused = false
             }
+            onPositionChanged: {
+                tracker.x = mouse.x - tracker.width/2 - iPlay.x
+                tracker.y = mouse.y - tracker.height/2 - iPlay.y
+                mParticleManager.showSpecific(iMoveMouseParticle)
+            }
+        }
+        RectangularGlow {
+            id: iPlayGlow
+
+            visible: false
+            anchors.fill: parent
+
+            glowRadius: parent.width*0.1
+            color: "lightgray"
+            cornerRadius: parent.width/2
+        }
+    }
+    BasicImageSource {
+        id: iPause
+
+        xPercent: 0.1
+        yPercent: 0.9
+        widthPercent: 0.03
+        height: width
+        z: 1
+
+        fillMode: Image.PreserveAspectFit
+
+        mSource: "Images/pause.png"
+        visible: iChoiceManager.opacity === 1 && !lPaused && !pChoiceVisible
+
+        MouseArea {
+            anchors.fill: parent
+
+            hoverEnabled: true
+            onEntered: iPauseGlow.visible = true
+            onExited: iPauseGlow.visible = false
+
+            onClicked: {
+                iMainVideo.pauseVideo()
+                lPaused = true
+            }
+            onPositionChanged: {
+                tracker.x = mouse.x - tracker.width/2 + iPause.x
+                tracker.y = mouse.y - tracker.height/2 + iPause.y
+                mParticleManager.showSpecific(iMoveMouseParticle)
+            }
+        }
+
+        RectangularGlow {
+            id: iPauseGlow
+
+            visible: false
+            anchors.fill: parent
+
+            glowRadius: parent.width*0.1
+            color: "lightgray"
+            cornerRadius: parent.width/2
         }
     }
 
     MouseArea {
         anchors.fill: parent
 
-        enabled: !pChoiceVisible && !mIsDebug
         onClicked: {
+            lPaused = true
             skipVideo()
         }
     }
@@ -67,9 +135,6 @@ Item {
     Component.onCompleted: {
         iMainVideo.setVideoOutputScale(mPosToZoomInXPercent, mPosToZoomInYPercent, 1, 1)
         iPlaceholder.sOnClicked.connect(skipVideo)
-        if (mMainVideoSource && mIsTimer) {
-            pPosToShowChoices = getPosFromSource()
-        }
     }
 
     onVisibleChanged: {
@@ -82,6 +147,7 @@ Item {
         } else {
             iMainVideo.setVideoPosition(0)
             pChoiceVisible = false
+            lPaused = false
             iMainVideo.visible = false
             iParallelAnimationZoom.stop()
             iMainVideo.setVideoOutputScale(mPosToZoomInXPercent, mPosToZoomInYPercent, 1, 1)

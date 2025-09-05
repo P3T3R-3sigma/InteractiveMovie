@@ -12,14 +12,12 @@ Item {
 
     function meridaSuperGlueOn() {
         if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
+            sceeneC57.lock()
         } else {
-            sceeneC40.hide()
+            sceeneC40.lock()
         }
-        sceeneC57.hide()
-        sceeneC05.makeAccessible()
     }
     function meridaSuperGlueOff() {
-
         if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
             sceeneC57.makeAccessible()
         } else {
@@ -28,7 +26,7 @@ Item {
     }
 
     function getSceene() {
-        return [sceeneC40, sceeneC05, sceeneC57]
+        return [sceeneC40, sceeneC57]
     }
 
     function resetGame(){
@@ -41,6 +39,7 @@ Item {
         id: sceeneC40
 
         mTextBeforeChoosing: qsTr("Go to the Swimming Pool")
+        mTextIfLocked: qsTr("Merida stops you.")
         mTitle: qsTr("Lollypop")
         mQuestion: qsTr("What do you want to do?")
 
@@ -274,6 +273,7 @@ Item {
 
         mStatus: mStatusEnum.HIDDEN
         mTextBeforeChoosing: qsTr("Offer money to Lollypop")
+        mTextIfLocked: qsTr("Merida stops you.")
         mTitle: qsTr("Money Money")
         mQuestion: qsTr("How much do you want to pay?")
 

@@ -15,8 +15,6 @@ Item {
     property int mVolume: 0
     property string mSource
 
-    z: 10
-
     signal sVideoEnd(var mediaPlayer)
     signal sStopOnEnd(var mediaPlayer)
     signal sPositionChanged(var position)
