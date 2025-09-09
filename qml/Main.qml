@@ -283,14 +283,14 @@ GameWindow {
     BasicVideoSource {
         id: iGlobalMusic
 
-        mSource: "qrc:/assets/Videos/c70.mp4"
+        mSource: "qrc:/assets/Music/music.mp4"
         mVolume: mVolumeOverall
     }
 
     CHsChoice {
         id: sceeneIntro
 
-        mStatus: mStatusEnum.ACCESSIBLE
+        mStatus: mCHc.mStatusEnum.ACCESSIBLE
 
         mIsDebug: !mShowIntro
 
@@ -317,7 +317,7 @@ GameWindow {
 
 
 
-        mDisplay: mDisplayEnum.IMAGE
+        mDisplay: mCHc.mDisplayEnum.IMAGE
 
         mTextBeforeChoosing: "Go back to hall"
         mTitle: "HALL"
@@ -357,7 +357,7 @@ GameWindow {
 
         mIsDebug: true
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
         mTextBeforeChoosing: "Go to the Swimming Pool"
         mTitle: "Swimming pool Superglue"
         mQuestion: ""
@@ -373,7 +373,7 @@ GameWindow {
     CHsChoice {
         id: sceeneC71
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
         mTextBeforeChoosing: "Go to the Library"
         mTitle: "Milena Superglue"
         mQuestion: ""
@@ -390,7 +390,7 @@ GameWindow {
     CHsChoice {
         id: sceeneC24
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom")
         mTitle: qsTr("Amber Superglue")

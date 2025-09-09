@@ -96,7 +96,7 @@ Item {
 
     onVisibleChanged: {
         if (visible) {
-            if (mDisplay === mDisplayEnum.IMAGE) {
+            if (mDisplay === mCHc.mDisplayEnum.IMAGE) {
                 iSecondaryImage.visible = true
             }
             startTimer()

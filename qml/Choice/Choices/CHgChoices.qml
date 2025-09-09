@@ -50,7 +50,7 @@ Item {
     onVisibleChanged: {
         if (visible) {
             iChoices.opacity = 1
-            if (mDisplay !== mDisplayEnum.IMAGE) {
+            if (mDisplay !== mCHc.mDisplayEnum.IMAGE) {
                 switch (mShadowListChoices.length) {
                     case 2: iTwoChoice.visible = true; break
                     case 3: iThreeChoice.visible = true; break

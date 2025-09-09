@@ -48,7 +48,7 @@ Item {
 
             text: {
                 if (pNextScene) {
-                    return (pNextScene.mStatus === pNextScene.mStatusEnum.LOCKED) ? pNextScene.mTextIfLocked : pNextScene.mTextBeforeChoosing
+                    return (pNextScene.mStatus === mCHc.mStatusEnum.LOCKED) ? pNextScene.mTextIfLocked : pNextScene.mTextBeforeChoosing
                 }
                 return ""
             }
@@ -66,7 +66,7 @@ Item {
 
             enabled: {
                 if (pNextScene) {
-                    return pNextScene.mStatus === mStatusEnum.ACCESSIBLE
+                    return pNextScene.mStatus === mCHc.mStatusEnum.ACCESSIBLE
                 }
                 return false
             }

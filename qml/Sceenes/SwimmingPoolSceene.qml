@@ -11,14 +11,14 @@ Item {
     anchors.fill: parent
 
     function meridaSuperGlueOn() {
-        if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
+        if (sceeneC40.mStatus === mCHc.mStatusEnum.TERMINATED) {
             sceeneC57.lock()
         } else {
             sceeneC40.lock()
         }
     }
     function meridaSuperGlueOff() {
-        if (sceeneC40.mStatus === sceeneC40.mStatusEnum.TERMINATED) {
+        if (sceeneC40.mStatus === mCHc.mStatusEnum.TERMINATED) {
             sceeneC57.makeAccessible()
         } else {
             sceeneC40.makeAccessible()
@@ -274,7 +274,7 @@ Item {
     CHsChoice {
         id: sceeneC57
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
         mTextBeforeChoosing: qsTr("Offer money to Lollypop")
         mTextIfLocked: qsTr("Merida stops you.")
         mTitle: qsTr("Money Money")

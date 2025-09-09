@@ -93,7 +93,7 @@ Item {
 
             enabled: {
                 if (pNextScene) {
-                    return pNextScene.mStatus === mStatusEnum.ACCESSIBLE && pOpacity
+                    return pNextScene.mStatus === mCHc.mStatusEnum.ACCESSIBLE && pOpacity
                 }
                 return false
             }
@@ -113,8 +113,8 @@ Item {
 
             onPressed: {
                 setStartBumpAnimation(0.9, 100)
-                pFunctionToDo(pNextScene)
                 mParticleManager.showParticle(iChoiceParticle)
+                pFunctionToDo(pNextScene)
             }
         }
 

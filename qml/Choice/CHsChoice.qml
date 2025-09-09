@@ -17,23 +17,12 @@ Item {
 
     anchors.fill: parent
 
-    property var mStatusEnum: {
-        "ACCESSIBLE": 0,
-        "LOCKED": 1,
-        "HIDDEN": 2,
-        "TERMINATED": 3
-    }
-    property var mDisplayEnum: {
-        "ONE_VIDEO": 0,
-        "TWO_VIDEO": 1,
-        "IMAGE": 2
-    }
 
     property bool mIsDebug: false
 
     property bool mIsTimer: false
-    property int mStatus: mStatusEnum.ACCESSIBLE
-    property int mDisplay: mDisplayEnum.ONE_VIDEO
+    property int mStatus: mCHc.mStatusEnum.ACCESSIBLE
+    property int mDisplay: mCHc.mDisplayEnum.ONE_VIDEO
     property real mPosToZoomInXPercent: 0.5
     property real mPosToZoomInYPercent: 0.2
 
@@ -91,7 +80,6 @@ Item {
             if (opacity === 1) {
                 pOpacity = true
             } else {
-                pOpacity = false
                 iChoiceManager.hideChoices()
                 iGlobalMusic.stopVideo()
                 pChoosenNext.visible = true
@@ -111,7 +99,7 @@ Item {
             shadow_getChoices()
             setNextSources()
             mCurrentSceene = this
-            if (mDisplay === mDisplayEnum.IMAGE) {
+            if (mDisplay === mCHc.mDisplayEnum.IMAGE) {
                 mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
             }
             mBackground.visible = true
@@ -126,6 +114,7 @@ Item {
     }
 
     function startFadeOut(lNext) {
+        pOpacity = false
         mCHgChoices.pauseTimer()
         setStatusChanges()
         pChoosenNext = lNext
@@ -147,7 +136,7 @@ Item {
     function shadow_getChoices() {
         var lShadowListChoices = []
         for (let i=0; i < mListChoices.length; i++) {
-            if (mListChoices[i].mStatus !== mStatusEnum.HIDDEN && mListChoices[i].mStatus !== mStatusEnum.TERMINATED) {
+            if (mListChoices[i].mStatus !== mCHc.mStatusEnum.HIDDEN && mListChoices[i].mStatus !== mCHc.mStatusEnum.TERMINATED) {
                 lShadowListChoices.push(mListChoices[i])
             }
         }
@@ -201,16 +190,16 @@ Item {
     }
 
     function hide() {
-        mStatus = mStatusEnum.HIDDEN
+        mStatus = mCHc.mStatusEnum.HIDDEN
     }
     function terminate() {
-        mStatus = mStatusEnum.TERMINATED
+        mStatus = mCHc.mStatusEnum.TERMINATED
     }
     function makeAccessible() {
-        mStatus = mStatusEnum.ACCESSIBLE
+        mStatus = mCHc.mStatusEnum.ACCESSIBLE
     }
     function lock() {
-        mStatus = mStatusEnum.LOCKED
+        mStatus = mCHc.mStatusEnum.LOCKED
     }
 
     function getmListItemToCheckIfLoaded() {

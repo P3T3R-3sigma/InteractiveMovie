@@ -60,8 +60,8 @@ OneParticleAbstract {
 
         source: mBasicSource.getSource("Images/white_disc_2.png")
 
-        color: "white"  // Base color
-        colorVariation: 0.5  // Allow color to randomly vary ±80%
+        color: "lightgreen"  // Base color
+        colorVariation: 0.5
     }
 
     function setEmitPos(xPos, yPos) {

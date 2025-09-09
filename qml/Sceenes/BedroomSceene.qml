@@ -12,9 +12,9 @@ Item {
 
 
     function meridaSuperGlueOn() {
-        if (sceeneC22.mStatus === sceeneC22.mStatusEnum.TERMINATED) {
+        if (sceeneC22.mStatus === mCHc.mStatusEnum.TERMINATED) {
             return
-        } else if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
+        } else if (sceeneC20.mStatus === mCHc.mStatusEnum.TERMINATED) {
         } else {
             sceeneC20.hide()
         }
@@ -22,9 +22,10 @@ Item {
         sceeneC24.makeAccessible()
     }
     function meridaSuperGlueOff() {
-        if (sceeneC22.mStatus === sceeneC22.mStatusEnum.TERMINATED) {
+        if (sceeneC22.mStatus === mCHc.mStatusEnum.TERMINATED) {
             return
-        } else if (sceeneC20.mStatus === sceeneC20.mStatusEnum.TERMINATED) {
+        } else if (sceeneC20.mStatus === mCHc.mStatusEnum.TERMINATED) {
+            sceeneC22.makeAccessible()
         } else {
             sceeneC20.makeAccessible()
         }
@@ -81,7 +82,7 @@ Item {
     CHsChoice {
         id: sceeneC22
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom again")
         mTitle: qsTr("Hi")
@@ -98,7 +99,7 @@ Item {
     CHsChoice {
         id: sceeneC23
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: qsTr("Go to the Bedroom again")
         mTitle: qsTr("Haven't you done enough?")
@@ -193,7 +194,7 @@ Item {
     CHsChoice {
         id: sceeneC31S04
 
-        // mDisplay: mDisplayEnum.TWO_VIDEO
+        // mDisplay: mCHc.mDisplayEnum.TWO_VIDEO
 
         mTextBeforeChoosing: qsTr("Ask to put on sunburn")
         mTitle: qsTr("It is really because you are a nice guy")

@@ -43,7 +43,7 @@ Item {
     CHsChoice {
         id: sceeneC01
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Merida rejects you"
@@ -61,7 +61,7 @@ Item {
     CHsChoice {
         id: sceeneC02
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: qsTr("Go to the kitchen")
         mTitle: qsTr("Merida is teasing you")
@@ -124,7 +124,7 @@ Item {
     CHsChoice {
         id: sceeneC08
 
-        mStatus: mStatusEnum.HIDDEN
+        mStatus: mCHc.mStatusEnum.HIDDEN
 
         mTextBeforeChoosing: "Go to the kitchen again"
         mTitle: "Do you want to marry me?"

@@ -32,25 +32,25 @@ Item {
                 iPlaceholder.visible = true
             } else {
                 switch (mDisplay) {
-                case mDisplayEnum.ONE_VIDEO: iMainVideo.visible = true; break
-                case mDisplayEnum.TWO_VIDEO: console.log("HERE1"); iSecondaryVideo.visible = true; break
-                case mDisplayEnum.IMAGE: iSecondaryImage.visible = true
+                case mCHc.mDisplayEnum.ONE_VIDEO: iMainVideo.visible = true; break
+                case mCHc.mDisplayEnum.TWO_VIDEO: console.log("HERE1"); iSecondaryVideo.visible = true; break
+                case mCHc.mDisplayEnum.IMAGE: iSecondaryImage.visible = true
                 }
             }
         }
     }
 
     function setSource() {
-        if (mDisplayEnum.ONE_VIDEO === mDisplay) {
+        if (mCHc.mDisplayEnum.ONE_VIDEO === mDisplay) {
             iMainVideo.setSource()
-        } else if (mDisplayEnum.TWO_VIDEO === mDisplay) {
+        } else if (mCHc.mDisplayEnum.TWO_VIDEO === mDisplay) {
             iSecondaryVideo.setSource()
         }
     }
     function getSource() {
-        if (mDisplayEnum.ONE_VIDEO === mDisplay) {
+        if (mCHc.mDisplayEnum.ONE_VIDEO === mDisplay) {
             return iMainVideo.getSource()
-        } else if (mDisplayEnum.TWO_VIDEO === mDisplay) {
+        } else if (mCHc.mDisplayEnum.TWO_VIDEO === mDisplay) {
             iSecondaryVideo.getSource()
         }
         return null
