@@ -328,9 +328,7 @@ BasicItem {
                 mTHIS_BASIC_IMAGE_HOVER_V1.entered()
             }
         }
-
     }
-
 
 
 }

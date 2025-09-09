@@ -58,6 +58,7 @@ Item {
 
     property bool mChoiceVisible: false
     property var pChoosenNext
+    property bool pOpacity: false
 
     z: 2
     visible: false
@@ -88,7 +89,9 @@ Item {
         }
         onFinished: {
             if (opacity === 1) {
+                pOpacity = true
             } else {
+                pOpacity = false
                 iChoiceManager.hideChoices()
                 iGlobalMusic.stopVideo()
                 pChoosenNext.visible = true
@@ -112,7 +115,7 @@ Item {
                 mDefaultChoice = mShadowListChoices[Math.floor(Math.random() * mShadowListChoices.length)]
             }
             mBackground.visible = true
-            mParticleManager.showSpecific(mDefaultBackgroundParticles)
+            mParticleManager.showParticle(mDefaultBackgroundParticles)
         } else {
             hideChoices()
         }
@@ -133,7 +136,6 @@ Item {
         iNumberAnimationOpacity.to = 1
         iParallelAnimationChoice.running = true
     }
-
 
     function getTime() {
         if (mIsTimer) {

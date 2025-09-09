@@ -25,12 +25,8 @@ OneParticleAbstract {
 
         system: getpParticleSystem() // always must be a particleSystem - only one system
 
-        emitRate: mNbParticles * 10 // Number of particles emitted per second, default is 10
-
         lifeSpan: 1000   //  duration of life of particle. the higher, the bigger will be the
         lifeSpanVariation: 500 // add random to the 'lifeSpan'
-
-        maximumEmitted: -1 // 10 // maximum of particles alive (-1 = no maximum limit)
 
         size: 5 //  size of particles in pixel at the begining of their life
 
@@ -49,20 +45,11 @@ OneParticleAbstract {
         velocity: TargetDirection {
             targetX: width / 2
             targetY: height / 2
-            magnitude: -100  // Negative = away from center
+            magnitude: -100
+            magnitudeVariation: -20
             targetVariation: 10
         }
     }
-
-    Timer {
-        id: iParticleTimer
-        interval: 100
-
-        onTriggered: {
-            stop()
-        }
-    }
-
 
     /*
       Define the particle
@@ -70,15 +57,13 @@ OneParticleAbstract {
     ImageParticle {
         system: getpParticleSystem()
 
+        anchors.fill: parent
+
         source: mBasicSource.getSource("Images/white_disc_2.png")
     }
 
     function start() {
-        mThisEmitter.enabled = true;
-        getpParticleSystem().running = true
         mThisEmitter.burst(mNbParticles)
-        iParticleTimer.start()
-
     }
 
     function clear() {
@@ -87,7 +72,6 @@ OneParticleAbstract {
 
     function stop() {
         mThisEmitter.enabled = false
-        getpParticleSystem().running = false
     }
 }
 

@@ -58,6 +58,7 @@ Item {
         mListChoices: [sceeneC25, sceeneC26, sceeneC30, sceeneC28, sceeneC29]
         mListUnlocks: [sceeneC22]
         mListTerminates: [sceeneC20]
+        mFunctionToCall: function() {mVisitedAmber = true}
     }
     CHsChoice {
         id: sceeneC21
@@ -142,21 +143,6 @@ Item {
         mListHides: [sceeneC26]
     }
     CHsChoice {
-        id: sceeneC27
-
-        mTextBeforeChoosing: qsTr("Ask to put on sunburn")
-        mTitle: qsTr("I got a sunburn")
-        mQuestion: qsTr("")
-
-        mMainVideoSource: "c27"
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
-
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: null
-        mListChoices: []
-    }
-    CHsChoice {
         id: sceeneC28
 
         mTextBeforeChoosing: qsTr("Tell a joke  about sex")
@@ -222,6 +208,7 @@ Item {
         mListChoices: []
         mListUnlocks: [sceeneC23]
         mListTerminates: [sceeneC22]
+        mFunctionToCall: function() {mHadSexAmber = true}
     }
     CHgSexVideo {
         id: sceeneS04

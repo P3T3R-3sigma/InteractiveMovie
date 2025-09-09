@@ -51,6 +51,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC43
         mListChoices: [sceeneC42, sceeneC43, sceeneC44, sceeneC45, sceeneC46]
+        mFunctionToCall: function() {mVisitedLollypop = true}
     }
     CHsChoice {
         id: sceeneC41
@@ -144,21 +145,21 @@ Item {
         mDefaultChoice: sceeneC14S03
         mListChoices: []
     }
-    CHsChoice {
-        id: sceeneC47
+    // CHsChoice {
+    //     id: sceeneC47
 
-        mTextBeforeChoosing: qsTr("Wait 1 minute")
-        mTitle: qsTr("Waiting")
-        mQuestion: qsTr("What do you want to do?")
+    //     mTextBeforeChoosing: qsTr("Wait 1 minute")
+    //     mTitle: qsTr("Waiting")
+    //     mQuestion: qsTr("What do you want to do?")
 
-        mMainVideoSource: "c47"
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
-        mIsTimer: true
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneC52
-        mListChoices: [sceeneC52, sceeneC53, sceeneC54S05, sceeneC56S05, sceeneC57]
-    }
+    //     mMainVideoSource: "c47"
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
+    //     mIsTimer: true
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneC52
+    //     mListChoices: [sceeneC52, sceeneC53, sceeneC54S05, sceeneC56S05, sceeneC57]
+    // }
     CHsChoice {
         id: sceeneC48
 
@@ -204,53 +205,54 @@ Item {
         mDefaultChoice: sceeneHall
         mListChoices: []
     }
-    CHsChoice {
-        id: sceeneC52
+    // CHsChoice {
+    //     id: sceeneC52
 
-        mTextBeforeChoosing: qsTr("Say hello")
-        mTitle: qsTr("Hello 3")
-        mQuestion: qsTr("")
+    //     mTextBeforeChoosing: qsTr("Say hello")
+    //     mTitle: qsTr("Hello 3")
+    //     mQuestion: qsTr("")
 
-        mMainVideoSource: "c52"
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+    //     mMainVideoSource: "c52"
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
 
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneHall
-        mListChoices: []
-    }
-    CHsChoice {
-        id: sceeneC53
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneHall
+    //     mListChoices: []
+    // }
+    // CHsChoice {
+    //     id: sceeneC53
 
-        mTextBeforeChoosing: qsTr("Propose a drink")
-        mTitle: qsTr("drink 3")
-        mQuestion: qsTr("")
+    //     mTextBeforeChoosing: qsTr("Propose a drink")
+    //     mTitle: qsTr("drink 3")
+    //     mQuestion: qsTr("")
 
-        mMainVideoSource: "c53"
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+    //     mMainVideoSource: "c53"
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
 
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneHall
-        mListChoices: []
-    }
-    CHsChoice {
-        id: sceeneC54S05
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneHall
+    //     mListChoices: []
+    // }
+    // CHsChoice {
+    //     id: sceeneC54S05
 
-        mTextBeforeChoosing: qsTr("Compliment")
-        mTitle: qsTr("Compliment 3")
-        mQuestion: qsTr("")
+    //     mTextBeforeChoosing: qsTr("Compliment")
+    //     mTitle: qsTr("Compliment 3")
+    //     mQuestion: qsTr("")
 
-        mMainVideoSource: "c54"
-        mSecondaryVideoSource: ""
-        mSecondaryImageSource: ""
+    //     mMainVideoSource: "c54"
+    //     mSecondaryVideoSource: ""
+    //     mSecondaryImageSource: ""
 
-        mVideoVolume: mVolumeOverall
-        mDefaultChoice: sceeneS05
-        mListChoices: []
-        mListUnlocks: [sceeneC57]
-        mListTerminates: [sceeneC40]
-    }
+    //     mVideoVolume: mVolumeOverall
+    //     mDefaultChoice: sceeneS05
+    //     mListChoices: []
+    //     mListUnlocks: [sceeneC57]
+    //     mListTerminates: [sceeneC40]
+    //     mFunctionToCall: function() {mHadSexLollypop = true}
+    // }
     CHsChoice {
         id: sceeneC56S05
 
@@ -267,6 +269,7 @@ Item {
         mListChoices: []
         mListUnlocks: [sceeneC57]
         mListTerminates: [sceeneC40]
+        mFunctionToCall: function() {mHadSexLollypop = true}
     }
     CHsChoice {
         id: sceeneC57

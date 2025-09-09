@@ -37,6 +37,7 @@ Item {
         mListChoices: [sceeneC04, sceeneC03S01]
         mListUnlocks: [sceeneC02]
         mListTerminates: [sceeneC00]
+        mFunctionToCall: function() {mVisitedMerida = true}
     }
 
     CHsChoice {

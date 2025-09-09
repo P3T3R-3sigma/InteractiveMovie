@@ -42,6 +42,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneC75
         mListChoices: [sceeneC72, sceeneC73, sceeneC74, sceeneC75]
+        mFunctionToCall: function() {mVisitedMilena = true}
     }
     CHsChoice {
         id: sceeneC72
@@ -177,6 +178,7 @@ Item {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneS07
         mListChoices: []
+        mFunctionToCall: function() {mHadSexMilena = true}
     }
     CHsChoice {
         id: sceeneC81

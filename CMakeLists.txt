@@ -64,6 +64,21 @@ configure_file(
     ${CMAKE_BINARY_DIR}/lollypop_assets.rcc
     COPYONLY
 )
+configure_file(
+    ${CMAKE_SOURCE_DIR}/image_assets.rcc
+    ${CMAKE_BINARY_DIR}/image_assets.rcc
+    COPYONLY
+)
+configure_file(
+    ${CMAKE_SOURCE_DIR}/Intro_assets.rcc
+    ${CMAKE_BINARY_DIR}/Intro_assets.rcc
+    COPYONLY
+)
+configure_file(
+    ${CMAKE_SOURCE_DIR}/revenge_assets.rcc
+    ${CMAKE_BINARY_DIR}/revenge_assets.rcc
+    COPYONLY
+)
 
 # Add QML files and resources to QML module to included them via QRC automatically:
 qt_add_qml_module(appInteractiveMovie
@@ -73,7 +88,14 @@ qt_add_qml_module(appInteractiveMovie
     QML_FILES ${QmlFiles}
 #    RESOURCES ${AssetsFiles}
     NO_RESOURCE_TARGET_PATH
-    RESOURCES amber_assets.qrc milena_assets.qrc merida_assets.qrc lollypop_assets.qrc
+    RESOURCES
+        amber_assets.qrc
+        milena_assets.qrc
+        merida_assets.qrc
+        lollypop_assets.qrc
+        image_assets.qrc
+        Intro_assets.qrc
+        revenge_assets.qrc
 )
 
 # NOTE: for PUBLISHING, perform the following steps:

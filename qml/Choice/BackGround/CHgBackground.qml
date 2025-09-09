@@ -60,4 +60,8 @@ Item {
         return [iSecondaryImage.getmListItemToCheckIfLoaded()];
     }
 
+    function getSecImage() {
+        return iSecondaryImage
+    }
+
 }

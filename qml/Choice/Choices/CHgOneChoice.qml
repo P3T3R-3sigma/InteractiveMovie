@@ -77,12 +77,16 @@ Item {
             onExited: {
                 iBackground.color = "#779161"
             }
+            onPositionChanged: function(mouse) {
+                iMoveMouseParticle.setEmitPos(mouse.x + iBackground.x, mouse.y + iBackground.y)
+                mParticleManager.showParticle(iMoveMouseParticle)
+            }
 
             onPressed: {
                 iBackground.color = "#b2cdaa"
                 iText.font.bold = true
                 pFunctionToDo(pNextScene)
-                mParticleManager.showSpecific(iChoiceParticle)
+                mParticleManager.showParticle(iChoiceParticle)
             }
         }
 

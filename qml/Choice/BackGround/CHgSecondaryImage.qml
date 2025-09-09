@@ -4,12 +4,24 @@ import Felgo
 import "../../basic_librairies/BasicImageSource/v4"
 import "../../basic_librairies/BasicDebug/v1"
 import "../../basic_librairies/BasicText/v4"
+import "../Choices"
 
 
 BasicImageSource {
     id: iSecondaryImage
 
+    anchors.fill: parent
+    fillMode: Image.PreserveAspectFit
+
     visible: false
+
+
+    ChgFourImageChoice {
+        id: iFourImageChoice
+        visible: false
+
+        pListScenes: mShadowListChoices
+    }
 
     BasicTextFitToText {
         id: iPlaceholderText
@@ -25,12 +37,9 @@ BasicImageSource {
         borderWidthPercent: 0.01
     }
 
-    anchors.fill: parent
-    fillMode: Image.PreserveAspectFit
-
     sourceSimple: {
         if (mSecondaryImageSource) {
-            return mSecondaryImageSource + ".png"
+            return mSecondaryImageSource
         }
         return ""
     }
@@ -38,6 +47,9 @@ BasicImageSource {
     onVisibleChanged: {
         if (visible) {
             showChoices()
+            iFourImageChoice.visible = true
+        } else {
+            iFourImageChoice.visible = false
         }
     }
 

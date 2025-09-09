@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     QResource::registerResource("merida_assets.rcc");
     QResource::registerResource("milena_assets.rcc");
     QResource::registerResource("lollypop_assets.rcc");
+    QResource::registerResource("image_assets.rcc");
+    QResource::registerResource("Intro_assets.rcc");
+    QResource::registerResource("revenge_assets.rcc");
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
 

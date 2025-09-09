@@ -37,18 +37,17 @@ Item {
         mVolume: mVideoVolume
     }
 
-    BasicImageSource {
+    BasicTextFitToText {
         id: iPlay
+        text: "Play"
 
-        xPercent: 0.1
-        yPercent: 0.9
-        widthPercent: 0.03
-        height: width
         z: 1
+        yPercent: 77.5/90
+        xPercent: 7/160
+        textFontPixelSizePercent: 2.5/90
+        textColor: "#ADADAD"
+        textFont.family: "Century Gothic Pro"
 
-        fillMode: Image.PreserveAspectFit
-
-        mSource: "Images/play.png"
         visible: iChoiceManager.opacity === 1 && lPaused && !pChoiceVisible
 
         MouseArea {
@@ -62,10 +61,9 @@ Item {
                 iMainVideo.playVideo()
                 lPaused = false
             }
-            onPositionChanged: {
-                tracker.x = mouse.x - tracker.width/2 - iPlay.x
-                tracker.y = mouse.y - tracker.height/2 - iPlay.y
-                mParticleManager.showSpecific(iMoveMouseParticle)
+            onPositionChanged: function(mouse) {
+                iMoveMouseParticle.setEmitPos(mouse.x + iPlay.x, mouse.y + iPlay.y)
+                mParticleManager.showParticle(iMoveMouseParticle)
             }
         }
         RectangularGlow {
@@ -77,20 +75,19 @@ Item {
             glowRadius: parent.width*0.1
             color: "lightgray"
             cornerRadius: parent.width/2
+            opacity: 0.8
         }
     }
-    BasicImageSource {
+    BasicTextFitToText {
         id: iPause
+        text: "Pause"
 
-        xPercent: 0.1
-        yPercent: 0.9
-        widthPercent: 0.03
-        height: width
         z: 1
-
-        fillMode: Image.PreserveAspectFit
-
-        mSource: "Images/pause.png"
+        yPercent: 77.5/90
+        xPercent: 7/160
+        textFontPixelSizePercent: 2.5/90
+        textColor: "#ADADAD"
+        textFont.family: "Century Gothic Pro"
         visible: iChoiceManager.opacity === 1 && !lPaused && !pChoiceVisible
 
         MouseArea {
@@ -104,10 +101,9 @@ Item {
                 iMainVideo.pauseVideo()
                 lPaused = true
             }
-            onPositionChanged: {
-                tracker.x = mouse.x - tracker.width/2 + iPause.x
-                tracker.y = mouse.y - tracker.height/2 + iPause.y
-                mParticleManager.showSpecific(iMoveMouseParticle)
+            onPositionChanged: function(mouse) {
+                iMoveMouseParticle.setEmitPos(mouse.x + iPause.x, mouse.y + iPause.y)
+                mParticleManager.showParticle(iMoveMouseParticle)
             }
         }
 
@@ -116,6 +112,7 @@ Item {
 
             visible: false
             anchors.fill: parent
+            opacity: 0.8
 
             glowRadius: parent.width*0.1
             color: "lightgray"

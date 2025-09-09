@@ -19,16 +19,13 @@ Item {
         return mListParticles;
     }
 
-    function showSpecific(sOneParticle) {
+    function showParticle(sOneParticle) {
         let lListOneParticleAbstract = getmListParticles();
         for (let lIdx = 0; lIdx < lListOneParticleAbstract.length; lIdx++) {
             let lOneParticle_01 = lListOneParticleAbstract[lIdx];
             if (lOneParticle_01 === sOneParticle && mParticleOverall) {
                 lOneParticle_01.visible = true
                 lOneParticle_01.start();
-            } else {
-                lOneParticle_01.visible = false;
-                lOneParticle_01.stop()
             }
         }
     }

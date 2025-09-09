@@ -83,6 +83,16 @@ GameWindow {
     property bool mShowIntro: false
     property var mCurrentSceene
 
+    property bool mVisitedAmber: false
+    property bool mVisitedMerida: false
+    property bool mVisitedMilena: false
+    property bool mVisitedLollypop: false
+
+    property bool mHadSexAmber: false
+    property bool mHadSexMerida: false
+    property bool mHadSexMilena: false
+    property bool mHadSexLollypop: false
+
     Rectangle {
         id: iSplashForDebug
         visible: mDebugOverall
@@ -220,6 +230,7 @@ GameWindow {
 
     MoveMouseParticle {
         id: iMoveMouseParticle
+        z: 3
     }
 
     MouseArea {
@@ -228,15 +239,15 @@ GameWindow {
         hoverEnabled: true
 
         onPositionChanged: function(mouse) {
-            // Set absolute scene position
             iMoveMouseParticle.setEmitPos(mouse.x, mouse.y)
-            mParticleManager.showSpecific(iMoveMouseParticle)
+            mParticleManager.showParticle(iMoveMouseParticle)
         }
     }
 
 
     function mSetSuperGlue() {
         mMeridaSuperglue = true
+        mHadSexMerida = true
         iSwimmingPoolSceene.meridaSuperGlueOn()
         iBedroomsceene.meridaSuperGlueOn()
         iLibrarySceene.meridaSuperGlueOn()
@@ -249,6 +260,16 @@ GameWindow {
     }
     function restartGame() {
         mCurrentSceene.visible = false
+        mCurrentSceene.opacity = 0
+        mCurrentSceene.pOpacity = false
+        mVisitedAmber = false
+        mVisitedMerida = false
+        mVisitedMilena = false
+        mVisitedLollypop = false
+        mHadSexAmber = false
+        mHadSexMerida = false
+        mHadSexMilena = false
+        mHadSexLollypop = false
         mRemoveSuperGlue()
         sceeneC05.hide()
         sceeneC24.hide()
@@ -304,7 +325,7 @@ GameWindow {
 
         mMainVideoSource: ""
         mSecondaryVideoSource: ""
-        mSecondaryImageSource: "c80"
+        mSecondaryImageSource: "Hall.jpg"
         mIsTimer: true
         mVideoVolume: mVolumeOverall
         mDefaultChoice: null
@@ -364,6 +385,7 @@ GameWindow {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
+        mFunctionToCall: function() {mVisitedMilena = true}
     }
     CHsChoice {
         id: sceeneC24
@@ -380,6 +402,7 @@ GameWindow {
         mVideoVolume: mVolumeOverall
         mDefaultChoice: sceeneHall
         mListChoices: []
+        mFunctionToCall: function() {mVisitedAmber = true}
     }
 
     CHsChoice {

@@ -15,7 +15,7 @@ OneParticleAbstract {
       */
 
 
-    property int mNbParticles: 10
+    property int mNbParticles: 1
 
     /**
       Launches particles within its boundaries
@@ -23,12 +23,12 @@ OneParticleAbstract {
     Emitter {
         id: mThisEmitter
 
+        width: 1
+        height: 1
+
         system: getpParticleSystem() // always must be a particleSystem - only one system
 
-        emitRate: mNbParticles * 10 // Number of particles emitted per second, default is 10
-
         lifeSpan: 500   //  duration of life of particle. the higher, the bigger will be the
-        lifeSpanVariation: 300 // add random to the 'lifeSpan'
 
         maximumEmitted: -1 // 10 // maximum of particles alive (-1 = no maximum limit)
 
@@ -37,30 +37,18 @@ OneParticleAbstract {
         /*
           the shape inside which the particle will start
           */
-        anchors.fill: parent
 
         /*
           the initial speed at which the particle will be sent (direction, )
           */
 
-        velocity: PointDirection {
-            id: iTarget
-            x: width/2
-            y: width/2
-            xVariation: 100
-            yVariation: 100
+        velocity: AngleDirection {
+            angle: 0
+            angleVariation: 360
+            magnitude: 30
+            magnitudeVariation: 10
         }
     }
-
-    Timer {
-        id: iParticleTimer
-        interval: 100
-
-        onTriggered: {
-            mThis.stop()
-        }
-    }
-
 
     /*
       Define the particle
@@ -68,24 +56,21 @@ OneParticleAbstract {
     ImageParticle {
         system: getpParticleSystem()
 
+        anchors.fill: parent
+
         source: mBasicSource.getSource("Images/white_disc_2.png")
 
         color: "white"  // Base color
-        colorVariation: 1  // Allow color to randomly vary ±80%
+        colorVariation: 0.5  // Allow color to randomly vary ±80%
     }
 
     function setEmitPos(xPos, yPos) {
-        iTarget.x = width/2-xPos
-        iTarget.y = height/2-yPos
+        mThisEmitter.x = xPos
+        mThisEmitter.y = yPos
     }
 
     function start() {
-        mThisEmitter.enabled = true;
-        getpParticleSystem().running = true
-        if (iParticleTimer.running) {
-            iParticleTimer.stop()
-        }
-        iParticleTimer.start()
+        mThisEmitter.burst(mNbParticles)
     }
 
     function clear() {

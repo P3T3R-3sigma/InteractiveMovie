@@ -50,13 +50,16 @@ Item {
     onVisibleChanged: {
         if (visible) {
             iChoices.opacity = 1
-            switch (mShadowListChoices.length) {
-            case 2: iTwoChoice.visible = true; break
-            case 3: iThreeChoice.visible = true; break
-            case 4: iFourChoice.visible = true; break
-            case 5: iFiveChoice.visible = true; break
-            default: console.log("ERROR: WRONG NUMBER OF CHOICES"); break
+            if (mDisplay !== mDisplayEnum.IMAGE) {
+                switch (mShadowListChoices.length) {
+                    case 2: iTwoChoice.visible = true; break
+                    case 3: iThreeChoice.visible = true; break
+                    case 4: iFourChoice.visible = true; break
+                    case 5: iFiveChoice.visible = true; break
+                    default: console.log("ERROR: WRONG NUMBER OF CHOICES"); break
+                }
             }
+
         } else {
             iTwoChoice.visible = false;
             iThreeChoice.visible = false;
